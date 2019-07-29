@@ -1,0 +1,16 @@
+Package: rt.test
+Title: Robustified t-Test
+Version: 1.19.7
+Date: 2019-07-01
+Authors@R: c(person("Chanseok","Park", role = c("aut", "cre"), 
+                     email="statpnu@gmail.com"), 
+             person("Min","Wang", role = "ctb", 
+                     email="Min.Wang@ttu.edu") )
+Author: Chanseok Park [aut, cre], Min Wang [ctb]
+Maintainer: Chanseok Park <statpnu@gmail.com>
+Depends: R (>= 3.2.3)
+Description: Performs one-sample t-test based on robustified statistics using median/MAD (TA) and Hodges-Lehmann/Shamos (TB). For more details, see Park and Wang (2018)<arXiv:1807.02215>. This work was partially supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (No. NRF-2017R1A2B4004169).  
+License: GPL-2 | GPL-3
+URL: https://github.com/statpnu/R-package
+BugReports: https://github.com/statpnu/R-package/issues
+LazyData: yes

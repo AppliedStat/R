@@ -1,0 +1,8 @@
+exportPattern("^[[:alpha:]]+")
+
+
+#functions
+export(HL.estimate, rt.test, q.robustified.t) 
+
+importFrom("stats", approxfun, complete.cases, mad, median)
+
