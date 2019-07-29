@@ -11,6 +11,6 @@ Maintainer: Chanseok Park <statpnu@gmail.com>
 Depends: R (>= 3.2.3)
 Description: Performs one-sample t-test based on robustified statistics using median/MAD (TA) and Hodges-Lehmann/Shamos (TB). For more details, see Park and Wang (2018)<arXiv:1807.02215>. This work was partially supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (No. NRF-2017R1A2B4004169).  
 License: GPL-2 | GPL-3
-URL: https://github.com/statpnu/R-package
-BugReports: https://github.com/statpnu/R-package/issues
+URL: https://github.com/AppliedStat/R
+BugReports: https://github.com/AppliedStat/R/issues
 LazyData: yes
