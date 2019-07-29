@@ -1,9 +1,0 @@
-exportPattern("^[[:alpha:]]+")
-
-#functions
-export(finite.breakdown, HL, shamos, c4.factor,
-mad.unbiased, shamos.unbiased, RE, evar, w5.for.mad2, w6.for.shamos2, 
-mad2.unbiased, shamos2.unbiased, A3.factor, rcc)
-
-importFrom("stats", mad, median, sd)
-
