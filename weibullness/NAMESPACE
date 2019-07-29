@@ -1,0 +1,10 @@
+exportPattern("^[[:alpha:]]+")
+## exportPattern(".")
+
+#functions
+export(wp.test, wp.test.pvalue, wp.test.critical)
+
+importFrom("stats", approxfun, complete.cases, cor, ppoints) 
+
+S3method(print, wp.test.critical.value)
+

@@ -1,0 +1,14 @@
+Package: weibullness
+Version: 1.18.7
+Title: Goodness-of-Fit Test for Weibull Distribution (Weibullness)
+Authors@R: person("Chanseok","Park", email="statpnu@gmail.com", 
+                  role = c("aut", "cre")) 
+Author: Chanseok Park [aut, cre]
+Maintainer: Chanseok Park <statpnu@gmail.com>
+Depends: R (>= 3.1.0)
+Date: 2018-05-25
+Description: Performs a goodness-of-fit test of Weibull distribution (weibullness test). For more details, see Park (2017) <http://journals.sfu.ca/ijietap/index.php/ijie/article/view/2848>. This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (No. NRF-2017R1A2B4004169).  
+License: GPL-2 | GPL-3
+URL: https://github.com/statpnu/R-package
+BugReports: https://github.com/statpnu/R-package/issues
+LazyData: yes
