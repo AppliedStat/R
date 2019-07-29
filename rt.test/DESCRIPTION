@@ -1,7 +1,7 @@
 Package: rt.test
 Title: Robustified t-Test
-Version: 1.19.7
-Date: 2019-07-01
+Version: 1.19.8
+Date: 2019-08-01
 Authors@R: c(person("Chanseok","Park", role = c("aut", "cre"), 
                      email="statpnu@gmail.com"), 
              person("Min","Wang", role = "ctb", 
