@@ -23,8 +23,8 @@ Github: <https://github.com/cran/rt.test>  <br /><br />
 
 
 ## /rQCC
-Robust Quality Control Chart
+Robust Quality Control Chart. <br />
+
 
 Current version 0.19.8.1
-
 
