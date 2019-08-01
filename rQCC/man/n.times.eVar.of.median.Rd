@@ -14,6 +14,8 @@ with 1E07 replicates.
 \usage{n.times.eVar.of.median}
 \format{This data frame contains 100 values.}
 
+\value{\code{n.times.eVar.of.median} returns a numeric value.}
+
 \references{
 Park, C., H. Kim and M. Wang (2019).
 Investigation of finite-sample properties of robust location 

@@ -1,15 +1,19 @@
 Package: rQCC
 Title: Robust Quality Control Chart
-Version: 0.19.8.1
-Date: 2019-08-01
-Authors@R: c(person("Chanseok","Park", role = c("aut", "cre"),
-                     email="statpnu@gmail.com"),
-             person("Min","Wang", role = "ctb",
-                     email="Min.Wang@ttu.edu") )
+Version: 0.19.8.2
+Date: 2019-08-02
+Authors@R: c(person(given="Chanseok", 
+                    family="Park", 
+                    role = c("aut", "cre"),
+                    email="statpnu@gmail.com"),
+             person(given="Min",
+                    family="Wang", 
+                    role = "ctb",
+                    email="Min.Wang@ttu.edu") )
 Author: Chanseok Park [aut, cre], Min Wang [ctb]
 Maintainer: Chanseok Park <statpnu@gmail.com>
 Depends: R (>= 3.2.3)
-Description: Constructs robust quality control chart based on the median and Hodges-Lehmann estimators (location) and the MAD and Shamos estimators (scale) which are unbiased with a sample of finite size. This work was partially supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (No. NRF-2017R1A2B4004169).
+Description: Constructs robust quality control chart based on the median and Hodges-Lehmann estimators (location) and the median absolute deviation (MAD) and Shamos estimators (scale) which are unbiased with a sample of finite size. This work was partially supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (No. NRF-2017R1A2B4004169).
 License: GPL-2 | GPL-3
 URL: https://github.com/AppliedStat/R
 BugReports: https://github.com/AppliedStat/R/issues

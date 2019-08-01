@@ -26,6 +26,8 @@ Note that
 \eqn{\code{constant}=1/\{\sqrt{2}\,\Phi^{-1}(3/4)\}\approx 1.048358}{constant=1/(\sqrt(2)*\Phi^(-1)(3/4)) = 1.048358 (approximately)}.
 }
 
+\value{\code{shamos} returns a numeric value.}
+
 \references{
 Park, C., H. Kim and M. Wang (2019).
 Investigation of finite-sample properties of robust location

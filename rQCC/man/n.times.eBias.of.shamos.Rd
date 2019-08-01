@@ -15,6 +15,8 @@ using the extensive Monte Carlo simulation with 1E07 replicates.
 \usage{n.times.eBias.of.shamos}
 \format{This data frame contains 100 values.}
 
+\value{\code{n.times.eBias.of.shamos} returns a numeric value.}
+
 \references{ 
 Park, C., H. Kim and M. Wang (2019).
 Investigation of finite-sample properties of robust location

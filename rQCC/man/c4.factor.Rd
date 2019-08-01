@@ -29,7 +29,7 @@ with the sample standard deviation (\eqn{s}) is given by \cr
 \code{sd(x)/c4.factor(length(x), method="sd")} \cr
 where \eqn{n}{n} is the sample size.
 
-When the MAD (\code{stats::\link{mad}}) estimator is used, 
+When the median absolute deviation (\code{stats::\link{mad}}) estimator is used, 
 an unbiased estimator of (\eqn{\sigma}{\sigma}) is given by \cr
 \code{mad(x)/c4.factor(length(x), method="mad")}.
 
@@ -40,16 +40,16 @@ an unbiased estimator of (\eqn{\sigma}{\sigma}) is given by \cr
 Note that the formula for the correction factor \eqn{c_4(n)}{c4(n)} is given by 
 \deqn{c_4(n) = \sqrt{\frac{2}{n-1}}\cdot\frac{\Gamma(n/2)}{\Gamma((n-1)/2)}.}{c4(n) = \sqrt\{2/(n-1)\}*\Gamma(n/2)/\Gamma((n-1)/2).}
 
-The finite-sample correction factors for the MAD and Shamos estimators 
+The finite-sample correction factors for the median absolute deviation (MAD)  
+and Shamos estimators 
 are obtained for \eqn{n=1,2,\ldots,10}{n = 1, 2, ... ,100} 
 using the extensive Monte Carlo simulation with 1E07 replicates. 
 For the case of \eqn{n > 100}{n > 100}, they are obtained 
 using the method of Hayes (2014).
 }
 
-\value{
-\code{c4.factor} computes the finite-sample correction factor when
-the sample standard deviations, the sample MAD and Shamos estimates are used.
+\value{\code{c4.factor} computes the finite-sample correction factor when
+the sample standard deviations, the sample median absolute deviation (MAD) and Shamos estimates are used.
 }
 
 \author{Chanseok Park and Min Wang}
@@ -72,10 +72,10 @@ Finite-sample bias-correction factors for the median absolute deviation.
 }
 
 \seealso{
-\code{stats::\link{mad}} for the Fisher-consistent MAD estimator 
+\code{stats::\link{mad}} for the Fisher-consistent median absolute deviation (MAD) estimator 
 for the standard deviation (\eqn{\sigma}{\sigma}) of a normal distribution. 
 
-\code{rQCC::mad.unbiased} for finite-sample unbiased MAD estimator
+\code{rQCC::mad.unbiased} for finite-sample unbiased median absolute deviation (MAD) estimator
 for the standard deviation (\eqn{\sigma}{\sigma}) of a normal distribution. 
 
 \code{rQCC::shamos} for the Fisher-consistent Shamos estimator 
@@ -86,7 +86,7 @@ for the standard deviation (\eqn{\sigma}{\sigma}) of a normal distribution.
 
 \code{rQCC::n.times.eBias.of.mad} 
 for the values of the empirical biases of 
-the MAD estimator under the standard normal distribution. 
+the median absolute deviation (MAD) estimator under the standard normal distribution. 
 
 \code{rQCC::n.times.eBias.of.shamos} 
 for the values of the empirical biases of 

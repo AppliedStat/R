@@ -1,7 +1,7 @@
 \name{factor.for.squared.mad}
 \alias{w5.for.mad2}
 \encoding{utf-8}
-\title{Finite-sample correction factor for the squared MAD estimator
+\title{Finite-sample correction factor for the squared MAD (median absolute deviation) estimator
 under the normal distribution}
 \usage{
 w5.for.mad2(n)
@@ -13,7 +13,7 @@ w5.for.mad2(n)
 \description{Finite-sample correction factor 
 for the squared median absolute deviation (MAD) estimator under the normal distribution
 with a sample of size n.
-Note that the conventional squared MAD estimator is 
+Note that the conventional squared median absolute deviation (MAD) estimator is 
 Fisher-consistent under the normal distribution, but 
 it is not unbiased with a sample of finite size.
 
@@ -39,7 +39,8 @@ Finite-sample bias-correction factors for the median absolute deviation.
 }
 
 \seealso{
-\code{rQCC::mad2.unbiased} for robust finite-sample unbiased squared MAD estimator
+\code{rQCC::mad2.unbiased} for robust finite-sample unbiased squared 
+median absolute deviation (MAD) estimator
 for the variance (\eqn{\sigma^2}{\sigma^2}) of a normal distribution. \cr
 
 \code{rQCC::shamos2.unbiased} for robust finite-sample unbiased squared Shamos estimator

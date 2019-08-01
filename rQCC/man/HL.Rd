@@ -28,6 +28,7 @@ The Hodges-Lehmann (HL3) is defined as
 median of (Xi+Xj)/2 over all (i,j).}
 }
 
+\value{\code{HL} computes the Hodges-Lehmann estimates (one of "HL1", "HL2", "HL3").}
 
 \references{
 Park, C., H. Kim and M. Wang (2019).

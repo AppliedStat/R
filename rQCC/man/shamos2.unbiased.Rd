@@ -30,6 +30,9 @@ Fisher-consistent for the variance (\eqn{\sigma^2}{\sigma^2}) under the normal d
 it is not unbiased with a sample of finite size.
 }
 
+\value{\code{shamos2.unbiased} returns a numeric value.}
+
+
 \references{
 Park, C., H. Kim and M. Wang (2019).
 Investigation of finite-sample properties of robust location

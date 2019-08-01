@@ -1,7 +1,7 @@
 \name{unbiased.mad}
 \alias{mad.unbiased}
 \encoding{utf-8}
-\title{Unbiased MAD estimate}
+\title{Unbiased MAD (median absolute deviation) estimate}
 
 \usage{
 mad.unbiased(x, center = median(x), constant=1.4826, na.rm = FALSE)
@@ -19,12 +19,15 @@ which is adjusted by
 the Fisher-consistency and finite-sample correction factors.}
 
 \details{
-The unbiased MAD is defined as the \code{stats::\link{mad}} divided by \eqn{c_5(n)}{c5(n)},
+The unbiased median absolute deviation(MAD) 
+is defined as the \code{stats::\link{mad}} divided by \eqn{c_5(n)}{c5(n)},
 where the bias-correction factor with a sample of finite size,
 \eqn{c_5(n)}{c5(n)}, is calculated by \code{rQCC::c4.factor} with \code{method="mad"} option.
 The default value (\code{constant=1.4826}) ensures the Fisher-consistency under the standard normal.
-Note that the original MAD was proposed by Hampel (1974).
+Note that the original median absolute deviation(MAD) was proposed by Hampel (1974).
 }
+
+\value{\code{mad.unbiased} returns a numeric value.}
 
 \references{
 Park, C., H. Kim and M. Wang (2019).
@@ -55,10 +58,10 @@ for the standard deviation of a normal distribution. \cr
 \examples{
 x = c(0:10, 50)
 
-# Unbiased MAD
+# Unbiased median absolute deviation(MAD)
 mad.unbiased(x)
 
-# Fisher-consistent MAD
+# Fisher-consistent median absolute deviation(MAD)
 mad(x)
 }
 %% \keyword{print}

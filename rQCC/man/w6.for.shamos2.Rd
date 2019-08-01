@@ -42,7 +42,8 @@ Finite-sample bias-correction factors for the median absolute deviation.
 \code{rQCC::shamos2.unbiased} for robust finite-sample unbiased squared Shamos estimator
 for the variance (\eqn{\sigma^2}{\sigma^2}) of a normal distribution. \cr
 
-\code{rQCC::mad2.unbiased} for robust finite-sample unbiased squared MAD estimator
+\code{rQCC::mad2.unbiased} for robust finite-sample unbiased squared 
+median absolute deviation (MAD) estimator
 for the variance (\eqn{\sigma^2}{\sigma^2}) of a normal distribution. \cr
 
 \code{stats::\link{mad}} for calculating the sample median absolute deviation (MAD). \cr
