@@ -29,9 +29,9 @@ Note that a conventional X-bar chart is also constructed by
 \value{\code{rcc} provides the center line and the lower and upper control limits.}
 
 \references{
-Park, C., H. Kim and M. Wang (2019).
-Investigation of finite-sample properties of robust location
-and scale estimators.  \emph{Submitted for Publication}.
+Park, C., H. Kim, and M. Wang (2019).
+Finite-sample properties of robust location and scale estimators. 
+\emph{arXiv:1908.00462}.
 }
 
 

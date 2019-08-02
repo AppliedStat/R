@@ -56,9 +56,8 @@ the sample standard deviations, the sample median absolute deviation (MAD) and S
 
 
 \references{
-Park, C., H. Kim and M. Wang (2019).
-Investigation of finite-sample properties of robust location
-and scale estimators.  \emph{Submitted for Publication}.
+Park, C., H. Kim, and M. Wang (2019). Finite-sample properties
+of robust location and scale estimators. \emph{arXiv:1908.00462}.
 
 Shamos, M. I. (1976).  Geometry and statistics: Problems at the interface.
 In Traub, J. F., editor,

@@ -35,4 +35,12 @@ A3.factor(n=10, method="shamos", sigma.factor=3.09)
 }
 
 \author{Chanseok Park and Min Wang}
+
+\references{
+ASTM (2018). 
+\emph{Manual on Presentation of Data and Control Chart Analysis} (9th edition).
+American Society for Testing and Materials, West Conshohocken, PA.
+}
+
+
 \keyword{correction factor}

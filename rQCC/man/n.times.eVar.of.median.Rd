@@ -14,12 +14,12 @@ with 1E07 replicates.
 \usage{n.times.eVar.of.median}
 \format{This data frame contains 100 values.}
 
-\value{\code{n.times.eVar.of.median} returns a numeric value.}
+\value{\code{n.times.eVar.of.median} returns a vector of 100 values.}
 
 \references{
-Park, C., H. Kim and M. Wang (2019).
-Investigation of finite-sample properties of robust location 
-and scale estimators.  \emph{Submitted for Publication}.
+Park, C., H. Kim, and M. Wang (2019).
+Finite-sample properties of robust location and scale estimators. 
+\emph{arXiv:1908.00462}.
 }
 
 \author{Chanseok Park and Min Wang}

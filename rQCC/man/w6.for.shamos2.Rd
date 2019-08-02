@@ -28,9 +28,9 @@ using the method of Hayes (2014).
 for the variance (\eqn{\sigma^2}{\sigma^2}) under the normal distribution.}
 
 \references{
-Park, C., H. Kim and M. Wang (2019).
-Investigation of finite-sample properties of robust location
-and scale estimators.  \emph{Submitted for Publication}.
+Park, C., H. Kim, and M. Wang (2019).
+Finite-sample properties of robust location and scale estimators. 
+\emph{arXiv:1908.00462}.
 
 Hayes, K. (2014).
 Finite-sample bias-correction factors for the median absolute deviation.

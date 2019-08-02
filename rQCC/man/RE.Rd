@@ -41,9 +41,9 @@ that of a scale estimator ("mad", "shamos") with respect to the sample standard 
 }
 
 \references{
-Park, C., H. Kim and M. Wang (2019).
-Investigation of finite-sample properties of robust location
-and scale estimators.  \emph{Submitted for Publication}.
+Park, C., H. Kim, and M. Wang (2019).
+Finite-sample properties of robust location and scale estimators. 
+\emph{arXiv:1908.00462}.
 
 Hayes, K. (2014).
 Finite-sample bias-correction factors for the median absolute deviation.

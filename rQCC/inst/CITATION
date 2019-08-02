@@ -1,11 +1,11 @@
 citHeader("To cite the rQCC package in publications, please use:")
 
-citEntry(entry="Article",
+citEntry(entry="Misc",
  author = personList(as.person("C. Park, H. Kim, and M. Wang")), 
  year   = "2019",
- title  = "Investigation of finite-sample properties of robust location and scale estimators",
-journal = "Submitted for Publication",
-textVersion = paste("Park, C., H. Kim, and M. Wang (2019)", 
-  "Investigation of finite-sample properties of robust location and scale estimators") 
+ title  = "Finite-sample properties of robust location and scale estimators",
+ url = "https://arxiv.org/abs/1908.00462",
+textVersion = paste("Park, C., H. Kim, and M. Wang (2019).",
+  "Finite-sample properties of robust location and scale estimators.",
+  "arXiv:1908.00462.")
 )
-

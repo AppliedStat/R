@@ -33,9 +33,9 @@ The Hodges-Lehmann (HL3) is defined as
 of the specified estimator.}
 
 \references{
-Park, C., H. Kim and M. Wang (2019).
-Investigation of finite-sample properties of robust location
-and scale estimators.  \emph{Submitted for Publication}.
+Park, C., H. Kim, and M. Wang (2019). 
+Finite-sample properties of robust location and scale estimators. 
+\emph{arXiv:1908.00462}.
 
 Hodges, Jr., J. L. (1967).
 Efficiency in normal samples and tolerance of extreme values 

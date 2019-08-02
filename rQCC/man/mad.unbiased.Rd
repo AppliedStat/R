@@ -30,9 +30,9 @@ Note that the original median absolute deviation(MAD) was proposed by Hampel (19
 \value{\code{mad.unbiased} returns a numeric value.}
 
 \references{
-Park, C., H. Kim and M. Wang (2019).
-Investigation of finite-sample properties of robust location
-and scale estimators.  \emph{Submitted for Publication}.
+Park, C., H. Kim, and M. Wang (2019).
+Finite-sample properties of robust location and scale estimators. 
+\emph{arXiv:1908.00462}.
 
 Hampel, F. R. (1974).
 The influence curve and its role in robust estimation.

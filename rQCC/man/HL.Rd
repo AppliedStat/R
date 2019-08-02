@@ -31,9 +31,9 @@ median of (Xi+Xj)/2 over all (i,j).}
 \value{\code{HL} computes the Hodges-Lehmann estimates (one of "HL1", "HL2", "HL3").}
 
 \references{
-Park, C., H. Kim and M. Wang (2019).
-Investigation of finite-sample properties of robust location
-and scale estimators.  \emph{Submitted for Publication}.
+Park, C., H. Kim, and M. Wang (2019). 
+Finite-sample properties of robust location and scale estimators. 
+\emph{arXiv:1908.00462}.
 
 Hodges, J. L. and E. L. Lehmann (1963).
 Estimates of location based on rank tests.
