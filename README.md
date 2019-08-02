@@ -4,7 +4,7 @@
 ## /rQCC (under development)
 Robust Quality Control Chart. <br />
 
-Current version 0.19.8.1
+Current version 0.19.8.2
 
 github: <https://github.com/appliedstat/R>    <br /> <br />
 
