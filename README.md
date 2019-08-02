@@ -6,7 +6,7 @@ Robust Quality Control Chart. <br />
 
 Current version 0.19.8.2
 
-github: <https://github.com/appliedstat/R>    <br /> <br />
+github: <https://github.com/appliedstat/R/rQCC>    <br /> <br />
 
 ## /rt.test 
 Robustified *t*-test using median/MAD and Hodges-Lehmann/Shamos.<br />  
