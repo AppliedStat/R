@@ -6,6 +6,8 @@ Robust Quality Control Chart. <br />
 
 Current version 0.19.8.2
 
+CRAN: <https://cran.r-project.org/web/packages/rQCC/> <br />
+rdrr.io: <https://rdrr.io/cran/rQCC/>  <br />
 github: <https://github.com/AppliedStat/R/tree/master/rQCC>    <br /> <br />
 
 ## /rt.test 
