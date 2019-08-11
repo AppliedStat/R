@@ -20,7 +20,7 @@ We used 1.0E08 Monte Carlo iterations in the simulation.
 This data frame contains 998 rows and 1001 columns.
 }
 \references{
-C. Park (2017). 
+Park, C. (2017).
 Weibullness test and parameter estimation of the three-parameter
 Weibull model using the sample correlation coefficient. 
 \emph{International Journal of Industrial Engineering - Theory, 
@@ -29,3 +29,4 @@ Applications and Practice}
 \url{http://journals.sfu.ca/ijietap/index.php/ijie/article/view/2848}
 }
 \keyword{datasets}
+\keyword{Weibull plot}% use one of  RShowDoc("KEYWORDS")

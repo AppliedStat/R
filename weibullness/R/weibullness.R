@@ -43,7 +43,7 @@ wp.test.pvalue <- function (r,n) {
 }
 
 ## critical value for wp.test 
-print.wp.test.critical.value <- function (x,...) { 
+print.wp.test.critical <- function (x,...) { 
    cat("\n       ", x$title, "\n\n") 
    cat("significan level = ",x$alpha, ", ", 
        "sample size = ", x$sample.size,"\n\n",sep="" )
@@ -62,7 +62,7 @@ wp.test.critical <- function (alpha, n) {
    RVAL = list(sample.size=n, alpha=AL/1000, critical.value=quantiles, 
                title="Critical value for the Weibullness test", 
                data.name =Weibull.Plot.Quantiles)
-   class(RVAL) = "wp.test.critical.value"
+   class(RVAL) = "wp.test.critical"
    return(RVAL)
 }
 
