@@ -1,10 +1,10 @@
 # Based on Farnum/Booth:1997
 weibull.mle <- 
-function(x, threshold, interval, interval.threshold, a, 
-         tol=.Machine$double.eps^0.25, maxiter=1000, trace=0) 
+function(x, threshold, interval, interval.threshold, extendInt="downX",
+         a, tol=.Machine$double.eps^0.25, maxiter=1000, trace=0) 
 {
   if (missing(threshold)) { 
-     threshold = weibull.threshold(x,a=a)
+     threshold = weibull.threshold(x, a, interval.threshold, extendInt)
   }
   x = x - threshold
 
@@ -43,10 +43,10 @@ weibull.wp <- function(x,n, a=0.5){
 
 #------------------------------
 weibull.threshold <- 
-function(x, a, interval.threshold) {
+function(x, a, interval.threshold, extendInt="downX") {
    n = length(x)
    if (missing(a)) { a = ifelse(n <= 10, 3/8, 1/2) }
-   EEthreshold = function(threshold) {
+   EE.weibull.threshold = function(threshold) {
       x = sort(x)
       v = log(-log(1-ppoints(n,a=a)))
       u1= log(x-threshold)
@@ -64,7 +64,8 @@ function(x, a, interval.threshold) {
       UPPER = min(x) - TINY 
       interval.threshold = c(LOWER,UPPER) 
    }
-   tmp = uniroot(EEthreshold, interval=interval.threshold, extendInt="downX")
+   tmp = uniroot(EE.weibull.threshold, 
+                 interval=interval.threshold, extendInt=extendInt)
    ans = tmp$root
    names(ans) = "threshold"
    return(ans)

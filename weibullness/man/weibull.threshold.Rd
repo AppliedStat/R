@@ -4,13 +4,14 @@
 \title{Estimate of threshold parameter of three-parameter Weibull distribution} 
 \description{Calculates the estimate of the threshold parameter.}
 \usage{
-weibull.threshold(x, a, interval.threshold)
+weibull.threshold(x, a, interval.threshold, extendInt="downX")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{a numeric vector of observations.}
   \item{a}{the offset fraction to be used; typically in (0,1).}
   \item{interval.threshold}{a vector containing the end-points of the interval to be estimated for the threshold parameter.}
+  \item{extendInt}{character string specifying if the interval c(left,right) should be extended or directly produce an error when f() has no differing signs at the endpoints. The default, "downX", keep lowering the the left end of the interval so that f() has different signs. See \code{\link{uniroot}}.}
 }
 \details{
 The three-parameter Weibull distribution has the cumulative distribution function

@@ -1,7 +1,7 @@
 Package: weibullness
 Title: Goodness-of-Fit Test for Weibull Distribution (Weibullness)
 Version: 1.19.8
-Date: 2019-08-11
+Date: 2019-08-19
 Authors@R: person(given="Chanseok",
                     family="Park",
                     role = c("aut", "cre"),

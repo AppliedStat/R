@@ -6,8 +6,8 @@
 three-parameter Weibull distribution.
 }
 \usage{
-weibull.mle(x, threshold, interval, interval.threshold, a, 
-        tol = .Machine$double.eps^0.25, maxiter = 1000, trace = 0)
+weibull.mle(x, threshold, interval, interval.threshold, extendInt="downX", 
+            a, tol = .Machine$double.eps^0.25, maxiter = 1000, trace = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -17,6 +17,7 @@ weibull.mle(x, threshold, interval, interval.threshold, a,
 for the shape parameter.}
   \item{interval.threshold}{a vector containing the end-points of the interval 
       to be estimated for the threshold parameter.}
+  \item{extendInt}{character string specifying if the interval c(left,right) should be extended or directly produce an error when f() has no differing signs at the endpoints. The default, "downX", keep lowering the the left end of the interval so that f() has different signs. See \code{\link{uniroot}}.}
   \item{a}{the offset fraction to be used; typically in (0,1).}
   \item{tol}{the desired accuracy (convergence tolerance).}
   \item{maxiter}{the maximum number of iterations.}
