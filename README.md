@@ -23,7 +23,7 @@ github: <https://github.com/cran/rt.test>  <br /> <br />
 ## weibullness 
 Weibullness test (goodness-of-fit test for Weibull)  <br /> 
 
-For version 1.18.6, refer to <br /> 
+For version 1.19.8, refer to <br /> 
 
 CRAN: <https://cran.r-project.org/web/packages/weibullness/> <br />
 rdrr.io: <https://rdrr.io/cran/weibullness/>  <br />
