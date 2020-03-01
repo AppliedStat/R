@@ -2,13 +2,13 @@
 
 ---
 ## rQCC 
-Robust Quality Control Chart. <br />
+Robust Quality Control Chart (rQCC). <br />
 
-Current version 0.19.8.2
+For version 1.20.3, refer to <br />
 
 CRAN: <https://cran.r-project.org/web/packages/rQCC/> <br />
 rdrr.io: <https://rdrr.io/cran/rQCC/>  <br />
-github: <https://github.com/AppliedStat/R/tree/master/rQCC>    <br /> <br />
+github: <https://github.com/cran/rQCC>  <br /> <br />
 
 ## rt.test 
 Robustified *t*-test using median/MAD and Hodges-Lehmann/Shamos.<br />  
