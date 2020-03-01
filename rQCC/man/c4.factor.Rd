@@ -1,63 +1,65 @@
 \encoding{utf-8}
-\name{correction.factor}
+\name{factor.for.sigma}
 \alias{c4.factor}
 
-\title{Finite-sample correction factor for the standard deviation}
+\title{Finite-sample unbiasing factor for the standard deviation}
 
 \description{
-Finite-sample correction factor for the standard deviation (\eqn{\sigma}{\sigma})
+Finite-sample unbiasing factor for the standard deviation (\eqn{\sigma}{\sigma})
 under the normal distribution.
 }
 
 \usage{
-c4.factor(n, method=c("sd","mad","shamos"))
+c4.factor(n, method=c("sd","range", "mad","shamos"))
 }
 \arguments{
  \item{n}{sample size (\eqn{n \ge 1}{n \ge 1}).}
  \item{method}{a character string specifying the estimator, must be
-one of "sd" (default), "mad" and "shamos."}
+one of \code{"sd"} (default), \code{"range"}, \code{"mad"} and \code{"shamos"}.}
 }
 
 
 \details{
-The conventional sample standard deviation, median absolute deviation (MAD)
+The conventional sample standard deviation, range, median absolute deviation (MAD)
 and Shamos estimators are Fisher-consistent under the normal distribution, 
 but they are not unbiased with a sample of finite size.
 
-An unbiased estimator of (\eqn{\sigma}{\sigma}) 
-with the sample standard deviation (\eqn{s}) is given by \cr
+Using the sample standard deviation,
+an unbiased estimator of the standard deviation (\eqn{\sigma}{\sigma}) is calculated by \cr
 \code{sd(x)/c4.factor(length(x), method="sd")} \cr
-where \eqn{n}{n} is the sample size.
 
-When the median absolute deviation (\code{stats::\link{mad}}) estimator is used, 
-an unbiased estimator of (\eqn{\sigma}{\sigma}) is given by \cr
-\code{mad(x)/c4.factor(length(x), method="mad")}.
+Using the range (maximum minus minimum), 
+an unbiased estimator of \eqn{\sigma}{\sigma} is calculated by \cr
+\code{diff(range(x))/c4.factor(length(x), method="range")}
 
-Using the Shamos estimator (\code{rQCC::shamos}), 
-an unbiased estimator of (\eqn{\sigma}{\sigma}) is given by \cr 
-\code{shamos(x)/c4.factor(length(x), method="shamos")}.
+Using the median absolute deviation (\link{mad}\{stats\}),
+an unbiased estimator of \eqn{\sigma}{\sigma} is calculated by \cr
+\code{mad(x)/c4.factor(length(x), method="mad")}
 
-Note that the formula for the correction factor \eqn{c_4(n)}{c4(n)} is given by 
+Using the Shamos estimator (\code{shamos}\{rQCC\}), 
+an unbiased estimator of \eqn{\sigma}{\sigma} is calculated by \cr 
+\code{shamos(x)/c4.factor(length(x), method="shamos")}
+
+Note that the formula for the unbiasing factor \eqn{c_4(n)}{c4(n)} is given by 
 \deqn{c_4(n) = \sqrt{\frac{2}{n-1}}\cdot\frac{\Gamma(n/2)}{\Gamma((n-1)/2)}.}{c4(n) = \sqrt\{2/(n-1)\}*\Gamma(n/2)/\Gamma((n-1)/2).}
 
-The finite-sample correction factors for the median absolute deviation (MAD)  
+The finite-sample unbiasing factors for the median absolute deviation (MAD)  
 and Shamos estimators 
-are obtained for \eqn{n=1,2,\ldots,10}{n = 1, 2, ... ,100} 
+are obtained for \eqn{n=1,2,\ldots,100}{n = 1, 2, ... ,100} 
 using the extensive Monte Carlo simulation with 1E07 replicates. 
 For the case of \eqn{n > 100}{n > 100}, they are obtained 
 using the method of Hayes (2014).
 }
 
-\value{\code{c4.factor} computes the finite-sample correction factor when
-the sample standard deviations, the sample median absolute deviation (MAD) and Shamos estimates are used.
-}
+\value{It returns a numeric value.}
 
 \author{Chanseok Park and Min Wang}
 
-
 \references{
-Park, C., H. Kim, and M. Wang (2019). Finite-sample properties
-of robust location and scale estimators. \emph{arXiv:1908.00462}.
+Park, C., H. Kim, and M. Wang (2020).
+Investigation of finite-sample properties of robust location and scale estimators.
+\emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
+\url{https://doi.org/10.1080/03610918.2019.1699114}
 
 Shamos, M. I. (1976).  Geometry and statistics: Problems at the interface.
 In Traub, J. F., editor,
@@ -71,24 +73,22 @@ Finite-sample bias-correction factors for the median absolute deviation.
 }
 
 \seealso{
-\code{stats::\link{mad}} for the Fisher-consistent median absolute deviation (MAD) estimator 
-for the standard deviation (\eqn{\sigma}{\sigma}) of a normal distribution. 
+\link{mad}\{stats\} for the Fisher-consistent median absolute deviation (MAD) estimator 
+of the standard deviation (\eqn{\sigma}{\sigma}) under the normal distribution.
 
-\code{rQCC::mad.unbiased} for finite-sample unbiased median absolute deviation (MAD) estimator
-for the standard deviation (\eqn{\sigma}{\sigma}) of a normal distribution. 
+\code{mad.unbiased}\{rQCC\} for finite-sample unbiased median absolute deviation (MAD) estimator
+of the standard deviation (\eqn{\sigma}{\sigma}) under the normal distribution.
 
-\code{rQCC::shamos} for the Fisher-consistent Shamos estimator 
-for the standard deviation (\eqn{\sigma}{\sigma}) of a normal distribution. 
+\code{shamos}\{rQCC\} for the Fisher-consistent Shamos estimator 
+of the standard deviation (\eqn{\sigma}{\sigma}) under the normal distribution.
 
-\code{rQCC::shamos.unbiased} for finite-sample unbiased Shamos estimator
-for the standard deviation (\eqn{\sigma}{\sigma}) of a normal distribution. 
+\code{shamos.unbiased}\{rQCC\} for finite-sample unbiased Shamos estimator
+of the standard deviation (\eqn{\sigma}{\sigma}) under the normal distribution.
 
-\code{rQCC::n.times.eBias.of.mad} 
-for the values of the empirical biases of 
+\code{n.times.eBias.of.mad}\{rQCC\} for the values of the empirical biases of 
 the median absolute deviation (MAD) estimator under the standard normal distribution. 
 
-\code{rQCC::n.times.eBias.of.shamos} 
-for the values of the empirical biases of 
+\code{n.times.eBias.of.shamos}\{rQCC\} for the values of the empirical biases of 
 the Shamos estimator under the standard normal distribution. 
 }
 
@@ -99,6 +99,10 @@ c4.factor(n=10, method="sd")
 c4.factor(n=10, method="mad")
 
 c4.factor(n=10, method="shamos")
+
+# Note: d2 notation is widely used for the bias-correction of the range.
+d2 = c4.factor(n=10, method="range") 
+d2
 }
 
-\keyword{correction factor}
+\keyword{unbiasing factor}

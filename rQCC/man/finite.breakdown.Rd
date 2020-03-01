@@ -1,23 +1,32 @@
+\encoding{utf-8}
 \name{finite.sample.breakdown}
 \alias{finite.breakdown}
 \title{Finite-sample breakdown point of various estimators}
 \usage{
-finite.breakdown(n, method=c("median","HL1","HL2","HL3","mad","shamos")) 
+finite.breakdown(n, 
+       method=c("mean","median","HL1","HL2","HL3","sd","range","mad","shamos") ) 
 }
 \arguments{
  \item{n}{sample size (\eqn{n \ge 1}{n \ge 1}).}
  \item{method}{a character string specifying the estimator, must be 
-one of "median" (default), "HL1", "HL2", "HL3", "mad", and "shamos."}
+one of \code{"mean"} (default), \code{"median"}, \code{"HL1"}, \code{"HL2"}, \code{"HL3"}, 
+\code{"sd"}, \code{"range"}, \code{"mad"}, and \code{"shamos"}.}
 }
 
 
-\description{Calculates finite-sample breakdown point of 
-median, Hodges-Lehmann estimators (HL1, HL2, HL3), 
-MAD (median absolute deviation) and Shamos.}
+\description{Calculates the finite-sample breakdown point of the mean, 
+median, Hodges-Lehmann estimators (HL1, HL2, HL3), standard deviation, range, 
+MAD (median absolute deviation) and Shamos estimators.
+Note that for the case of the mean, standard deviation and  range, 
+the finite-sample breakdown points
+are always zero.}
 
 \details{
+\code{finite.breakdown} gives the finite-sample breakdown point
+of the specified estimator.
+
 The Hodges-Lehmann (HL1) is defined as 
-\deqn{\mathrm{HL1} = \mathop{\mathrm{median}}_{i<j} \Big( \frac{X_i+X_j}{2} \Big).}{HL1 = median of (X
+\deqn{\mathrm{HL1} = \mathop{\mathrm{median}}_{i<j} \Big( \frac{X_i+X_j}{2} \Big)}{HL1 = median of (X
 i+Xj)/2 over i<j}  
 where \eqn{i,j=1,2,\ldots,n}{i, j=1,2,...,n}.
 
@@ -28,14 +37,13 @@ The Hodges-Lehmann (HL3) is defined as
 \deqn{\mathrm{HL3} = \mathop{\mathrm{median}}_{\forall(i,j)} \Big( \frac{X_i+X_j}{2} \Big).}{HL3 = median of (Xi+Xj)/2 over all (i,j).}
 }
 
-
-\value{\code{finite.breakdown} gives the finite-sample breakdown point
-of the specified estimator.}
+\value{It returns a numeric value.}
 
 \references{
-Park, C., H. Kim, and M. Wang (2019). 
-Finite-sample properties of robust location and scale estimators. 
-\emph{arXiv:1908.00462}.
+Park, C., H. Kim, and M. Wang (2020).
+Investigation of finite-sample properties of robust location and scale estimators.
+\emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
+\url{https://doi.org/10.1080/03610918.2019.1699114}
 
 Hodges, Jr., J. L. (1967).
 Efficiency in normal samples and tolerance of extreme values 
@@ -49,9 +57,8 @@ Hampel, F. R., Ronchetti, E., Rousseeuw, P. J., and Stahel, W. A. (1986).
 Subsection 2.2a.  John Wiley & Sons, New York.
 }
 
-
 \seealso{
-\code{rQCC::HL} for the Hodges-Lehmann estimate.
+\code{HL}\{rQCC\} for the Hodges-Lehmann estimate.
 }
 
 \examples{

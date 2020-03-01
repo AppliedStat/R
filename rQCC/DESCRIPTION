@@ -1,20 +1,23 @@
 Package: rQCC
 Title: Robust Quality Control Chart
-Version: 0.19.8.2
-Date: 2019-08-02
-Authors@R: c(person(given="Chanseok", 
-                    family="Park", 
+Version: 1.20.3
+Date: 2020-03-01
+Authors@R: c(person(given="Chanseok",
+                    family="Park",
                     role = c("aut", "cre"),
-                    email="statpnu@gmail.com"),
+                    email="statpnu@gmail.com",
+                    comment = c(ORCID = "https://orcid.org/0000-0002-2208-3498")),
              person(given="Min",
-                    family="Wang", 
+                    family="Wang",
                     role = "ctb",
-                    email="Min.Wang@ttu.edu") )
-Author: Chanseok Park [aut, cre], Min Wang [ctb]
+                    email="min.wang3@utsa.edu", 
+                    comment = c(ORCID = "https://orcid.org/0000-0002-9233-7844")) )
+Author: Chanseok Park [aut, cre] (<https://orcid.org/0000-0002-2208-3498>), Min Wang [ctb] (<https://orcid.org/0000-0002-9233-7844>)
 Maintainer: Chanseok Park <statpnu@gmail.com>
 Depends: R (>= 3.2.3)
-Description: Constructs robust quality control chart based on the median and Hodges-Lehmann estimators (location) and the median absolute deviation (MAD) and Shamos estimators (scale) which are unbiased with a sample of finite size. For more details, see Park, Kim and Wang (2019)<arXiv:1908.00462>. This work was partially supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (No. NRF-2017R1A2B4004169).
+Description: Constructs robust quality control chart based on the median or Hodges-Lehmann estimator (location) and the median absolute deviation (MAD) or Shamos estimator (scale). These estimators are all unbiased with a sample of finite size. For more details, see Park, Kim and Wang (2020) <doi:10.1080/03610918.2019.1699114>. This work was partially supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (NRF-2017R1A2B4004169).
 License: GPL-2 | GPL-3
 URL: https://github.com/AppliedStat/R
 BugReports: https://github.com/AppliedStat/R/issues
+Encoding: UTF-8
 LazyData: yes
