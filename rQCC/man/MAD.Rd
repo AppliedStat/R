@@ -12,8 +12,8 @@ mad2.unbiased(x, center = median(x), constant=1.4826, na.rm = FALSE)
 
 \arguments{
  \item{x}{a numeric vector of observations.}
- \item{center}{Optionally, the center: defaults to the median.}
- \item{constant}{Correction factor for the Fisher-consistency under the normal distribution}
+ \item{center}{pptionally, the center: defaults to the median.}
+ \item{constant}{correction factor for the Fisher-consistency under the normal distribution}
  \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 

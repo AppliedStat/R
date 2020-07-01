@@ -1,0 +1,540 @@
+%\VignetteIndexEntry{Factors for constructing control limits}
+%\VignetteKeyword{rQCC}
+%\VignetteKeyword{control chart}
+%\VignetteKeyword{control limits}
+%\VignetteKeyword{Xbar chart}
+%\VignetteKeyword{S chart}
+%\VignetteKeyword{R chart}
+%\VignetteKeyword{factor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}[12pt]
+\usepackage{Sweave}
+\usepackage{amsmath,xcolor}
+\addtolength{\textwidth}{1in}
+\addtolength{\oddsidemargin}{-.5in}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Factors for Constructing Control Limits}
+%-------------------------------------------------------------------
+\author{Chanseok Park\footnote{Applied Statistics Laboratory,
+Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
+His work was partially supported by the National Research Foundation of Korea (NRF)
+grant funded by the Korea government (NRF-2017R1A2B4004169).}
+~{and}
+Min Wang\footnote{Department of Management Science and Statistics,
+The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
+}
+\date{July 1, 2020}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\begin{abstract}
+In this note, we provide the mathematical formulas of the factors which are
+used for constructing control limits.
+Using the \texttt{factors.cc} function in the robust quality control chart
+(\texttt{rQCC}) R package, one can obtain these factors.
+\end{abstract}
+
+%%--------------------------------------
+\section{Factors for computing control chart lines}
+%%--------------------------------------
+In this section, we provide a brief summary of
+ mathematical relations of factors for computing control chart \emph{lines}.
+For more details, see
+    Supplement~A of ASTM (STP 15-D) \cite{ASTM:1976}
+and Supplement~B of ASTM (STP 15-C) \cite{ASTM:1951}.
+
+The mathematical relations given for factors ($c_2$, $c_4$, $d_2$, $d_3$)
+are based on sampling randomly from a normal distribution.
+These are given by
+%-----
+\begin{align*}
+c_2(n) &= \sqrt{\frac{2}{n}}   \cdot \frac{\Gamma(n/2)}{\Gamma(n/2-1/2)}, \\
+c_4(n) &= \sqrt{\frac{2}{n-1}} \cdot \frac{\Gamma(n/2)}{\Gamma(n/2-1/2)},\\
+d_2(n) &= {2}\int_{{0}}^{{\infty}}
+         \Big\{ 1-\big[\Phi(z)\big]^n  - \big[1-\Phi(z)\big]^n \Big\} dz, \\
+\intertext{and}
+d_3(n) &= \sqrt{ E(R^2) - d_2(n)^2 },
+\end{align*}
+%-----
+where $\Phi(\cdot)$ is the cumulative distribution function (cdf) of
+the standard normal distribution
+and $E(R^k)$ is given in (\ref{EQ:ER}) of Appendix~B.
+All the detailed derivations of $c_4(n)$ are in Appendix~A
+and those of $d_2(n)$ and $d_3(n)$ are in Appendix~B.
+Note that $c_2(n)$ had been used in ASTM (STP 15-C) \cite{ASTM:1951}
+and it is replaced by $c_4(n)$ in ASTM (STP 15-D) \cite{ASTM:1976}.
+Thus, $c_2(n)$ is rarely used after the year of 1976.
+
+
+%%--------------------------------------
+\section{Factors for computing control limits}
+%%--------------------------------------
+The factors below are used for constructing
+a variety of control charts with the choice of $g\!\cdot\!\sigma$ \emph{limits}.
+For more details, see
+    Supplement~A of ASTM (STP 15-D) \cite{ASTM:1976}
+and Supplement~B of ASTM (STP 15-C) \cite{ASTM:1951}.
+Note that the American Standard uses $3\!\cdot\!\sigma$ limits
+with 0.27\% false alarm rate, while
+the British Standard uses $3.09\!\cdot\!\sigma$ limits with 0.20\% false alarm rate.
+
+%-------------
+\begin{itemize}
+\item For averages:
+\begin{align*}
+A(n)   &= \frac{g}{\sqrt{n}},\\
+A_1(n) &= \frac{g}{c_2(n)\sqrt{n}} = \frac{A(n)}{c_2(n)}, \\
+A_2(n) &= \frac{g}{d_2(n)\sqrt{n}} = \frac{A(n)}{d_2(n)}, \\
+A_3(n) &= \frac{g}{c_4(n)\sqrt{n}} = \frac{A(n)}{c_4(n)}.
+\end{align*}
+Note that  $A_1(n)$ in  ASTM (STP 15-C) \cite{ASTM:1951}
+was replaced by $A_3(n)$ in ASTM (STP 15-D) \cite{ASTM:1976} in the year of 1976.
+Since then, $A_1(n)$ is rarely used.
+
+\item For standard deviations:
+\begin{align*}
+B_1(n) &= \max\left\{c_2(n) - g\cdot\sqrt{\frac{n-1}{n}-c_2(n)^2},~ 0 \right\},    \\
+B_2(n) &=            c_2(n) + g\cdot\sqrt{\frac{n-1}{n}-c_2(n)^2},                \\
+B_3(n) &= \max\left\{1 - \frac{g}{c_4(n)} \cdot\sqrt{1-c_4(n)^2},~ 0 \right\},    \\
+B_4(n) &=            1 + \frac{g}{c_4(n)} \cdot\sqrt{1-c_4(n)^2},    \\
+B_5(n) &= \max\left\{c_4(n) - {g}\cdot\sqrt{1-c_4(n)^2},~ 0 \right\} = c_4(n)\cdot B_3(n), \\
+B_6(n) &=            c_4(n) + {g}\cdot\sqrt{1-c_4(n)^2}              = c_4(n)\cdot B_4(n).
+\end{align*}
+Note that $B_1(n)$ and $B_2(n)$ in  ASTM (STP 15-C) \cite{ASTM:1951}
+are replaced by $B_5(n)$ and $B_6(n)$,
+respectively, in ASTM (STP 15-D) \cite{ASTM:1976}.
+
+In  ASTM (STP 15-C), however, $B_3(n)$ and $B_4(n)$ are defined as
+\begin{align*}
+B_3(n) &= \max\left\{1 - \frac{g}{c_2(n)}\cdot\sqrt{\frac{n-1}{n}-c_2(n)^2},~ 0 \right\},  \\
+B_4(n) &=            1 + \frac{g}{c_2(n)}\cdot\sqrt{\frac{n-1}{n}-c_2(n)^2},
+\end{align*}
+which are easily obtained by $B_1(n)/c_2(n)$ and $B_2(n)/c_2(n)$ in ASTM (STP 15-C), 
+respectively.
+Thus, we calculate $B_3(n)$ and $B_4(n)$ based only on ASTM (STP 15-D) \cite{ASTM:1976}
+instead of ASTM (STP 15-C).
+
+\item For ranges:
+\begin{align*}
+D_1(n) &= \max\left\{d_2(n) - g\cdot d_3(n),~  0 \right\},    \\
+D_2(n) &=            d_2(n) + g\cdot d_3(n),                 \\
+D_3(n) &= \max\left\{1 - g\cdot\frac{d_3(n)}{d_2(n)},~ 0 \right\} = \frac{D_1(n)}{d_2(n)}, \\
+D_4(n) &=            1 + g\cdot\frac{d_3(n)}{d_2(n)}              = \frac{D_2(n)}{d_2(n)}. \\
+\end{align*}
+
+\item For individuals:
+\begin{align*}
+E_1(n) &= \frac{g}{c_2(n)},  \\
+E_2(n) &= \frac{g}{d_2(n)},  \\
+E_3(n) &= \frac{g}{c_4(n)}.
+\end{align*}
+Note that $E_1(n)$ in ASTM (STP 15-C) \cite{ASTM:1951}
+is replaced by  $E_3(n)$ in  ASTM (STP 15-D) \cite{ASTM:1976}.
+\end{itemize}
+%-------------
+
+
+
+
+
+%%================================================
+\clearpage
+%% \bigskip \bigskip
+\appendix
+%%------------------------------------------------
+\part*{Appendices}
+%%------------------------------------------------
+
+%%------------------------------------------------
+\section{The bias correction factor for the sample standard deviation}
+%%------------------------------------------------
+It is well known that
+\[
+E( S^2 ) = \sigma^2,
+\]
+where $S^2 = \sum_{i=1}^{n} (X_i-\bar{X})^2 / (n-1)$,
+$X_i \sim N(\mu,\sigma^2)$, and $\bar{X}=\sum_{i=1}^{n}X_i/n$.
+However, we have $E( S ) \not= \sigma$.
+
+Using the fact that $Y=(n-1)S^2/\sigma^2$ has the chi-square distribution
+with $n-1$ degrees of freedom which is  equivalent to the gamma distribution with
+$\alpha=(n-1)/2$ (shape) and $\theta=2$ (scale), 
+we obtain the unbiased estimator of $\sigma$.
+Now, it is well known that
+\[
+E\big[ Y^c \big] = \frac{\Gamma(\alpha+c)\theta^c}{\Gamma(\alpha)},
+\]
+when $Y$ has the gamma distribution with shape $\alpha$ and scale $\theta$.
+Clearly, for $c=1/2$, we have
+\[
+E\big[ \sqrt{Y} \big] = \frac{\Gamma(\alpha+1/2)\sqrt{\theta}}{\Gamma(\alpha)}.
+\]
+Then we obtain
+\[
+E\big[ \sqrt{ (n-1)S^2/\sigma^2 } \big]
+= \frac{\Gamma(n/2)\sqrt{2}}{\Gamma( n/2-1/2 )}.
+\]
+This implies that
+\[
+E(S) = c_4(n)\,\sigma, 
+\]
+where
+\[
+c_4(n) = \sqrt{\frac{2}{n-1}} \cdot \frac{\Gamma(n/2)}{\Gamma(n/2-1/2)}.
+\]
+Thus, the estimator $S/c_4(n)$ is unbiased for $\sigma$.
+
+%%------------------------------------------------
+\section{The bias correction factors for the range}
+%%---------------------------------------------------------------
+We can also estimate $\sigma$ using the range, $R=X_{(n)} - X_{(1)}$, where
+$X_{(1)}$, $X_{(2)}$, $\ldots$, $X_{(n)}$ are the order statistics of a random sample
+of size $n$ from $N(\mu, \sigma)$.
+It is known that $R=X_{(n)} - X_{(1)}$ by itself is \emph{not} unbiased for $\sigma$.
+In this section, we provide the bias correction factor for the range
+to estimate $\sigma$ so that $E(R/d_2(n)) = \sigma$.
+We also provide the  bias correction factor defined by
+$\mathrm{Var}(R/d_3(n)) = \sigma^2$.
+First, we provide the following theorems
+and lemmas which are needed to obtain $d_2(n)$ and $d_3(n)$.
+
+
+%--------------------------------
+%% \subsection{The joint pdf of order statistics}
+%--------------------------------
+\begin{theorem}   \label{THM:jointpdf}
+Let $X_{1}, X_{2}, \ldots, X_{n}$ be a random sample with
+continuous cdf $F(x)$ and pdf $f(x)$.
+Let $X_{(1)}, X_{(2)}, \ldots, X_{(n)}$ be the order statistics of a random
+sample. Then the joint pdf of $U=X_{(i)}$ and $V=X_{(j)}$ for
+$1 \le i < j \le n$ is given by
+\begin{align*}
+f_{(i,j)} (u,v) &=
+  \frac{n!}{(i-1)! \times 1! \times (j-i-1)! \times 1!\times (n-j)!} ~ \times \\
+  & \qquad
+   \Big[F(u)\Big]^{i-1}f(u)\Big[F(v)-F(u)\Big]^{j-i-1}f(v)\Big[1-F(v)\Big]^{n-j}
+\end{align*}
+for $-\infty < u < v < \infty$.
+\end{theorem}
+\begin{proof}
+For more details, refer to Theorem~5.4.6 in Casella and
+Berger~\cite{Casella/Berger:2002}.
+\end{proof}
+%%----------------
+
+
+%%--------------------
+% \subsection{Distribution of the range}
+%%\subsection[Distribution of the range under $N(0,1)$]{Distribution of the range}
+Let $Z_1, Z_2, \ldots, Z_n$ be a random sample from a standard normal distribution with
+pdf $\phi(z)$ and cdf $\Phi(z)$.
+For notational convenience, we denote $U = Z_{(1)}$ and $V = Z_{(n)}$.
+Using Theorem~\ref{THM:jointpdf},
+we have the joint pdf of $U$ and $V$
+\[
+f_{(1,n)}(u,v)
+= n(n-1)\, \phi(u) \, \phi(v)\; \big[ \Phi(v)-\Phi(u) \big]^{n-2}.
+\]
+The goal is to derive the distribution of the range of the sample,
+$V - U = Z_{(n)} - Z_{(1)}$.
+Next we consider the new random variables given by $Y_1=U$ and $Y_2=V-U$.
+Notice that the random variable $Y_2$ is the \emph{range}.
+The inverse transforms are easily obtained by $u=y_1$ and $v=y_1+y_2$.
+Then the joint pdf of $Y_1$ and $Y_2$, denoted by $g(y_1,y_2)$, is given by
+\[
+g(y_1,y_2) = n(n-1)\,\phi(y_1) \, \phi(y_1+y_2)  \,
+            \Big[ \Phi(y_1+y_2)-\Phi(y_1) \Big]^{n-2} {|}J{|},
+\]
+where $-\infty < y_1 < \infty$, $y_2>0$ and
+\[
+J
+= \det{\begin{pmatrix}
+\dfrac{\partial u}{\partial y_1} & \dfrac{\partial u}{\partial y_2} \\[3ex]
+\dfrac{\partial v}{\partial y_1} & \dfrac{\partial v}{\partial y_2}
+\end{pmatrix}}
+= 1 .
+\]
+
+Thus, we have
+\begin{align}
+g_2(y_2)
+&= \int_{-\infty}^{\infty} g(y_1,y_2) \,dy_1 \notag \\
+&= n(n-1) \int_{-\infty}^{\infty} \phi(y_1)\phi(y_1+y_2)
+     \Big[ \Phi(y_1+y_2)-\Phi(y_1) \Big]^{n-2} dy_1.
+\label{EQ:pdfofrange}
+\end{align}
+Note that the cdf of $Y_2$ can be easily obtained by
+\[
+G_2(y_2)
+= n\int_{-\infty}^{\infty} \phi(y_1) \Big[ \Phi(y_1+y_2)-\Phi(y_1) \Big]^{n-1} dy_1.
+\]
+
+%%----------------------------
+%% \subsection{The $k$-th moment of the range}
+Next we consider the $k$-th moment of the range which was provided by Harter~\cite{Harter:1960}.
+We provide a detailed derivation here.
+Using the pdf of the range in (\ref{EQ:pdfofrange}),
+we can obtain the $k$-th moment of the range, $Y_2=Z_{(n)}-Z_{(1)}$,
+by calculating the expectation as follows:
+\begin{align*}
+E(Y_2^k)
+&= \int_{0}^{\infty} y_2^k \, g_2(y_2) \,dy_2  \\
+&= n(n-1) \int_{0}^{\infty} y_2^k
+          \int_{-\infty}^{\infty} \phi(y_1)\phi(y_1+y_2)
+          \Big[ \Phi(y_1+y_2)-\Phi(y_1) \Big]^{n-2} dy_1 \, dy_2 \\
+&= n(n-1) \int_{-\infty}^{\infty}
+    \!\bigg\{\! \int_{0}^{\infty}
+      y_2^k \Big[\Phi(y_1+y_2)-\Phi(y_1)\Big]^{n-2} \! \phi(y_1+y_2)dy_2 \!\bigg\}
+      \phi(y_1) \, dy_1.
+\end{align*}
+For notational convenience,
+we replace $(y_{1},y_{2})$ with {$(x,r)$}. Then we have
+\begin{equation}
+E(R^k) = n(n-1) \! \int_{-\infty}^{\infty}
+      \!\bigg\{\! \int_{0}^{\infty}
+          r^k \Big[\Phi(x+r)-\Phi(x)\Big]^{n-2} \! \phi(x+r)dr \! \bigg\}
+      \phi(x) \, dx,
+\label{EQ:ER}
+\end{equation}
+where $R=Z_{(n)} - Z_{(1)}$.
+
+Clearly, the expression for the $k$-th moment of the range requires the evaluation of a
+complicated double integral.
+Fortunately, for the case where $k=1$ which is the expectation, we can derive
+an alternative formula involving only a \emph{single} integral. The derivation of this formula will
+require the application of three different lemmas which we state and prove below.
+%%------------------------
+\begin{lemma} \label{LEM1}
+Let $X$ be a continuous random variable with cdf $F(x)$.
+If $E( |X|^k )$ exists, then we have
+\[
+\textrm{(i)}~
+\lim_{x\to\infty} x^k \big\{ 1-F(x) \big\} = 0
+\textrm{~~and~~}
+\textrm{(ii)}~
+\lim_{x\to-\infty} |x|^k  F(x)  = 0 .
+\]
+\end{lemma}
+\begin{proof}
+(i) For $x>0$, we have
+\[
+0 \le x^k \big\{ 1-F(x) \big\} = x^k \int_x^\infty dF(t) = \int_x^\infty x^k dF(t)
+  \le \int_x^\infty t^k dF(t) .
+\]
+Now, if we can show that the last term $\int_x^\infty t^k dF(t) \to 0$ in the limit
+as $x\to\infty$, then this will complete the proof because we just showed that
+$0 \le x^k \big\{ 1-F(x) \big\} \le \int_x^\infty t^k dF(t)$ for $x > 0$.
+In order to prove that $\int_x^\infty t^k dF(t) \to 0$ in the limit as $x\to\infty$, note
+that we also have
+\[
+\int_x^\infty t^k dF(t)
+= \int_{-\infty}^\infty |t|^k dF(t) - \int_{-\infty}^x |t|^k dF(t)
+= E(|X|^k) - \int_{-\infty}^x |t|^k dF(t).
+\]
+Since $E( |X|^k )$ exists and
+  $\lim_{x\to\infty} \int_{-\infty}^x |t|^k dF(t) = E( |X|^k )$, we have
+\[
+\int_x^\infty t^k dF(t) = E(|X|^k) - \int_{-\infty}^x |t|^k dF(t) \to 0
+\]
+in the limit as $x\to\infty$.
+
+(ii) For $x<0$, we have
+\[
+0\le |x|^k F(x) = |x|^k \int_{-\infty}^x dF(t) = \int_{-\infty}^x |x|^k dF(t)
+ \le \int_{-\infty}^x |t|^k dF(t).
+\]
+Now, if we can show that the last term $\int_{-\infty}^x |t|^k dF(t) \to 0$
+in the limit as $x\to -\infty$,
+then this will complete the proof because we just showed that
+$0\le |x|^k F(x) \le \int_{-\infty}^x |t|^k dF(t)$ for $x<0$.
+In order to prove that $\int_{-\infty}^x |t|^k dF(t) \to 0$
+in the limit as $x\to-\infty$, note that we also have
+\[
+\int_{-\infty}^x |t|^k dF(t)
+= \int_{-\infty}^\infty |t|^k dF(t) - \int_{x}^\infty |t|^k dF(t)
+= E(|X|^k) - \int_{x}^\infty |t|^k dF(t) .
+\]
+Since $E( |X|^k )$ exists and
+  $\lim_{x\to-\infty} \int_x^{\infty} |t|^k dF(t) = E( |X|^k )$, we have
+\[
+\int_{-\infty}^x |t|^k dF(t) = E(|X|^k) - \int_{x}^\infty |t|^k dF(t) \to 0
+\]
+in the limit as $x\to-\infty$.
+\end{proof}
+
+%--------------
+\begin{lemma} \label{LEM2}
+Let $X$ be a continuous random variable with cdf $F(x)$.
+Then we have
+\[
+E(X) = \int_0^\infty \big[1-F(x) - F(-x)\big] dx .
+\]
+\end{lemma}
+\begin{proof}
+We have
+\begin{equation}
+E(X) = \int_{-\infty}^0 x\,dF(x) + \int_0^\infty x\,dF(x)
+     = \int_{-\infty}^0 x\,dF(x) - \int_0^\infty x\,d\big[1-F(x)\big].
+\label{EQ:EX1}
+\end{equation}
+Using integration by parts, we have
+\begin{align}
+\int_{-\infty}^0 x\,dF(x)
+   &=\Big[x F(x)\Big]_{-\infty}^0 - \int_{-\infty}^0 F(x)\,dx
+  \label{EQ:intxF}    \\
+\intertext{and}
+\int_0^{\infty} x\,d\big[1-F(x)\big]
+ &=\Big[x \big\{1-F(x)\big\}\Big]_0^{\infty}-\int_0^{\infty} \big[1-F(x)\big]\,dx .
+  \label{EQ:intx1minusF}
+\end{align}
+Applying Lemma~\ref{LEM1} to both (\ref{EQ:intxF}) and (\ref{EQ:intx1minusF}),
+we have
+\begin{equation}
+\int_{-\infty}^0 x\,dF(x)  = -\int_{-\infty}^0 F(x)\,dx
+\textrm{~~and~~}
+\int_0^{\infty} x\,d\big[1-F(x)\big] = -\int_0^{\infty} \big[1-F(x)\big]\,dx .
+    \label{EQ:intx1minusF2}
+\end{equation}
+%% Substituting (\ref{EQ:intxF2}) and (\ref{EQ:intx1minusF2}) into (\ref{EQ:EX1}),
+%% we have (\ref{EQ:Lemma2a}).
+%% It is immediate from the change of integration variable
+%% that we have $\int_{-\infty}^0 F(x) dx = \int_0^\infty F(-x) dx$.
+%% Substituting this into (\ref{EQ:Lemma2a}), we have (\ref{EQ:Lemma2b}).
+Substituting (\ref{EQ:intx1minusF2}) into (\ref{EQ:EX1}), we have
+\[
+E(X) = \int_0^\infty \big[1-F(x)\big] dx - \int_{-\infty}^0 F(x) dx
+\]
+Since $\int_{-\infty}^0 F(x) dx = \int_0^\infty F(-x) dx$, we have
+\[
+E(X) = \int_0^\infty \big[1-F(x) - F(-x)\big] dx .
+\]
+which completes the proof.
+\end{proof}
+%%-----------
+It should be noted that Lemma~\ref{LEM2}
+is also valid for discrete random variables, but the proof is omitted.
+%%--------
+\begin{lemma} \label{LEM3}
+Let $X_1, X_2, \ldots, X_n$ be a random sample with cdf $F(x)$.
+Let $F_{(j)}(x)$ denote the cdf of the $j$-th order statistic $X_{(j)}$.
+Then we have
+\begin{equation} \label{EQ:LEM3result}
+\textrm{(i)}~
+F_{(n)}(x) = \big[F(x)\big]^n \textrm{~~and~~}
+\textrm{(ii)}~
+F_{(1)}(x) = 1 - \big[1-F(x)\big]^n.
+\end{equation}
+\end{lemma}
+\begin{proof} The proof is omitted.
+\end{proof}
+%%-------------------------
+\begin{theorem}
+Let $X_1, X_2, \ldots, X_n$ be a random sample with cdf $F(x)$.
+Then the expectation of the range, $R=X_{(n)}-X_{(1)}$, is given by
+\[
+E\big( X_{(n)} -  X_{(1)} \big)
+= \int_{-\infty}^\infty
+   \Big\{ 1 - \big[F(x)\big]^n - \big[1-F(x)\big]^n \Big\} dx.
+\]
+\end{theorem}
+%%--
+\begin{proof}
+Using Lemma~\ref{LEM2}, we have
+\begin{align*}
+E\big( X_{(n)}\big)
+  &= \int_0^\infty\big[1-F_{(n)}(x) - F_{(n)}(-x) \big] dx \\
+\intertext{and}
+E\big( X_{(1)}\big)
+  &= \int_0^\infty\big[1-F_{(1)}(x) - F_{(1)}(-x) \big] dx .
+\end{align*}
+Applying (\ref{EQ:LEM3result}) in Lemma~\ref{LEM3} to the integral above, we obtain
+\begin{align*}
+E\big( X_{(n)}\big)
+  &= \int_0^\infty\Big\{1-\big[F(x)\big]^n - \big[F(-x)\big]^n \Big\}dx, \\
+\intertext{and}
+E\big( X_{(1)}\big)
+  &= \int_0^\infty \Big\{ \big[1-F(x)\big]^n dx -1 + \big[1-F(-x)\big]^n \Big\} dx.
+\end{align*}
+Thus, we have
+\begin{align*}
+&E\big( X_{(n)} -  X_{(1)} \big) \\
+&= \int_0^\infty\!\!\Big\{ 1-\big[F(x)\big]^n {-\big[F(-x)\big]^n}
+      -\big[1-F(x)\big]^n +{1-\big[1-F(-x)\big]^n} \Big\} dx \\
+&= \int_0^\infty\!\!\Big\{ 1-\big[F(x)\big]^n -\big[1-F(x)\big]^n \Big\} dx
+  +\!\!\int_0^\infty\!\!\Big\{{1-\big[F(-x)\big]^n-\big[1-F(-x)\big]^n}
+   \Big\} dx.
+\end{align*}
+Using the change of the integration variable technique for the last term in the above,
+ we have
+\[
+\int_0^\infty\Big\{ {1-\big[F(-x)\big]^n-\big[1-F(-x)\big]^n}\Big\}dx
+= {\int_{-\infty}^0}
+    \Big\{ {1-\big[F(x)\big]^n-\big[1-F(x)\big]^n} \Big\} dx.
+\]
+It is immediate from this result that we have
+\begin{align*}
+&E\big( X_{(n)} - X_{(1)} \big)  \\
+&= \int_0^\infty\Big\{ 1-\big[F(x)\big]^n  - \big[1-F(x)\big]^n \Big\} dx
+      + {\int_{-\infty}^0}
+   \Big\{{1-\big[F(x)\big]^n -\big[1-F(x)\big]^n} \Big\} dx \\
+&= \int_{{-\infty}}^{{\infty}}
+         \Big\{ 1-\big[F(x)\big]^n  - \big[1-F(x)\big]^n \Big\} dx,
+\end{align*}
+which completes the proof.
+\end{proof}
+%%-----------------------
+
+
+It should be noted that
+the above lemmas and theorems are also valid for non-normal distributions.
+But, we use the results specifically in the case of the normal distribution.
+Now suppose that we have a random sample from a \emph{standard} normal distribution,
+$Z_1, Z_2, \ldots, Z_n$, and we want to calculate the expectation of the
+sample range. Then we have
+\[
+E\big( Z_{(n)} - Z_{(1)} \big)
+ = \int_{{-\infty}}^{{\infty}}
+          \Big\{ 1-\big[\Phi(z)\big]^n  - \big[1-\Phi(z)\big]^n \Big\} dz.
+\]
+%%---
+Note that the integrand, $1-\big[\Phi(z)\big]^n -\big[1-\Phi(z)\big]^n$,
+is an even function due to the fact that
+$\Phi(-z)=1-\Phi(z)$ which allows for the simplification of the expectation:
+\[
+d_2(n) = E\big( Z_{(n)} - Z_{(1)} \big)
+ = {2}\int_{{0}}^{{\infty}}
+         \Big\{ 1-\big[\Phi(z)\big]^n  - \big[1-\Phi(z)\big]^n \Big\} dz.
+\]
+Thus, the estimator $R/d_2(n) = (X_{(n)}-X_{(1)})/d_2(n)$ is unbiased for $\sigma$
+with $X_i \sim N(\mu,\sigma^2)$.
+Then it is easily seen that $R = X_{(n)}-X_{(1)} = \sigma(Z_{(n)}-Z_{(1)})$, where
+$Z_i \sim N(0,1)$.
+
+Next, we consider the factor $d_3(n)$ which
+is defined by $\mathrm{Var}(R/d_3(n)) = \sigma^2$.
+Then, using   $\mathrm{Var}(R) = \sigma^2 \mathrm{Var}(Z_{(n)}-Z_{(1)})$,
+we have
+\[
+d_3(n) = \sqrt{\mathrm{Var}(R)}
+    = \sqrt{ E(R^2) - \{E(R)\}^2 }
+    = \sqrt{ E(R^2) - d_2(n)^2 },
+\]
+where $E(R^2)$ can be obtained by (\ref{EQ:ER}).
+
+
+%%===============================================
+\bibliographystyle{unsrt}
+\bibliography{REFrcc}
+
+
+%%===============================================
+\end{document}
+%%===============================================

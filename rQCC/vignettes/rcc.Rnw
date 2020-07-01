@@ -1,0 +1,366 @@
+%\VignetteIndexEntry{A note on the "rcc" function in the "rQCC" package}
+%\VignetteKeyword{rQCC}
+%\VignetteKeyword{control chart}
+%\VignetteKeyword{Xbar chart}
+%\VignetteKeyword{S chart}
+%\VignetteKeyword{R chart}
+%\VignetteKeyword{robust}
+%\VignetteKeyword{robustness}
+%\VignetteKeyword{breakdown}
+%\VignetteKeyword{unbiasing factor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}[12pt]
+\usepackage{Sweave}
+\usepackage{amsmath,xcolor}
+\addtolength{\textwidth}{0.5in}
+\addtolength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{A note on the \texttt{rcc} function in the \texttt{rQCC} package}
+%-------------------------------------------------------------------
+\author{Chanseok Park\footnote{Applied Statistics Laboratory,
+Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
+His work was partially supported by the National Research Foundation of Korea (NRF)
+grant funded by the Korea government (NRF-2017R1A2B4004169).}
+~{and}
+Min Wang\footnote{Department of Management Science and Statistics,
+The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
+}
+\date{July 1, 2020}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\begin{abstract}
+In this note, we provide a brief summary of control charts
+and a description of how they are constructed
+using the \texttt{rcc} function in the robust quality control chart (rQCC) R package.
+Using \texttt{rcc} function, one can construct the traditional Shewhart-type control charts.
+In addition, using various robust location and scale estimates provided by the rQCC package,
+one can easily obtain robust alternatives to the traditional charts.
+\end{abstract}
+
+%--------------------------------------
+\section{Introduction}
+%--------------------------------------
+Control charts, also known as Shewhart control charts
+\cite{Shewhart:1926b,Shewhart:1927,Shewhart:1931}, have been widely used to monitor
+whether a manufacturing process is in a proper state of control or not.
+The traditional Shewhart-type control charts are made up of the upper control limit (UCL),
+the center line (CL) and the lower control limit (LCL) and they have
+the form of $\mathrm{CL}\pm g\cdot\mathrm{SE}$, where the American Standard is based on $g=3$
+with a target false alarm rate of 0.027\% and the British Standard is based on $g=3.09$
+with a target false alarm rate of 0.020\%.
+The UCL is given by $\mathrm{CL}+g\cdot\mathrm{SE}$ and the LCL is
+$\mathrm{CL}-g\cdot\mathrm{SE}$.
+
+In what follows, we provide how to construct the traditional Shewhart-type control charts
+and robust alternatives to them using various robust location and scale estimates
+provided by the \texttt{rQCC} package.
+In this note, we assume
+that we have $m$ samples and that each sample has the same sample size of $n$.
+Let $X_{ij}$ be the $i$th sample (subgroup) from a stable manufacturing process, where
+$i=1,2,\ldots,m$ and $j=1,2,\ldots,n$.
+We also assume that $X_{ij}$ are independent and identically distributed
+as normal with mean $\mu$ and variance $\sigma^2$.
+The $A$, $B$ and $D$ notations here follow the definitions in ASTM (STP 15-C)~\cite{ASTM:1951}
+and ASTM (STP 15-D)~\cite{ASTM:1976}.
+
+
+
+%--------------------------------------
+\section{The $\bar{X}$ chart} \label{subsection:4:03}
+%--------------------------------------
+In order to construct the $\mathrm{CL} \pm g\cdot\mathrm{SE}$ control limits,
+we consider the relation
+\[
+\frac{\bar{X}_k - E(\bar{X}_k)}{\mathrm{SE}(\bar{X}_k)} = \pm g.
+\]
+Since $E(\bar{X}_k) = \mu$ and $\mathrm{SE}(\bar{X}_k)=\sigma/\sqrt{n}$, we have
+%% \begin{equation} \label{EQ:EXk}
+%---
+\[
+E(\bar{X}_k) \pm g\cdot\mathrm{SE}(\bar{X}_k)
+= \mu \pm  \frac{g}{\sqrt{n}}\sigma.
+\]
+%---
+Then the control limits for the $\bar{X}$ chart are given by
+\begin{align*}
+\mathrm{UCL} &= {\mu} + A(n) \sigma,  \\
+\mathrm{CL}  &= {\mu},    \\
+\mathrm{LCL} &= {\mu} - A(n) \sigma,
+\end{align*}
+where $A(n) = g/\sqrt{n}$.
+In practice, the values of the parameters, ${\mu}$ and $\sigma$, are not known.
+Thus, with the estimates $\hat\mu$ and $\hat\sigma$, we have
+\begin{align}
+\mathrm{UCL} &= \hat{\mu} + \frac{g}{\sqrt{n}}\hat{\sigma}  \notag, \\
+\mathrm{CL}  &= \hat{\mu}   \label{EQ:CCwitheEstimates},  \\
+\mathrm{LCL} &= \hat{\mu} - \frac{g}{\sqrt{n}}\hat{\sigma} . \notag
+\end{align}
+
+Thus, we need to estimate  $\mu$ and $\sigma$ by using each sample and then pooling these estimates. Using the $i$th sample above,
+the sample mean and variance are given by
+%-----------
+\[
+\bar{X}_i = \frac{1}{n} \sum_{j=1}^{n} X_{ij}
+\textrm{~~and~~}
+{S}_i^2   = \frac{1}{n-1} \sum_{j=1}^{n} (X_{ij}-\bar{X}_i)^2,
+\]
+%-----------
+where $i=1,2,\ldots,m$.
+Then we can estimate $\mu$ using all the samples as below: 
+\[
+\bar{\bar{X}} = \frac{\bar{X}_1 + \bar{X}_2 +\cdots+ \bar{X}_m}{m}
+              = \frac{1}{m} \sum_{i=1}^m \bar{X}_i.
+\]
+Note that it is easily seen that $\bar{\bar{X}}$ is unbiased for $\mu$.
+However, ${S}_i$ is not unbiased for $\sigma$ since
+$E({S}_i) = c_4(n) \sigma$, where
+$c_4(n) = \sqrt{{2}/{(n-1)}} \cdot {\Gamma(n/2)}/{\Gamma(n/2-1/2)}$.
+Thus, ${S}_i/c_4(n)$ is unbiased for $\sigma$.
+Then we can easily show that $\bar{S}/c_4(n)$ is unbiased for $\sigma$, where
+%%\begin{equation}\label{EQ:Sbar}
+\[
+\bar{S} = \frac{1}{m} \sum_{i=1}^m  {S}_i.
+\]
+%%\end{equation}
+Thus, by substituting $\hat{\mu}=\bar{\bar{X}}$ and $\hat{\sigma}=\bar{S}/c_4(n)$
+into (\ref{EQ:CCwitheEstimates}), we have the control limits
+\begin{align*}
+\mathrm{UCL} &= \bar{\bar{X}} + \frac{g}{\sqrt{n}} \frac{\bar{S}}{c_4(n)}
+              = \bar{\bar{X}} + A_3(n)\bar{S},   \\
+\mathrm{CL}  &= \bar{\bar{X}},    \\
+\mathrm{LCL} &= \bar{\bar{X}} - \frac{g}{\sqrt{n}} \frac{\bar{S}}{c_4(n)}
+              = \bar{\bar{X}} - A_3(n)\bar{S},
+\end{align*}
+where $A_3(n) = A(n)/c_4(n) = g/\{c_4(n) \sqrt{n}\}$.
+
+It is also known that
+\[
+E(R) = d_2(n) \sigma,
+\]
+where $R$ is the sample range from $X_i \sim N(\mu,\sigma^2)$ and
+\[
+d_2(n) = {2}\int_{{0}}^{{\infty}}
+         \Big\{ 1-\big[\Phi(z)\big]^n  - \big[1-\Phi(z)\big]^n \Big\} dz.
+\]
+For more details on $d_2(n)$, one can refer to the vignette below.
+\begin{center}
+{\texttt{vignette("factors.cc", package="rQCC")}}
+\end{center}
+
+Then, with the $i$th sample,
+$R_i / d_2(n)$ is unbiased for $\sigma$, where
+\[
+R_i=\mathop{\max}_{1\le j \le n}(X_{ij}) - \mathop{\min}_{1\le j \le n}(X_{ij}).
+\]
+Then,  with the $m$ samples, $\bar{R}/d_2(n)$ is unbiased for $\sigma$, where
+\[
+\bar{R} = \frac{1}{m} \sum_{i=1}^m  {R}_i .
+\]
+Substituting $\hat{\mu}=\bar{\bar{X}}$ and $\hat{\sigma}=\bar{R}/{d_2(n)}$
+into (\ref{EQ:CCwitheEstimates}), we have the control limits
+\begin{align*}
+\mathrm{UCL} &= \bar{\bar{X}} + \frac{g}{\sqrt{n}} \frac{\bar{R}}{d_2(n)}
+              = \bar{\bar{X}} + A_2(n)\bar{R},   \\
+\mathrm{CL}  &= \bar{\bar{X}},    \\
+\mathrm{LCL} &= \bar{\bar{X}} - \frac{g}{\sqrt{n}} \frac{\bar{R}}{d_2(n)}
+              = \bar{\bar{X}} - A_2(n)\bar{R},
+\end{align*}
+where $A_2(n) = A(n)/d_2(n) = g/\{d_2(n) \sqrt{n}\}$.
+
+As alternatives to the above, we can use robust estimates of location and scale.
+For example, using the median, we can estimate $\mu$
+\[
+\hat{\mu} = \frac{M_1 + M_2 + \cdots + M_m}{m} = \frac{1}{m} \sum_{i=1}^{m} M_i,
+\]
+where
+\[
+M_i = \mathop{\mathrm{median}}_{1\le j \le n}(X_{ij}).
+\]
+One can also consider estimating $\sigma$ 
+based on the conventional MAD (median absolute deviation) given by
+%------------
+% \begin{equation} \label{EQ:MAD}
+\[
+\mathrm{MAD} =
+\frac{\displaystyle{\mathop\mathrm{median}_{1\le i\le n}}|X_i- M |}{\Phi^{-1}({3}/{4})}
+\approx
+{1.4826\cdot\displaystyle{\mathop\mathrm{median}_{1\le i\le n}}|X_i- M|},
+\]
+% \end{equation}
+%-------------
+where $X_i \sim N(\mu,\sigma^2)$ and $M = \mathrm{median}(X_i)$.
+Here $\Phi^{-1}({3}/{4})$ is needed to make this estimator
+{Fisher-consistent \cite{Fisher:1922} for the standard deviation
+under the normal distribution}.
+For more details, see the references
+\cite{Hampel/etc:1986,Park/Kim/Wang:2020}.
+It should be noted that the above conventional MAD estimator is Fisher-consistent 
+but not unbiased.
+The ``\emph{unbiased} MAD'' (uMAD)
+with a finite sample is developed by
+Park, Kim and Wang~\cite{Park/Kim/Wang:2020}
+and implemented in the \texttt{rQCC} package 
+(see \texttt{mad.unbiased} function).
+
+Then, with the $m$ samples, we have the robust unbiased estimate
+of $\sigma$ as follows
+\[
+\hat{\sigma} = \frac{\mathrm{uMAD}_1 + \mathrm{uMAD}_2 + \cdots + \mathrm{uMAD}_m}{m}
+             = \frac{1}{m} \sum_{i=1}^{m} \mathrm{uMAD}_i,
+\]
+where
+\[
+\mathrm{uMAD}_i = \mathop{\mathrm{uMAD}}_{1\le j \le n}(X_{ij}).
+\]
+The \texttt{rcc} function constructs the control charts
+based on various \emph{unbiased} estimates.
+For example, with the median and uMAD estimates, one can obtain the control limits
+using the following
+\begin{center}
+{\texttt{rcc(data, loc="median", scale="mad")}}
+\end{center}
+
+
+Another way of constructing the control limits is to use
+the Hodges-Lehmann \cite{Hodges/Lehmann:1963} for location
+and Shamos~\cite{Shamos:1976} for scale which are respectively given by
+\begin{align*}
+\mathrm{HL}     &= \mathop{\mathrm{median}} \Big( \frac{X_i+X_j}{2} \Big) \\
+\intertext{and}
+\mathrm{Shamos} &= \frac{\displaystyle\mathop{\mathrm{median}}_{i < j} \big( |X_i-X_j| \big)}%
+{\sqrt{2}\,\Phi^{-1}(3/4)}
+\approx
+{1.048358\cdot\displaystyle\mathop{\mathrm{median}}_{i < j} \big( |X_i-X_j| \big)},
+\end{align*}
+where $\sqrt{2}\,\Phi^{-1}(3/4)$ is needed
+to make Shamos estimator {Fisher-consistent for the standard deviation
+under the normal distribution} \cite{Levy/etc:2011}.
+For the Hodges-Lehmann estimate, the median is obtained by
+three ways: (i) the pairwise averages with $i<j$ (denoted by HL1),
+(ii) the pairwise averages with $i \le j$ (HL2),
+and (iii) all the pairwise averages (HL3).
+For more details, refer to \cite{Park/Kim/Wang:2020}.
+It should be noted that the above Shamos is Fisher-consistent but not unbiased.
+The Hodges-Lehmann and ``\emph{unbiased} Shamos''
+are also developed by \cite{Park/Kim/Wang:2020}
+and implemented in R (see \texttt{HL} and \texttt{shamos.unbiased}).
+For example, with the HL2 and unbiased Shamos estimates,
+one can obtain the control limits as below.
+\begin{center}
+{\texttt{rcc(data, loc="HL2", scale="shamos")}}
+\end{center}
+As shown above, by choosing the options for \texttt{loc} and \texttt{scale},
+one can construct various control charts.
+
+
+%-------------------------------------------------
+\section{The $S$ chart} \label{SEC:S}
+%-------------------------------------------------
+In order to construct the $\mathrm{CL} \pm g\cdot\mathrm{SE}$ control limits,
+we can consider the relation
+\[
+\frac{S_k - E(S_k)}{\mathrm{SE}(S_k)} = \pm g.
+\]
+Since $E(S_k) = c_4(n)\sigma$ and $\mathrm{SE}(S_k)=\sqrt{1-c_4(n)^2} \cdot \sigma$,
+we have
+%---
+\[
+E(S_k) \pm g\cdot\mathrm{SE}(S_k)
+= \big\{ c_4(n) \pm g\sqrt{1-c_4(n)^2}\big\} \sigma.
+\]
+%---
+The control limits for the $S$ chart are given by
+\begin{align*}
+\mathrm{UCL} &= B_6(n) \sigma,  \\
+\mathrm{CL}  &= c_4(n) \sigma,  \\
+\mathrm{LCL} &= B_5(n) \sigma,
+\end{align*}
+where
+\begin{align*}
+B_5(n) &= \max\left\{c_4(n) - {g}\cdot\sqrt{1-c_4(n)^2},~ 0 \right\}, \\
+B_6(n) &=            c_4(n) + {g}\cdot\sqrt{1-c_4(n)^2}.
+\end{align*}
+
+Since $\sigma$ is unknown in practice, we need to choose an appropriate unbiased
+estimate for $\sigma$.
+One can consider $\hat{\sigma} = \bar{S}/c_4(n)$. Then we have
+\begin{align*}
+\mathrm{UCL} &= B_4(n) {\bar{S}},  \\
+\mathrm{CL}  &= {\bar{S}},   \\
+\mathrm{LCL} &= B_3(n) {\bar{S}},
+\end{align*}
+where $B_3(n) = B_5(n)/c_4(n)$ and $B_4(n) = B_6(n)/c_4(n)$.
+
+To obtain the robustness property, one can consider a robust estimate of $\sigma$.
+For example, the unbiased MAD or unbiased Shamos estimates of $\sigma$ can be used
+as seen before. The limits for the $S$ chart are calculated using the
+\texttt{rcc} function with \texttt{type="S"} as below. 
+\begin{verbatim}
+                rcc(data, scale="mad", type="S")
+                rcc(data, scale="shamos", type="S")
+\end{verbatim}
+
+
+
+%-------------------------------------------------
+\section{The $R$ chart} \label{SEC:R}
+%-------------------------------------------------
+We consider the relation
+\[
+\frac{R_k - E(R_k)}{\mathrm{SE}(R_k)} = \pm g.
+\]
+Since $E(R_k) = d_2(n)\sigma$ and $\mathrm{Var}(R_k)= d_3(n)^2 \sigma^2$,
+we have
+%---
+\[
+E(R_k) \pm g\cdot\mathrm{SE}(R_k)
+= \big\{ d_2(n) \pm g d_3(n) \big\} \sigma.
+\]
+%---
+The control limits for the $R$ chart are given by
+\begin{align*}
+\mathrm{UCL} &= D_2(n) \sigma,  \\
+\mathrm{CL}  &= d_2(n) \sigma, \\
+\mathrm{LCL} &= D_1(n) \sigma,
+\end{align*}
+where
+\begin{align*}
+D_1(n) &= \max\left\{d_2(n) - {g}\cdot d_3(n),~ 0 \right\}, \\
+D_2(n) &=            d_2(n) + {g}\cdot d_3(n),
+\end{align*}
+
+Since $\sigma$ is unknown in practice, we need to choose an appropriate unbiased
+estimate for $\sigma$.
+One can consider $\hat{\sigma} = \bar{R}/d_2(n)$. Then we have
+\begin{align*}
+\mathrm{UCL} &= D_4(n) {\bar{R}},  \\
+\mathrm{CL}  &= {\bar{R}},   \\
+\mathrm{LCL} &= D_3(n) {\bar{R}},
+\end{align*}
+where $D_3(n) = D_1(n)/d_2(n)$ and $D_4(n) = D_2(n)/d_2(n)$.
+These limits are easily calculated using the \texttt{rcc} function as below. 
+\begin{verbatim}
+                rcc(data, scale="range", type="R")
+\end{verbatim}
+
+As afore-mentioned, we can consider a robust estimate of $\sigma$.
+For example, the control limits with the unbiased Shamos are calculated as below. 
+\begin{verbatim}
+                rcc(data, scale="shamos", type="R")
+\end{verbatim}
+
+%%===============================================
+\bibliographystyle{unsrt}
+\bibliography{REFrcc}
+
+
+%%===============================================
+\end{document}
+%%===============================================
+
+

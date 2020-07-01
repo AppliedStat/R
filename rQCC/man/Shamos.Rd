@@ -8,15 +8,12 @@
 
 \description{Calculates the conventional Shamos, unbiased Shamos and unbiased squared 
 Shamos estimates.
-
 The conventional Shamos is calculated by \code{shamos}
 which is Fisher-consistent under the normal distribution.
 Note that it is not unbiased with a sample of finite size.
-
 The unbiased Shamos estimate under the normal distribution is
 calculated by \code{shamos.unbiased} with a finite-sample unbiasing factor.
-
-The unbiased squared Shamos estimate under the normal distribution is
+The unbiased \emph{squared} Shamos estimate under the normal distribution is
 calculated by \code{shamos2.unbiased} with a finite-sample unbiasing  factor.
 }
 
@@ -38,14 +35,14 @@ while \code{TRUE} calculates median of \eqn{|X_i-X_j|}{|Xi-Xj|} with \eqn{i \le 
 
 \details{
 The Shamos estimator is defined as 
-\deqn{\textrm{Shamos}=\code{constant}\times\mathop{\mathrm{median}}_{i < j} \big(|X_i-X_j|\big)}{Shamos = constant * median of (Xi+Xj)/2 over i<j} 
+\deqn{\textrm{Shamos}=\code{constant}\times\mathop{\mathrm{median}}_{i < j} \big(|X_i-X_j|\big)}{Shamos = constant * median of |Xi-Xj| over i<j} 
 where \eqn{i,j=1,2,\ldots,n}{i, j=1,2,...,n}. 
 The default value (\code{constant=1.048358}) ensures the Fisher-consistency under the normal distribution.
 Note that 
 \eqn{\code{constant}=1/\{\sqrt{2}\,\Phi^{-1}(3/4)\}\approx 1.048358}{constant=1/(\sqrt(2)*\Phi^(-1)(3/4)) = 1.048358 (approximately)}.
 
 The unbiased Shamos is defined as
-\deqn{\textrm{Shamos}=\code{constant}\times\mathop{\mathrm{median}}_{i < j} \big(|X_i-X_j|\big)/{c_6(n)}}{Shamos = constant * median of (Xi+Xj)/2 over i<j divided by c6(n)}
+\deqn{\textrm{Shamos}=\code{constant}\times\mathop{\mathrm{median}}_{i < j} \big(|X_i-X_j|\big)/{c_6(n)}}{Shamos = constant * median of |Xi-Xj| over i<j divided by c6(n)}
 for \eqn{i,j=1,2,\ldots,n}{i,j=1,2,...,n}, where 
 \eqn{c_6(n)}{c6(n)} is the finite-sample unbiasing factor.
 Note that \eqn{c_6(n)}{c6(n)} notation is used in Park et. al (2020), and 
@@ -84,7 +81,9 @@ long-range dependence.
 
 
 \seealso{
-\link{mad}\{stats\} for calculating the sample median absolute deviation (MAD).
+\code{mad.unbiased}\{rQCC\} for calculating the \emph{unbiased} sample MAD.
+
+\link{mad}\{stats\} for calculating the Fisher-consistent sample MAD.
 
 \code{c4.factor}\{rQCC\} for finite-sample unbiasing 
 factor for the standard deviation (\eqn{\sigma}{\sigma}) under the normal distribution.
@@ -98,16 +97,16 @@ of the variance (\eqn{\sigma^2}{\sigma^2}) under the normal distribution.
 \examples{
 x = c(0:10, 50)
 
-# Fisher-consistent Shamos, but not unbiased with a finite sample.
+# Fisher-consistent Shamos, but not unbiased with a finite sample. 
 shamos(x)
 
-# Unbiased Shamos.
+# Unbiased Shamos. 
 shamos.unbiased(x)
 
-# Fisher-consistent squared Shamos, but not unbiased with a finite sample.
+# Fisher-consistent squared Shamos, but not unbiased with a finite sample. 
 shamos(x)^2 
 
-# Unbiased squared Shamos.
+# Unbiased squared Shamos. 
 shamos2.unbiased(x)
 }
 

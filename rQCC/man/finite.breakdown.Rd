@@ -1,7 +1,7 @@
 \encoding{utf-8}
 \name{finite.sample.breakdown}
 \alias{finite.breakdown}
-\title{Finite-sample breakdown point of various estimators}
+\title{Finite-sample breakdown point}
 \usage{
 finite.breakdown(n, 
        method=c("mean","median","HL1","HL2","HL3","sd","range","mad","shamos") ) 
@@ -49,8 +49,8 @@ Hodges, Jr., J. L. (1967).
 Efficiency in normal samples and tolerance of extreme values 
 for some estimates of location.
 \emph{Proceedings of the Fifth Berkeley Symposium on Mathematical
-Statistics and Probability}, Vol. \bold{1}, 163--186, 
-Berkeley. University of California Press.
+Statistics and Probability}, Vol. \bold{1}, 163--186.
+University of California Press, Berkeley.
 
 Hampel, F. R., Ronchetti, E., Rousseeuw, P. J., and Stahel, W. A. (1986).
 \emph{Robust Statistics: The Approach Based on Influence Functions},

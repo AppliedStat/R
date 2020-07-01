@@ -11,11 +11,11 @@
 }
 
 \arguments{
- \item{x}{An object of \link{class} \code{"rcc"}.}
- \item{digits}{Number of significant digits to use, see \link{print}.}
- \item{cex.text}{The magnification to be used for the text labels (LCL, CL, UCL).}
- \item{x.text}{The x-coordinate where the text labels (LCL, CL, UCL) should be written.}
- \item{\dots}{Additional parameters to plot.}
+ \item{x}{an object of \link{class} \code{"rcc"}.}
+ \item{digits}{number of significant digits to use, see \link{print}.}
+ \item{cex.text}{magnification to be used for the text labels (LCL, CL, UCL).}
+ \item{x.text}{x-coordinate where the text labels (LCL, CL, UCL) should be written.}
+ \item{\dots}{additional parameters to plot.}
 }
 
 \seealso{

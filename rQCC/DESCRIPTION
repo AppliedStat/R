@@ -1,7 +1,7 @@
 Package: rQCC
 Title: Robust Quality Control Chart
-Version: 1.20.3
-Date: 2020-03-01
+Version: 1.20.7
+Date: 2020-07-01
 Authors@R: c(person(given="Chanseok",
                     family="Park",
                     role = c("aut", "cre"),
@@ -15,9 +15,9 @@ Authors@R: c(person(given="Chanseok",
 Author: Chanseok Park [aut, cre] (<https://orcid.org/0000-0002-2208-3498>), Min Wang [ctb] (<https://orcid.org/0000-0002-9233-7844>)
 Maintainer: Chanseok Park <statpnu@gmail.com>
 Depends: R (>= 3.2.3)
-Description: Constructs robust quality control chart based on the median or Hodges-Lehmann estimator (location) and the median absolute deviation (MAD) or Shamos estimator (scale). These estimators are all unbiased with a sample of finite size. For more details, see Park, Kim and Wang (2020) <doi:10.1080/03610918.2019.1699114>. This work was partially supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (NRF-2017R1A2B4004169).
+Description: Constructs robust quality control chart based on the median or Hodges-Lehmann estimator (location) and the median absolute deviation (MAD) or Shamos estimator (scale). These estimators are all unbiased with a sample of finite size. For more details, see Park, Kim and Wang (2020) <doi:10.1080/03610918.2019.1699114>. In addition, using this package, the conventional quality control charts such as Xbar, S and R charts are also easily constructed. This work was partially supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (NRF-2017R1A2B4004169).
 License: GPL-2 | GPL-3
-URL: https://github.com/AppliedStat/R
+URL: https://AppliedStat.GitHub.io/R/
 BugReports: https://github.com/AppliedStat/R/issues
 Encoding: UTF-8
 LazyData: yes

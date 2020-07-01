@@ -8,7 +8,7 @@ RE (n, method = c("mean", "median","HL1","HL2","HL3", "sd", "range","mad","shamo
 }
 \arguments{
  \item{n}{sample size (\eqn{n \ge 1}{n \ge 1}).}
- \item{correction}{A finite-sample bias correction.
+ \item{correction}{a finite-sample bias correction.
 \code{TRUE} adjusts a finite-sample bias correction using \code{A3.factor} function.}
  \item{method}{a character string specifying the estimator, must be 
 one of \code{"mean"} (default), \code{"median"}, \code{"HL1"}, \code{"HL2"}, \code{"HL3"}, 
