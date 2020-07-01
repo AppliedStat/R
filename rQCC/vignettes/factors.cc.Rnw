@@ -2,7 +2,7 @@
 %\VignetteKeyword{rQCC}
 %\VignetteKeyword{control chart}
 %\VignetteKeyword{control limits}
-%\VignetteKeyword{Xbar chart}
+%\VignetteKeyword{X-bar chart}
 %\VignetteKeyword{S chart}
 %\VignetteKeyword{R chart}
 %\VignetteKeyword{factor}

@@ -26,11 +26,11 @@ while the British Standard uses "\emph{3.09*sigma}" limits (0.20\% false alarm
 }
 
 \details{
-\code{rcc} constructs a robust Xbar control chart.
-Using various robust location and scale estimates, one can construct a robust Xbar chart.
+\code{rcc} constructs a robust X-bar control chart.
+Using various robust location and scale estimates, one can construct a robust X-bar chart.
 The location and scale estimates used in this fuction are all unbiased.
-In addition, one can also construct the conventional \eqn{\bar{X}}{Xbar} chart with \eqn{S}{S} and 
- \eqn{\bar{X}}{Xbar} chart with \eqn{R}{R}.
+In addition, one can also construct the conventional \eqn{\bar{X}}{X-bar} chart with \eqn{S}{S} and 
+ \eqn{\bar{X}}{X-bar} chart with \eqn{R}{R}.
 For more details, see the vignette.
 }
 
@@ -58,13 +58,13 @@ John Wiley & Sons, New York, NY.
 
 \examples{
 ##############
-# Xbar chart #
+# X-bar chart #
 ##############
 
 # ========== 
 # Example 1a 
 # ---------- 
-# The conventional Xbar chart with the standard deviation. 
+# The conventional X-bar chart with the standard deviation. 
 # Refer to Example 3 in Section 3.31 of ASTM (2010). 
 
 # The data below are from Table 29 in Section 3.31 of ASTM (2010). 
@@ -81,11 +81,12 @@ x10= c(0.4994, 0.4998, 0.5000, 0.4990, 0.5000, 0.5000)
 data1 = rbind(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
 # Print LCL, CL, UCL.
-# The standard deviation is used for the scale estimate.
-result = rcc(data1, loc="mean", scale="sd") 
+# The mean and standard deviation are used.
+result = rcc(data1, loc="mean", scale="sd", type="Xbar") 
 print(result)
 
-# Note: Xbar chart is a default so that the below is the same as the above.
+# Note: X-bar chart is a default with the mean and sd
+#       so the below is the same as the above.
 rcc(data1) 
 
 # Summary of a control chart
@@ -106,7 +107,7 @@ text( c(3,8), c(0.5005, 0.5005), labels=c("Group 1", "Group 2") )
 # ==========
 # Example 1b 
 # ----------
-# The conventional Xbar chart with the range.
+# The conventional X-bar chart with the range.
 # Refer to Example 5 in Section 3.31 of ASTM (2010).
 # The data are the same as in Example 1a.
 

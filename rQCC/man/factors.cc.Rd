@@ -34,7 +34,7 @@ while the British Standard uses "\emph{3.09*sigma}" limits (0.20\% false alarm r
 The values of the factors are used for constructing 
 various control charts.
 
-For example, the conventional \eqn{\bar{X}}{Xbar} chart 
+For example, the conventional \eqn{\bar{X}}{X-bar} chart 
 with the sample standard deviation is given by
 \deqn{\bar{\bar{X}} \pm A_3 \bar{S}.}{"X.bar.bar + A3*S.bar" and "X.bar.bar - A3*S.bar."}
 
@@ -65,7 +65,7 @@ the Shamos estimate.
 
 
 \examples{
-## A3 is used for constructing the conventional Xbar chart 
+## A3 is used for constructing the conventional X-bar chart 
 #  with the sample standard deviation.
 factors.cc(n=10, factor="A3")
 

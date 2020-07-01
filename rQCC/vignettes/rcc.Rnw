@@ -1,7 +1,7 @@
 %\VignetteIndexEntry{A note on the "rcc" function in the "rQCC" package}
 %\VignetteKeyword{rQCC}
 %\VignetteKeyword{control chart}
-%\VignetteKeyword{Xbar chart}
+%\VignetteKeyword{X-bar chart}
 %\VignetteKeyword{S chart}
 %\VignetteKeyword{R chart}
 %\VignetteKeyword{robust}
