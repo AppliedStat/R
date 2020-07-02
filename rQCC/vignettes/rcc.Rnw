@@ -27,7 +27,7 @@ grant funded by the Korea government (NRF-2017R1A2B4004169).}
 Min Wang\footnote{Department of Management Science and Statistics,
 The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
 }
-\date{July 1, 2020}
+\date{July 2, 2020}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -356,8 +356,77 @@ For example, the control limits with the unbiased Shamos are calculated as below
 
 %%===============================================
 \bibliographystyle{unsrt}
-\bibliography{REFrcc}
 
+\begin{thebibliography}{99}
+
+\bibitem{Shewhart:1926b}
+W.~A. Shewhart.
+\newblock Quality control charts.
+\newblock {\em Bell Systems Technical Journal}, pages 593--603, 1926.
+
+\bibitem{Shewhart:1927}
+W.~A. Shewhart.
+\newblock Quality control.
+\newblock {\em Bell Systems Technical Journal}, pages 722--735, 1927.
+
+\bibitem{Shewhart:1931}
+W.~A. Shewhart.
+\newblock {\em Economic Control of Quality of Manufactured Product}.
+\newblock Van Nostrand Reinhold, Princeton, NJ, 1931.
+\newblock Republished in 1981 by the American Society for Quality Control,
+  Milwaukee, WI.
+
+\bibitem{ASTM:1951}
+{ASTM Committee E-11}.
+\newblock {\em {ASTM} Manual on Quality Control of Materials ({STP} {15-C})}.
+\newblock American Society for Testing and Materials, Philadelphia, PA, 1951.
+
+\bibitem{ASTM:1976}
+{ASTM Committee E-11}.
+\newblock {\em Manual on Presentation of Data and Control Chart Analysis ({STP}
+  {15-D})}.
+\newblock American Society for Testing and Materials, Philadelphia, PA, 4th
+  edition, 1976.
+
+\bibitem{Fisher:1922}
+R.~A. Fisher.
+\newblock On the mathematical foundations of theoretical statistics.
+\newblock {\em Philosophical Transactions of the Royal Society of London.
+  Series A, Containing Papers of a Mathematical or Physical Character},
+  222:309--368, 1922.
+
+\bibitem{Hampel/etc:1986}
+F.~R. Hampel, E.~Ronchetti, P.~J. Rousseeuw, and W.~A. Stahel.
+\newblock {\em Robust Statistics: The Approach Based on Influence Functions}.
+\newblock John Wiley \& Sons, New York, 1986.
+
+\bibitem{Park/Kim/Wang:2020}
+C.~Park, H.~Kim, and M.~Wang.
+\newblock Investigation of finite-sample properties of robust location and
+  scale estimators.
+\newblock {\em Communication in Statistics -- Simulation and Computation},
+  2020.
+\newblock doi:10.1080/03610918.2019.1699114.
+
+\bibitem{Hodges/Lehmann:1963}
+J.~L. Hodges and E.~L. Lehmann.
+\newblock Estimates of location based on rank tests.
+\newblock {\em Annals of Mathematical Statistics}, 34:598--611, 1963.
+
+\bibitem{Shamos:1976}
+M.~I. Shamos.
+\newblock Geometry and statistics: Problems at the interface.
+\newblock In J.~F. Traub, editor, {\em Algorithms and Complexity: New
+  Directions and Recent Results}, pages 251--280. Academic Press, New York,
+  1976.
+
+\bibitem{Levy/etc:2011}
+C.~L\`{e}vy-Leduc, H.~Boistard, E.~Moulines, M.~S. Taqqu, and V.~A. Reisen.
+\newblock Large sample behaviour of some well-known robust estimators under
+  long-range dependence.
+\newblock {\em Statistics}, 45:59--71, 2011.
+
+\end{thebibliography}
 
 %%===============================================
 \end{document}

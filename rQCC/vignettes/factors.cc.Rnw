@@ -29,7 +29,7 @@ grant funded by the Korea government (NRF-2017R1A2B4004169).}
 Min Wang\footnote{Department of Management Science and Statistics,
 The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
 }
-\date{July 1, 2020}
+\date{July 2, 2020}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -532,9 +532,31 @@ where $E(R^2)$ can be obtained by (\ref{EQ:ER}).
 
 %%===============================================
 \bibliographystyle{unsrt}
-\bibliography{REFrcc}
+\begin{thebibliography}{99}
 
+\bibitem{ASTM:1976}
+{ASTM Committee E-11}.
+\newblock {\em Manual on Presentation of Data and Control Chart Analysis ({STP}
+  {15-D})}.
+\newblock American Society for Testing and Materials, Philadelphia, PA, 4th
+  edition, 1976.
 
+\bibitem{ASTM:1951}
+{ASTM Committee E-11}.
+\newblock {\em {ASTM} Manual on Quality Control of Materials ({STP} {15-C})}.
+\newblock American Society for Testing and Materials, Philadelphia, PA, 1951.
+
+\bibitem{Casella/Berger:2002}
+G.~Casella and R.~L. Berger.
+\newblock {\em Statistical Inference}.
+\newblock Duxbury, Pacific Grove, CA, second edition, 2002.
+
+\bibitem{Harter:1960}
+H.~Leon Harter.
+\newblock Tables of range and {S}tudentized range.
+\newblock {\em The Annals of Mathematical Statistics}, 31(4):1122--1147, 1960.
+
+\end{thebibliography}
 %%===============================================
 \end{document}
 %%===============================================
