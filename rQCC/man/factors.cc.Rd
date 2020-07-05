@@ -115,8 +115,7 @@ round(res,3)
 
 
 ## vignette ##
-vignette("factors.cc", package="rQCC")
-
+if (interactive()) vignette("factors.cc", package="rQCC")
 }
 
 

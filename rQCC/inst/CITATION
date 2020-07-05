@@ -21,7 +21,7 @@ title  = "rQCC: Robust Quality Control Chart",
 note   = "R package version 1.20.7", 
 url = "https://CRAN.R-project.org/package=rQCC",
 textVersion = paste("Park, C. and M. Wang (2020)",
-  "rQCC: Robust Quality Control Chart", "R Package Version 1.20.7 (published on July 1, 2020)", 
+  "rQCC: Robust Quality Control Chart", "R Package Version 1.20.7 (published on July 5, 2020)", 
   "https://CRAN.R-project.org/package=rQCC")
 )
 

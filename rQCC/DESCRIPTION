@@ -1,7 +1,7 @@
 Package: rQCC
 Title: Robust Quality Control Chart
 Version: 1.20.7
-Date: 2020-07-02
+Date: 2020-07-05
 Authors@R: c(person(given="Chanseok",
                     family="Park",
                     role = c("aut", "cre"),

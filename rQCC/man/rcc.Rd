@@ -293,8 +293,7 @@ text( c(3,8), c(0.0014, 0.0014), labels=c("Group 1", "Group 2") )
 ############
 # vignette #
 ############
-
-vignette("rcc", package="rQCC")
+if (interactive()) vignette("rcc", package="rQCC")
 
 }
 

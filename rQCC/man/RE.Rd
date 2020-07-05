@@ -72,6 +72,7 @@ Investigation of finite-sample properties of robust location and scale estimator
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
 \url{https://doi.org/10.1080/03610918.2019.1699114}
 
+
 Hayes, K. (2014).
 Finite-sample bias-correction factors for the median absolute deviation.
 \emph{Communications in Statistics: Simulation and Computation},
