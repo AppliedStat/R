@@ -4,7 +4,7 @@
 ## rQCC 
 Robust Quality Control Chart (rQCC). <br />
 
-For version 1.20.3, refer to <br />
+For version 1.20.7, refer to <br />
 
 CRAN: <https://cran.r-project.org/web/packages/rQCC/> <br />
 rdrr.io: <https://rdrr.io/cran/rQCC/>  <br />
