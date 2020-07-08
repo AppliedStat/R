@@ -13,7 +13,7 @@ github: <https://github.com/cran/rQCC>  <br /> <br />
 ## rt.test 
 Robustified *t*-test using median/MAD and Hodges-Lehmann/Shamos.<br />  
    
-For version 1.18.7.9, refer to <br /> 
+For version 1.19.7, refer to <br /> 
 
 CRAN: <https://cran.r-project.org/web/packages/rt.test/> <br />
 rdrr.io: <https://rdrr.io/cran/rt.test/>  <br />
