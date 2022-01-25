@@ -46,7 +46,7 @@ American Society for Testing and Materials, West Conshohocken, PA.
 Park, C. (2013).
 An Improved \emph{p} Chart Based on the Wilson Interval.
 \emph{Journal of Statistics and Management Systems}, \bold{16}(2-03), 201-221.\cr
-\url{https://doi.org/10.1080/09720510.2013.777576}
+\doi{10.1080/09720510.2013.777576}
 
 Montgomery, D. C. (2013). 
 \emph{Statistical Quality Control: An Modern Introduction}, 7th edition.

@@ -43,7 +43,7 @@ The Hodges-Lehmann (HL3) is defined as
 Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators.
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
-\url{https://doi.org/10.1080/03610918.2019.1699114}
+\doi{10.1080/03610918.2019.1699114}
 
 Hodges, Jr., J. L. (1967).
 Efficiency in normal samples and tolerance of extreme values 

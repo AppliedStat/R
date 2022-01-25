@@ -1,7 +1,15 @@
 \name{news}
 \title{Package news for rQCC package}
 
-\section{version 1.21.1}{
+
+\section{version 2.22.5}{
+  \itemize{
+    \item Some references are updated.
+    \item new \code{racc} function for the robust attributes control charts is added.
+    \item References are updated. 
+}}
+
+\section{version 2.22.1}{
   \itemize{
     \item The argument '\code{method}' is changed to '\code{estimator}.'
     \item The new \code{pooledEstimator} function is added. 
@@ -12,7 +20,6 @@
     \item The updated \code{evar} function can handle multiple samples.
     \item The updated \code{RE}   function can handle multiple samples.
     \item The \code{factors.cc} is improved for the case of '\code{factor="d3"}.'
-    \item References are updated. 
 }}
 
 \section{version 1.20.7}{

@@ -38,12 +38,12 @@ For more details on how to pool them, refer to vignette.
 Park, C. and M. Wang (2020).
 A study on the X-bar and S control charts with unequal sample sizes.
 \emph{Mathematics}, \bold{8}(5), 698. \cr
-\url{https://doi.org/10.3390/math8050698}
+\doi{10.3390/math8050698}
 
 Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators.
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
-\url{https://doi.org/10.1080/03610918.2019.1699114}
+\doi{10.1080/03610918.2019.1699114}
 }
 
 \examples{

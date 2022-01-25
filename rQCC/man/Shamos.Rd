@@ -65,7 +65,7 @@ it is not unbiased with a sample of finite size.
 Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators.
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
-\url{https://doi.org/10.1080/03610918.2019.1699114}
+\doi{10.1080/03610918.2019.1699114}
 
 Shamos, M. I. (1976).  Geometry and statistics: Problems at the interface.
 In Traub, J. F., editor,

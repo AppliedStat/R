@@ -52,7 +52,7 @@ and the function \code{plot} is used to plot the control chart.
 Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators. 
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
-\url{https://doi.org/10.1080/03610918.2019.1699114}
+\doi{10.1080/03610918.2019.1699114}
 
 ASTM (2010).
 \emph{Manual on Presentation of Data and Control Chart Analysis} (STP 15-D),
@@ -170,17 +170,10 @@ data2 = matrix(tmp, ncol=4, byrow=TRUE)
 
 # Print LCL, CL, UCL.
 # The median (location) and MAD (scale) are used.
-result = rcc(data2, loc="median", scale="mad")
-print(result)
+rcc(data2, loc="median", scale="mad")
 
-# Summary of a control chart
-summary(result)
 # Note: the RE is calculated based on the unbiased estimators.
 RE(n=4, estimator="median", correction=TRUE)
-RE(n=4, estimator="mad", correction=TRUE)
-
-# Plot a control chart
-plot(result)
 
 # ==========
 # Example 1d 
@@ -190,17 +183,10 @@ plot(result)
 
 # Print LCL, CL, UCL.
 # The HL2 (location) and Shamos (scale) are used.
-result = rcc(data2, loc="HL2", scale="shamos")
-print(result)
+rcc(data2, loc="HL2", scale="shamos")
 
-# Summary of a control chart
-summary(result)
 # Note: the RE is calculated based on the unbiased estimators.
 RE(n=4, estimator="HL2", correction=TRUE)
-RE(n=4, estimator="shamos", correction=TRUE)
-
-# Plot a control chart
-plot(result)
 
 
 ############
@@ -218,10 +204,6 @@ plot(result)
 # The standard deviaion (default) is used for the scale estimator.
 result = rcc(data1, type="S")
 print(result)
-
-# Summary of a control chart
-# Note: the RE is calculated based on the unbiased estimators.
-summary(result)
 
 # The above limits are also calculated as 
 B3 = factors.cc(n=6, "B3")
@@ -246,10 +228,6 @@ text( c(3,8), c(0.0005, 0.0005), labels=c("Group 1", "Group 2") )
 result = rcc(data1, scale="mad", type="S")
 print(result)
 
-# Summary of a control chart
-# Note: the RE is calculated based on the unbiased estimators.
-summary(result)
-
 # Plot a control chart
 plot(result, cex.text=0.8)
 abline(v=5.5, lty=1, lwd=2, col="gold")
@@ -273,10 +251,6 @@ text( c(3,8), c(0.00045, 0.00045), labels=c("Group 1", "Group 2") )
 # Thus, for the conventional R chart, use the option (scale="range") as below.
 result = rcc(data1, scale="range", type="R")
 print(result)
-
-# Summary of a control chart
-# Note: the RE is calculated based on the unbiased estimators.
-summary(result)
 
 # The above limits are also calculated as 
 D3 = factors.cc(n=6, "D3")
@@ -304,10 +278,6 @@ text( c(3,8), c(0.00135, 0.00135), labels=c("Group 1", "Group 2") )
 # The mad (scale) are used.
 result = rcc(data1, scale="shamos", type="R")
 print(result)
-
-# Summary of a control chart
-# Note: the RE is calculated based on the unbiased estimators.
-summary(result)
 
 # Plot a control chart
 plot(result, cex.text=0.8)
@@ -350,26 +320,11 @@ x21 = c( 69, 69, 69, 69, 69)
 data = list(x1, x2,  x3, x4,  x5,  x6,  x7,  x8,  x9, x10,
             x11,x12,x13,x14, x15, x16, x17, x18, x19, x20, x21)
 
-# Xbar chart (witn nk=4)
-xbarchart = rcc(data, nk=4)
-summary(xbarchart)
-plot(xbarchart)
-
 # Xbar chart (witn nk=5)
-xbarchart = rcc(data, nk=5)
-summary(xbarchart)
-plot(xbarchart)
+rcc(data, nk=5)
 
 # S chart (witn nk=4)
-schart = rcc(data, type="S", nk=4)
-summary(schart)
-plot(schart)
-
-# S chart (witn nk=5)
-schart = rcc(data, type="S", nk=5)
-summary(schart)
-plot(schart)
-
+rcc(data, type="S", nk=4)
 
 # ==========
 # Example 5a
@@ -408,19 +363,10 @@ data = list(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15,
            x16, x17, x18, x19, x20, x21, x22, x23, x24, x25)
 
 # Xbar chart (witn nk=5)
-xbarchart = rcc(data, nk=5)
-summary(xbarchart)
-plot(xbarchart)
-
-# Xbar chart (witn nk=10)
-xbarchart = rcc(data, nk=10)
-summary(xbarchart)
-plot(xbarchart)
+rcc(data, nk=5)
 
 # S chart (witn nk=5)
-schart = rcc(data, type="S", nk=5)
-summary(schart)
-plot(schart)
+rcc(data, type="S", nk=5)
 
 
 # ==========
@@ -433,14 +379,10 @@ datan = data
 datan[[1]] = c(data[[1]], 70.5, 77.0)
 
 # Xbar chart with non-robust estimators
-xbarchart = rcc(datan, nk=5)
-summary(xbarchart)
-plot(xbarchart)
+rcc(datan, nk=5)
 
 # Xbar chart with robust estimators (median and mad)
-xbarchart = rcc(datan, loc="median", sc="mad", nk=5)
-summary(xbarchart)
-plot(xbarchart)
+rcc(datan, loc="median", sc="mad", nk=5)
 }
 
 \author{Chanseok Park}
