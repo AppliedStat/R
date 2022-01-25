@@ -4,17 +4,17 @@
 \alias{shamos.unbiased}
 \alias{shamos2.unbiased}
 
-\title{Shamos estimate}
+\title{Shamos estimator}
 
 \description{Calculates the conventional Shamos, unbiased Shamos and unbiased squared 
-Shamos estimates.
+Shamos estimators.
 The conventional Shamos is calculated by \code{shamos}
 which is Fisher-consistent under the normal distribution.
 Note that it is not unbiased with a sample of finite size.
-The unbiased Shamos estimate under the normal distribution is
+The unbiased Shamos estimator under the normal distribution is
 calculated by \code{shamos.unbiased} with a finite-sample unbiasing factor.
-The unbiased \emph{squared} Shamos estimate under the normal distribution is
-calculated by \code{shamos2.unbiased} with a finite-sample unbiasing  factor.
+The unbiased \emph{squared} Shamos estimator under the normal distribution is
+calculated by \code{shamos2.unbiased} with a finite-sample unbiasing factor.
 }
 
 \usage{
@@ -45,15 +45,15 @@ The unbiased Shamos is defined as
 \deqn{\textrm{Shamos}=\code{constant}\times\mathop{\mathrm{median}}_{i < j} \big(|X_i-X_j|\big)/{c_6(n)}}{Shamos = constant * median of |Xi-Xj| over i<j divided by c6(n)}
 for \eqn{i,j=1,2,\ldots,n}{i,j=1,2,...,n}, where 
 \eqn{c_6(n)}{c6(n)} is the finite-sample unbiasing factor.
-Note that \eqn{c_6(n)}{c6(n)} notation is used in Park et. al (2020), and 
-\eqn{c_6(n)}{c6(n)} is calculated using the function \code{c4.factor}\{rQCC\} with \code{method="shamos"} option.
+Note that \eqn{c_6(n)}{c6(n)} notation is used in Park et. al (2022), and 
+\eqn{c_6(n)}{c6(n)} is calculated using the function \code{c4.factor}\{rQCC\} with \code{estimator="shamos"} option.
 
 The unbiased squared Shamos is defined as the
 squared \code{shamos}\{rQCC\} divided by  \eqn{w_6(n)}{w6(n)} where 
 \eqn{w_6(n)}{w6(n)} is the finite-sample unbiasing factor.
-Note that \eqn{w_6(n)}{w6(n)} notation is used in Park et. al (2020), and 
+Note that \eqn{w_6(n)}{w6(n)} notation is used in Park et. al (2022), and 
 \eqn{w_6(n)}{w6(n)} is calculated using the function \code{w4.factor}\{rQCC\} 
-with \code{method="shamos2"} option.
+with \code{estimator="shamos2"} option.
 Note that the square of the conventional Shamos estimator is
 Fisher-consistent for the variance (\eqn{\sigma^2}{\sigma^2}) under the normal distribution, but
 it is not unbiased with a sample of finite size.
@@ -62,7 +62,7 @@ it is not unbiased with a sample of finite size.
 \value{They return a numeric value.}
 
 \references{
-Park, C., H. Kim, and M. Wang (2020).
+Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators.
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
 \url{https://doi.org/10.1080/03610918.2019.1699114}
@@ -111,6 +111,5 @@ shamos2.unbiased(x)
 }
 
 \author{Chanseok Park and Min Wang}
-
 \keyword{robust}
-
+\keyword{univar}

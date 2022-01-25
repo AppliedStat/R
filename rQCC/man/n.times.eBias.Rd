@@ -4,17 +4,8 @@
 \alias{n.times.eBias.of.shamos}
 \title{Empirical biases (times n)}
 
-\description{
-\eqn{n}{n} times the empirical biases of the median absolute deviation (MAD) 
-and Shamos estimators 
-under the standard normal distribution, where \eqn{n}{n} is the sample size 
-and \eqn{n}{n} is from 1 to 100.
-For the MAD estimator, \link{mad}\{stats\} is used. 
-For the Shamos estimator, the Fisher-consistent Shamos estimator, \code{shamos}\{rQCC\}, is used.
-
-These estimators are not unbiased with a finite sample.
-The empirical biases are obtained using the extensive Monte Carlo simulation 
-with 1E07 replicates. 
+\description{\eqn{n}{n} times the empirical biases of the median absolute deviation (MAD) 
+and Shamos estimators.
 }
 
 \usage{
@@ -23,10 +14,22 @@ n.times.eBias.of.mad
 n.times.eBias.of.shamos
 }
 
+\details{\eqn{n}{n} times the empirical biases of the median absolute deviation (MAD) 
+and Shamos estimators  
+under the standard normal distribution, where \eqn{n}{n} is the sample size
+and \eqn{n}{n} is from 1 to 100.
+For the MAD estimator, \link{mad}\{stats\} is used.  
+For the Shamos estimator, the Fisher-consistent Shamos estimator, \code{shamos}\{rQCC\}, is used.
+
+These estimators are not unbiased with a finite sample.
+The empirical biases are obtained using the extensive Monte Carlo simulation
+with 1E07 replicates.
+}
+
 \value{They return a vector of 100 values.}
 
 \references{
-Park, C., H. Kim, and M. Wang (2020).
+Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators.
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
 \url{https://doi.org/10.1080/03610918.2019.1699114}

@@ -14,6 +14,8 @@
 \addtolength{\oddsidemargin}{-.5in}
 \setlength{\evensidemargin}{\oddsidemargin}
 
+\usepackage[breaklinks]{hyperref}
+
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -29,29 +31,29 @@ grant funded by the Korea government (NRF-2017R1A2B4004169).}
 Min Wang\footnote{Department of Management Science and Statistics,
 The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
 }
-\date{July 5, 2020}
+\date{January 2022}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
 \begin{abstract}
-In this note, we provide the mathematical formulas of the factors which are
-used for constructing control limits.
-Using the \texttt{factors.cc} function in the robust quality control chart
-(\texttt{rQCC}) R package, one can obtain these factors.
+In this note, we provide several mathematical formulas of the factors which are
+used for constructing the control limits. These factors can be easily obtained by
+using the \texttt{factors.cc} function in the robust quality control chart
+(\texttt{rQCC}) R package.
 \end{abstract}
 
 %%--------------------------------------
 \section{Factors for computing control chart lines}
 %%--------------------------------------
 In this section, we provide a brief summary of
- mathematical relations of factors for computing control chart \emph{lines}.
+ mathematical relations of factors for computing the control chart \emph{lines}.
 For more details, see
     Supplement~A of ASTM (STP 15-D) \cite{ASTM:1976}
 and Supplement~B of ASTM (STP 15-C) \cite{ASTM:1951}.
 
-The mathematical relations given for factors ($c_2$, $c_4$, $d_2$, $d_3$)
+The mathematical relations for factors ($c_2$, $c_4$, $d_2$, $d_3$)
 are based on sampling randomly from a normal distribution.
 These are given by
 %-----
@@ -67,9 +69,9 @@ d_3(n) &= \sqrt{ E(R^2) - d_2(n)^2 },
 where $\Phi(\cdot)$ is the cumulative distribution function (cdf) of
 the standard normal distribution
 and $E(R^k)$ is given in (\ref{EQ:ER}) of Appendix~B.
-All the detailed derivations of $c_4(n)$ are in Appendix~A
-and those of $d_2(n)$ and $d_3(n)$ are in Appendix~B.
-Note that $c_2(n)$ had been used in ASTM (STP 15-C) \cite{ASTM:1951}
+All the detailed derivations of $c_4(n)$ are provided in Appendix~A
+and those of $d_2(n)$ and $d_3(n)$ are given in Appendix~B.
+Note that $c_2(n)$ has been used in ASTM (STP 15-C) \cite{ASTM:1951}
 and it is replaced by $c_4(n)$ in ASTM (STP 15-D) \cite{ASTM:1976}.
 Thus, $c_2(n)$ is rarely used after the year of 1976.
 
@@ -117,7 +119,7 @@ In  ASTM (STP 15-C), however, $B_3(n)$ and $B_4(n)$ are defined as
 B_3(n) &= \max\left\{1 - \frac{g}{c_2(n)}\cdot\sqrt{\frac{n-1}{n}-c_2(n)^2},~ 0 \right\},  \\
 B_4(n) &=            1 + \frac{g}{c_2(n)}\cdot\sqrt{\frac{n-1}{n}-c_2(n)^2},
 \end{align*}
-which are easily obtained by $B_1(n)/c_2(n)$ and $B_2(n)/c_2(n)$ in ASTM (STP 15-C), 
+which are easily obtained by $B_1(n)/c_2(n)$ and $B_2(n)/c_2(n)$ in ASTM (STP 15-C),
 respectively.
 Thus, we calculate $B_3(n)$ and $B_4(n)$ based only on ASTM (STP 15-D) \cite{ASTM:1976}
 instead of ASTM (STP 15-C).
@@ -162,11 +164,11 @@ E( S^2 ) = \sigma^2,
 \]
 where $S^2 = \sum_{i=1}^{n} (X_i-\bar{X})^2 / (n-1)$,
 $X_i \sim N(\mu,\sigma^2)$, and $\bar{X}=\sum_{i=1}^{n}X_i/n$.
-However, we have $E( S ) \not= \sigma$.
+It deserves mentioning that $E( S ) \not= \sigma$.
 
 Using the fact that $Y=(n-1)S^2/\sigma^2$ has the chi-square distribution
 with $n-1$ degrees of freedom which is  equivalent to the gamma distribution with
-$\alpha=(n-1)/2$ (shape) and $\theta=2$ (scale), 
+$\alpha=(n-1)/2$ (shape) and $\theta=2$ (scale),
 we obtain the unbiased estimator of $\sigma$.
 Now, it is well known that
 \[
@@ -184,7 +186,7 @@ E\big[ \sqrt{ (n-1)S^2/\sigma^2 } \big]
 \]
 This implies that
 \[
-E(S) = c_4(n)\,\sigma, 
+E(S) = c_4(n)\,\sigma,
 \]
 where
 \[
@@ -235,7 +237,7 @@ Berger~\cite{Casella/Berger:2002}.
 % \subsection{Distribution of the range}
 %%\subsection[Distribution of the range under $N(0,1)$]{Distribution of the range}
 Let $Z_1, Z_2, \ldots, Z_n$ be a random sample from a standard normal distribution with
-pdf $\phi(z)$ and cdf $\Phi(z)$.
+the pdf $\phi(z)$ and the cdf $\Phi(z)$.
 For notational convenience, we denote $U = Z_{(1)}$ and $V = Z_{(n)}$.
 Using Theorem~\ref{THM:jointpdf},
 we have the joint pdf of $U$ and $V$
@@ -332,8 +334,8 @@ If $E( |X|^k )$ exists, then we have
 Now, if we can show that the last term $\int_x^\infty t^k dF(t) \to 0$ in the limit
 as $x\to\infty$, then this will complete the proof because we just showed that
 $0 \le x^k \big\{ 1-F(x) \big\} \le \int_x^\infty t^k dF(t)$ for $x > 0$.
-In order to prove that $\int_x^\infty t^k dF(t) \to 0$ in the limit as $x\to\infty$, note
-that we also have
+To prove that $\int_x^\infty t^k dF(t) \to 0$ in the limit as $x\to\infty$, we
+observe that 
 \[
 \int_x^\infty t^k dF(t)
 = \int_{-\infty}^\infty |t|^k dF(t) - \int_{-\infty}^x |t|^k dF(t)
@@ -355,8 +357,8 @@ Now, if we can show that the last term $\int_{-\infty}^x |t|^k dF(t) \to 0$
 in the limit as $x\to -\infty$,
 then this will complete the proof because we just showed that
 $0\le |x|^k F(x) \le \int_{-\infty}^x |t|^k dF(t)$ for $x<0$.
-In order to prove that $\int_{-\infty}^x |t|^k dF(t) \to 0$
-in the limit as $x\to-\infty$, note that we also have
+To prove that $\int_{-\infty}^x |t|^k dF(t) \to 0$
+in the limit as $x\to-\infty$, we have 
 \[
 \int_{-\infty}^x |t|^k dF(t)
 = \int_{-\infty}^\infty |t|^k dF(t) - \int_{x}^\infty |t|^k dF(t)
@@ -385,7 +387,7 @@ E(X) = \int_{-\infty}^0 x\,dF(x) + \int_0^\infty x\,dF(x)
      = \int_{-\infty}^0 x\,dF(x) - \int_0^\infty x\,d\big[1-F(x)\big].
 \label{EQ:EX1}
 \end{equation}
-Using integration by parts, we have
+Using the integration by parts, we have
 \begin{align}
 \int_{-\infty}^0 x\,dF(x)
    &=\Big[x F(x)\Big]_{-\infty}^0 - \int_{-\infty}^0 F(x)\,dx
@@ -408,13 +410,13 @@ we have
 %% It is immediate from the change of integration variable
 %% that we have $\int_{-\infty}^0 F(x) dx = \int_0^\infty F(-x) dx$.
 %% Substituting this into (\ref{EQ:Lemma2a}), we have (\ref{EQ:Lemma2b}).
-Substituting (\ref{EQ:intx1minusF2}) into (\ref{EQ:EX1}), we have
+Substituting (\ref{EQ:intx1minusF2}) into (\ref{EQ:EX1}) gives 
 \[
-E(X) = \int_0^\infty \big[1-F(x)\big] dx - \int_{-\infty}^0 F(x) dx
+E(X) = \int_0^\infty \big[1-F(x)\big] dx - \int_{-\infty}^0 F(x) dx.
 \]
 Since $\int_{-\infty}^0 F(x) dx = \int_0^\infty F(-x) dx$, we have
 \[
-E(X) = \int_0^\infty \big[1-F(x) - F(-x)\big] dx .
+E(X) = \int_0^\infty \big[1-F(x) - F(-x)\big] dx.
 \]
 which completes the proof.
 \end{proof}
@@ -423,7 +425,7 @@ It should be noted that Lemma~\ref{LEM2}
 is also valid for discrete random variables, but the proof is omitted.
 %%--------
 \begin{lemma} \label{LEM3}
-Let $X_1, X_2, \ldots, X_n$ be a random sample with cdf $F(x)$.
+Let $X_1, X_2, \ldots, X_n$ be a random sample with the cdf $F(x)$.
 Let $F_{(j)}(x)$ denote the cdf of the $j$-th order statistic $X_{(j)}$.
 Then we have
 \begin{equation} \label{EQ:LEM3result}
@@ -497,7 +499,7 @@ It should be noted that
 the above lemmas and theorems are also valid for non-normal distributions.
 But, we use the results specifically in the case of the normal distribution.
 Now suppose that we have a random sample from a \emph{standard} normal distribution,
-$Z_1, Z_2, \ldots, Z_n$, and we want to calculate the expectation of the
+$Z_1, Z_2, \ldots, Z_n$ and that we want to calculate the expectation of the
 sample range. Then we have
 \[
 E\big( Z_{(n)} - Z_{(1)} \big)
@@ -524,39 +526,53 @@ Then, using   $\mathrm{Var}(R) = \sigma^2 \mathrm{Var}(Z_{(n)}-Z_{(1)})$,
 we have
 \[
 d_3(n) = \sqrt{\mathrm{Var}(R)}
-    = \sqrt{ E(R^2) - \{E(R)\}^2 }
-    = \sqrt{ E(R^2) - d_2(n)^2 },
+       = \sqrt{ E(R^2) - \{E(R)\}^2 }
+       = \sqrt{ E(R^2) - d_2(n)^2 },
 \]
 where $E(R^2)$ can be obtained by (\ref{EQ:ER}).
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[t!]
+\centering\includegraphics[width=5.5in]{d3-calculations}
+\caption{The plot of $d_3(n)$ versus $n$.} \label{FIG:d3}
+\end{figure}
+
+The value of $d_3(n)$ is involved with the double integration as shown in (\ref{EQ:ER}).
+We calculated the value of  $d_3(n)$ using the numerical integration.
+This double integration is accurate for small values of $n$ (say, $n<100$).
+As seen in Figure~\ref{FIG:d3}, the numerical calculation of $d_3(n)$ (denoted by red line) is not reliable
+especially for large values of $n$.
+We double-checked these values by comparing with those obtained by the Monte Carlo simulation.
+To obtain more reliable and accurate calculation of $d_3(n)$ especially for large values of $n$,
+we calculated the value of $d_3(n)$ by Monte Carlo simulation, we generated a sample of size $n$ from $N(0,1)$ and calculated
+the range. We iterated this simulation one hundred million times ($I=10^8$) and then calculated the empirical variance of this range
+(denoted by a circle in Figure~\ref{FIG:d3}).
+
+We also obtained the approximation of $d_3(n)$ by using the least squares method with the empirical variances of the ranges,
+which is given by
+\begin{equation} \label{EQ:d3approx}
+d_3(n) \approx
+\exp\Big( 0.73784298+0.06390565\cdot\ln(n) - 0.71491753\cdot\sqrt{\ln(n)}\; \Big) .
+\end{equation}
+Figure \ref{FIG:d3} clearly shows that this approximation is very close to the simulated value of $d_3(n)$ for large values of $n$.
+It is worth mentioning that The \texttt{factors.cc} function calculates $d_3(n)$ using the numerical integration for $n \le 100$
+and using the approximation in (\ref{EQ:d3approx}) for $n > 100$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
 %%===============================================
 \bibliographystyle{unsrt}
-\begin{thebibliography}{99}
+\bibliography{rQCC}
 
-\bibitem{ASTM:1976}
-{ASTM Committee E-11}.
-\newblock {\em Manual on Presentation of Data and Control Chart Analysis ({STP}
-  {15-D})}.
-\newblock American Society for Testing and Materials, Philadelphia, PA, 4th
-  edition, 1976.
 
-\bibitem{ASTM:1951}
-{ASTM Committee E-11}.
-\newblock {\em {ASTM} Manual on Quality Control of Materials ({STP} {15-C})}.
-\newblock American Society for Testing and Materials, Philadelphia, PA, 1951.
-
-\bibitem{Casella/Berger:2002}
-G.~Casella and R.~L. Berger.
-\newblock {\em Statistical Inference}.
-\newblock Duxbury, Pacific Grove, CA, second edition, 2002.
-
-\bibitem{Harter:1960}
-H.~Leon Harter.
-\newblock Tables of range and {S}tudentized range.
-\newblock {\em The Annals of Mathematical Statistics}, 31(4):1122--1147, 1960.
-
-\end{thebibliography}
 %%===============================================
 \end{document}
 %%===============================================

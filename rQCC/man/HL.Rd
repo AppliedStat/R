@@ -1,24 +1,24 @@
 \encoding{utf-8}
 \name{Hodges-Lehmann}
 \alias{HL}
-\title{Hodges-Lehmann estimate}
+\title{Hodges-Lehmann estimator}
 
-\description{Calculates the Hodges-Lehmann estimate.}
+\description{Calculates the Hodges-Lehmann estimator.}
 
 \usage{
-HL(x, method = c("HL1", "HL2", "HL3"), na.rm = FALSE)
+HL(x, estimator = c("HL1", "HL2", "HL3"), na.rm = FALSE)
 }
 
 \arguments{
  \item{x}{a numeric vector of observations.}
- \item{method}{a character string specifying the estimator, must be 
+ \item{estimator}{a character string specifying the estimator, must be 
 one of \code{"HL1"} (default), \code{"HL2"} and \code{"HL3"}.}
  \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 
 
 \details{
-\code{HL} computes the Hodges-Lehmann estimates (one of \code{"HL1"}, \code{"HL2"}, \code{"HL3"}).
+\code{HL} computes the Hodges-Lehmann estimators (one of \code{"HL1"}, \code{"HL2"}, \code{"HL3"}).
 
 The Hodges-Lehmann (HL1) is defined as 
 \deqn{\mathrm{HL1} = \mathop{\mathrm{median}}_{i<j} \Big( \frac{X_i+X_j}{2} \Big)}{HL1 = median of 
@@ -37,7 +37,7 @@ median of (Xi+Xj)/2 over all (i,j).}
 \value{It returns a numeric value.}
 
 \references{
-Park, C., H. Kim, and M. Wang (2020).
+Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators.
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
 \url{https://doi.org/10.1080/03610918.2019.1699114}
@@ -56,10 +56,9 @@ Estimates of location based on rank tests.
 
 \examples{
 x = c(0:10, 50)
-HL(x, method="HL2")
+HL(x, estimator="HL2")
 }
 
 \author{Chanseok Park and Min Wang}
-
 \keyword{robust}
-
+\keyword{univar}

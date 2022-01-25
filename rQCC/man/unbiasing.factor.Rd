@@ -11,12 +11,12 @@ and the variance (\eqn{\sigma^2}{\sigma^2}) under the normal distribution.
 }
 
 \usage{
-c4.factor(n, method=c("sd","range", "mad","shamos"))
-w4.factor(n, method=c("mad2","shamos2"))
+c4.factor(n, estimator=c("sd","range", "mad","shamos"))
+w4.factor(n, estimator=c("mad2","shamos2"))
 }
 \arguments{
  \item{n}{sample size (\eqn{n \ge 1}{n \ge 1}).}
- \item{method}{a character string specifying the estimator, must be
+ \item{estimator}{a character string specifying the estimator, must be
 one of \code{"sd"} (default), \code{"range"}, \code{"mad"}, \code{"shamos"} 
 for \code{c4.factor}, and one of \code{"mad2"} (default), \code{"shamos2"} for \code{w4.factor}.} 
 }
@@ -29,19 +29,19 @@ but they are not unbiased with a sample of finite size.
 
 Using the sample standard deviation,
 an unbiased estimator of the standard deviation (\eqn{\sigma}{\sigma}) is calculated by \cr
-\code{sd(x)/c4.factor(length(x), method="sd")} \cr
+\code{sd(x)/c4.factor(length(x), estimator="sd")} \cr
 
 Using the range (maximum minus minimum), 
 an unbiased estimator of \eqn{\sigma}{\sigma} is calculated by \cr
-\code{diff(range(x))/c4.factor(length(x), method="range")}
+\code{diff(range(x))/c4.factor(length(x), estimator="range")}
 
 Using the median absolute deviation (\link{mad}\{stats\}),
 an unbiased estimator of \eqn{\sigma}{\sigma} is calculated by \cr
-\code{mad(x)/c4.factor(length(x), method="mad")}
+\code{mad(x)/c4.factor(length(x), estimator="mad")}
 
 Using the Shamos estimator (\code{shamos}\{rQCC\}), 
 an unbiased estimator of \eqn{\sigma}{\sigma} is calculated by \cr 
-\code{shamos(x)/c4.factor(length(x), method="shamos")}
+\code{shamos(x)/c4.factor(length(x), estimator="shamos")}
 
 Note that the formula for the unbiasing factor \eqn{c_4(n)}{c4(n)} is given by 
 \deqn{c_4(n) = \sqrt{\frac{2}{n-1}}\cdot\frac{\Gamma(n/2)}{\Gamma((n-1)/2)}.}{c4(n) = \sqrt\{2/(n-1)\}*\Gamma(n/2)/\Gamma((n-1)/2).}  \cr
@@ -54,11 +54,11 @@ An unbiased estimator of the variance (\eqn{\sigma^2}{\sigma^2})
 is obtained using the finite-sample unbiasing factor (\code{w4.factor}).
 
 Using the squared MAD, an unbiased estimator of \eqn{\sigma^2}{\sigma^2} is calculated by \cr
-\code{mad(x)^2/w4.factor(length(x), method="mad2")}
+\code{mad(x)^2/w4.factor(length(x), estimator="mad2")}
 
 Using the squared Shamos estimator,
 an unbiased estimator of \eqn{\sigma^2}{\sigma^2} is calculated by \cr
-\code{shamos(x)^2/w4.factor(length(x), method="shamos2")}
+\code{shamos(x)^2/w4.factor(length(x), estimator="shamos2")}
 
 The finite-sample unbiasing factors for the median absolute deviation (MAD)  
 and Shamos estimators 
@@ -70,10 +70,8 @@ using the method of Hayes (2014).
 
 \value{It returns a numeric value.}
 
-\author{Chanseok Park and Min Wang}
-
 \references{
-Park, C., H. Kim, and M. Wang (2020).
+Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators.
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
 \url{https://doi.org/10.1080/03610918.2019.1699114}
@@ -124,20 +122,20 @@ the Shamos estimator under the standard normal distribution.
 
 \examples{
 # unbiasing factor for estimating the standard deviation
-c4.factor(n=10, method="sd")
-c4.factor(n=10, method="mad")
-c4.factor(n=10, method="shamos")
+c4.factor(n=10, estimator="sd")
+c4.factor(n=10, estimator="mad")
+c4.factor(n=10, estimator="shamos")
 
 # Note: d2 notation is widely used for the bias-correction of the range.
-d2 = c4.factor(n=10, method="range") 
+d2 = c4.factor(n=10, estimator="range") 
 d2
-
 
 # unbiasing factor for estimating the variance
 w4.factor(n=10, "mad2")
 w4.factor(n=10, "shamos2")
 }
 
+\author{Chanseok Park}
 \keyword{factor}
 \keyword{variance}
 

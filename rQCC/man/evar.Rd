@@ -2,29 +2,40 @@
 \name{empirical.variance}
 \alias{evar}
 \title{Empirical variances of robust estimators}
+
+\description{This function calculate or estimate the variances of the mean, median, Hodges-Lehmann (HL1, HL2, HL3), standard deviation, range,
+median absolute deviation (MAD) and Shamos estimators.}
+
 \usage{
-evar (n, method = c("median", "HL1", "HL2", "HL3", "mad", "shamos")) 
+evar (n, estimator=c("mean","median","HL1","HL2","HL3", "sd","range","mad","shamos"),
+         poolType=c("A","B","C"), correction=TRUE )
 }
 \arguments{
- \item{n}{sample size (\eqn{n \ge 1}{n \ge 1}).}
- \item{method}{a character string specifying the estimator, must be 
-one of \code{"median"} (default), \code{"HL1"}, \code{"HL2"}, \code{"HL3"}, \code{"mad"}, 
+ \item{n}{a vector of sample sizes.
+          For \code{"HL1"}, \code{"sd"}, \code{"range"} and \code{"shamos"}, \eqn{n \ge 2}{n \ge 2}.
+          For others, \eqn{n \ge 2}{n \ge 2}.}
+ \item{estimator}{a character string specifying the estimator, must be 
+one of \code{"mean"} (default), \code{"median"}, \code{"HL1"}, \code{"HL2"}, \code{"HL3"}, \code{"sd"}, \code{"range"}, \code{"mad"}, 
 and \code{"shamos"}.}
+ \item{poolType}{Type for how to pool estimators, must be
+one of \code{"A"} (default), \code{"B"}, and \code{"C"}.}
+ \item{correction}{logical. A finite-sample bias correction for the estimator with a single sample.
+      \code{TRUE} (default) adjusts a finite-sample bias correction for a scale estimator
+      using \code{c4.factor} function.}
 }
 
-\description{Provides the empirical variances of the median, Hodges-Lehmann (HL1, HL2, HL3) 
-median absolute deviation (MAD) and Shamos estimators.
-}
 
 \details{
-The empirical variances for \eqn{n=1,2,\ldots,100}{n = 1, 2, ... ,100} are obtained
-using the extensive Monte Carlo simulation with 1E07 replicates.
-For the case of \eqn{n > 100}{n > 100}, they are obtained using the method of Hayes (2014).
-
-\code{evar} computes the empirical variance of a specific 
-estimator (one of \code{"median"}, \code{"HL1"}, \code{"HL2"}, \code{"HL3"}, \code{"mad"}, 
-and \code{"shamos"}) 
+This function calculates or estimates 
+the variance of a specific estimator 
 when a random sample is from the standard normal distribution.
+
+For the mean, standard deviation (sd) and range, their exact variances
+are calculated, but the others are empirically estimated through 
+the extensive Monte Carlo simulation with 1E07 replicates
+for  \eqn{n=1,2,\ldots,100}{n = 1, 2, ... ,100}. 
+For the case of \eqn{n > 100}{n > 100}, 
+the empirical variances are obtained using the method of Hayes (2014).
 }
 
 \value{It returns a numeric value.}
@@ -40,7 +51,7 @@ when a random sample is from the standard normal distribution.
 }
 
 \references{
-Park, C., H. Kim, and M. Wang (2020).
+Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators.
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
 \url{https://doi.org/10.1080/03610918.2019.1699114}
@@ -54,8 +65,12 @@ Finite-sample bias-correction factors for the median absolute deviation.
 
 \examples{
 # Empirical variance of the Hodges-Lehmann estimator (HL2) under the standard normal distribution.
-evar (n=10, method="HL2")
+evar (n=10, estimator="HL2")
+
+# Multiple samples
+evar (n=c(4,5), estimator="mad", poolType="C")
 }
 
-\keyword{variance}
 \author{Chanseok Park and Min Wang}
+\keyword{variance}
+\keyword{unbalanced}

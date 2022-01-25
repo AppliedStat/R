@@ -3,13 +3,17 @@ exportPattern("^[[:alpha:]]+")
 #functions
 export(finite.breakdown, HL, shamos, c4.factor, w4.factor, 
 mad.unbiased, shamos.unbiased, RE, evar, 
-mad2.unbiased, shamos2.unbiased, factors.cc, rcc)
+mad2.unbiased, shamos2.unbiased, factors.cc, acc, rcc)
 
-importFrom("stats", integrate, mad, median, pnorm, sd)
-importFrom("graphics", abline, axis, lines, plot, points, polygon, text)
+importFrom("stats", integrate, mad, median, weighted.mean, pnorm, sd, var)
+importFrom("graphics", abline, axis, lines, plot, points, polygon, text, par)
+
+#
+S3method(print,acc)
+S3method(plot,acc)
+S3method(summary,acc)
 
 #
 S3method(print,rcc)
 S3method(plot,rcc)
 S3method(summary,rcc)
-

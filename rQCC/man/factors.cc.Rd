@@ -4,13 +4,14 @@
 
 \title{Factors for constructing control charts}
 
-\description{
+
+\description{ 
 Factors for constructing control charts.
 }
 
 \usage{
 factors.cc(n, factor=c( "A","A1","A2","A3", "B1","B2","B3","B4","B5","B6", "c2","c4",
-                        "d2","d3","D1","D2","D3","D4", "E1", "E2", "E3"), sigma.factor=3)
+                        "d2","d3","D1","D2","D3","D4", "E1", "E2", "E3"), sigmaFactor=3)
 }
 
 \arguments{
@@ -23,12 +24,12 @@ factors.cc(n, factor=c( "A","A1","A2","A3", "B1","B2","B3","B4","B5","B6", "c2",
                  for standard devations; 
        \code{"D1"}, \code{"D2"}, \code{"D3"}, \code{"D4"} for ranges;
        and 
-       \code{"E1"}, \code{"E2"}, \code{"E3"} for individuals.}
- \item{sigma.factor}{a factor for the standard deviation (\eqn{\sigma}{\sigma}). \cr 
+       \code{"E1"}, \code{"E2"}, \code{"E3"} for individuals. 
+For \code{"d3"}, the calculation is not accurate when \eqn{n>100}{n>100}.}
+ \item{sigmaFactor}{a factor for the standard deviation (\eqn{\sigma}{\sigma}). \cr 
 For example, the American Standard uses "\emph{3*sigma}" limits (0.27\% false alarm rate),
 while the British Standard uses "\emph{3.09*sigma}" limits (0.20\% false alarm rate).}
 }
-
 
 \details{
 The values of the factors are used for constructing 
@@ -60,7 +61,7 @@ for the finite-sample unbiasing factor to estimate
 the standard deviation (\eqn{\sigma}{\sigma}) under the normal distribution
 using various estimators such as the sample standard deviation,
 the sample range, the median absolute deviation (MAD), and 
-the Shamos estimate.
+the Shamos estimator.
 }
 
 
@@ -74,14 +75,14 @@ factors.cc(n=10, factor="A3")
 #           using the sample standard deviation.
 factors.cc(n=10, factor="c4")
 #  The above is the same as below:
-c4.factor(n=10, method="sd")
+c4.factor(n=10, estimator="sd")
 
 
 ## Unbiasing factor for the standard deviation 
 #           using the sample range. 
 factors.cc(n=10, factor="d2")
 #  The above is the same as below:
-c4.factor(n=10, method="range") 
+c4.factor(n=10, estimator="range") 
 
 
 ## Table B2 in Supplement B of ASTM (1951).
@@ -112,14 +113,10 @@ res=NULL
 for(n in nn){tmp=NULL;for(ch in char) tmp=c(tmp,factors.cc(n,ch));res=rbind(res,tmp)}
 rownames(res) = paste0("n=",nn)
 round(res,3)
-
-
-## vignette ##
-if (interactive()) vignette("factors.cc", package="rQCC")
 }
 
 
+\author{Chanseok Park}
 \keyword{factor}
 \keyword{control chart}
-\author{Chanseok Park}
 

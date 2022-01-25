@@ -4,8 +4,12 @@
 \alias{mad2.unbiased}
 \title{Median absolute deviation (MAD)}
 
+\description{Calculates the unbiased median absolute deviation (MAD)
+estimator and the unbiased squared MAD under the normal distribution which are adjusted by 
+the Fisher-consistency and finite-sample unbiasing factors.}
+
 \usage{
-mad.unbiased(x, center = median(x), constant=1.4826, na.rm = FALSE)
+mad.unbiased (x, center = median(x), constant=1.4826, na.rm = FALSE)
 
 mad2.unbiased(x, center = median(x), constant=1.4826, na.rm = FALSE)
 }
@@ -17,17 +21,13 @@ mad2.unbiased(x, center = median(x), constant=1.4826, na.rm = FALSE)
  \item{na.rm}{a logical value indicating whether NA values should be stripped before the computation proceeds.}
 }
 
-\description{Calculates the unbiased median absolute deviation (MAD) 
-estimate and the unbiased squared MAD under the normal distribution which are adjusted by 
-the Fisher-consistency and finite-sample unbiasing factors.}
-
 \details{
 The unbiased MAD (\code{mad.unbiased})
 is defined as the \link{mad}\{stats\} divided by \eqn{c_5(n)}{c5(n)},
 where  \eqn{c_5(n)}{c5(n)} is the finite-sample unbiasing factor.
-Note that \eqn{c_5(n)}{c5(n)} notation is used in Park et. al (2020),
+Note that \eqn{c_5(n)}{c5(n)} notation is used in Park et. al (2022),
 and \eqn{c_5(n)}{c5(n)} is calculated 
-using the function \code{c4.factor}\{rQCC\} with \code{method="mad"} option.
+using the function \code{c4.factor}\{rQCC\} with \code{estimator="mad"} option.
 The default value (\code{constant=1.4826}) ensures the Fisher-consistency 
 under the normal distribution. 
 Note that the original MAD was proposed by Hampel (1974).
@@ -35,9 +35,9 @@ Note that the original MAD was proposed by Hampel (1974).
 The unbiased squared MAD (\code{mad2.unbiased}) is defined as the
 squared \link{mad}\{stats\} divided by \eqn{w_5(n)}{w5(n)} where 
  \eqn{w_5(n)}{w5(n)} is the finite-sample unbiasing  factor. 
-Note that \eqn{w_5(n)}{w5(n)} notation is used in Park et. al (2020),
+Note that \eqn{w_5(n)}{w5(n)} notation is used in Park et. al (2022),
 and \eqn{w_5(n)}{w5(n)} is calculated 
-using the function \code{w4.factor}\{rQCC\} with \code{method="mad2"} option.
+using the function \code{w4.factor}\{rQCC\} with \code{estimator="mad2"} option.
 The default value (\code{constant=1.4826}) ensures the Fisher-consistency
  under the normal distribution.
 Note that the square of the conventional MAD is
@@ -48,7 +48,7 @@ it is not unbiased with a sample of finite size.
 \value{They return a numeric value.}
 
 \references{
-Park, C., H. Kim, and M. Wang (2020).
+Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators.
 \emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
 \url{https://doi.org/10.1080/03610918.2019.1699114}
@@ -94,4 +94,4 @@ mad2.unbiased(x)
 
 \author{Chanseok Park and Min Wang}
 \keyword{robust}
-
+\keyword{univar}

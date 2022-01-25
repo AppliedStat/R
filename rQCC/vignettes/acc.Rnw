@@ -1,0 +1,419 @@
+%\VignetteIndexEntry{A note on the "acc" function in the "rQCC" package}
+%\VignetteKeyword{rQCC}
+%\VignetteKeyword{attribute chart}
+%\VignetteKeyword{p chart}
+%\VignetteKeyword{c chart}
+%\VignetteKeyword{u chart}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{amsmath,xcolor}
+\usepackage[breaklinks]{hyperref} 
+
+
+\addtolength{\textwidth}{0.5in}
+\addtolength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{A note on the function for the attributes control charts (\texttt{acc}) in the \texttt{rQCC} package}
+%-------------------------------------------------------------------
+\author{Chanseok Park\footnote{Applied Statistics Laboratory,
+Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
+His work was partially supported by the National Research Foundation of Korea (NRF)
+grant funded by the Korea government (NRF-2017R1A2B4004169).}
+~{and}
+Min Wang\footnote{Department of Management Science and Statistics,
+The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
+}
+\date{January 2022}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\begin{abstract}
+In this note, we provide a brief summary of attribute control charts
+along with a description of how they are constructed
+using the \texttt{acc} function in the R package \texttt{rQCC}. In addition, 
+various traditional attribute control charts such as $p$, $c$ and $u$ can be easily
+constructed using the \texttt{acc} function.
+\end{abstract}
+
+%--------------------------------------
+\section{Introduction}
+%--------------------------------------
+In many practical applications, attribute control charts are widely used in
+the scenario where the quality characteristics cannot be conveniently measured and/or represented.
+Attribute (or count) data deal with quality characteristics, such as
+color, types of design, defective or non-defective, conforming or nonconforming, etc.
+In general, it is easier, cheaper, and faster to collect attribute data than quantitative data, 
+whereas attribute data are less informative and precise.
+For example, the fraction or percentage of nonconforming units does not provide any information
+in which the measurements are centered and how dispersive they are.
+
+Attribute control charts can also be constructed based on the idea of the traditional Shewhart control charts.
+These are the control charts for the fraction of nonconforming units ($p$ chart),
+for nonconformities ($c$ chart) and for nonconformities per unit ($u$ chart).
+The traditional Shewhart-type control charts consist of the upper control limit (UCL),
+the center line (CL) and the lower control limit (LCL). They have
+the form of $\mathrm{CL}\pm g\cdot\mathrm{SE}$,
+where the American Standard is based on $g=3$
+with a target false alarm rate of 0.027\% and the British Standard is based on $g=3.09$
+with a target false alarm rate of 0.020\%.
+The UCL is given by $\mathrm{CL}+g\cdot\mathrm{SE}$ and the LCL is
+$\mathrm{CL}-g\cdot\mathrm{SE}$.
+
+In this note, we consider two kinds of attribute control charts for fraction nonconforming 
+and for nonconformities (defects), which
+are also called the $p$ and $u$ charts, respectively.
+The Shewhart-type attribute control charts are constructed under the tacit assumption that
+the normal approximation to the binomial distribution is acceptable. In what follows, we provide the construction of the $p$ and $u$ control charts
+based on the traditional Shewhart-type control charts and implement these charts in the R package \texttt{rQCC}.
+%======================================
+\section{The $p$ and $np$ charts}
+%======================================
+The $p$ chart is usually used to monitor fraction nonconforming. 
+Using this $p$ chart, it is also available to construct the control chart ($np$ chart) 
+for the number of nonconforming
+instead of fraction nonconforming. 
+
+It is assumed that 
+we have $m$ samples and that the $i$th sample have either the equal number of observations $n$ (balanced case)
+or different number of observations $n_i$ (unbalanced case) for $i=1 ,2 ,\ldots, m$. For notational simplicity,  
+let $X_{i}$ be the number of nonconforming units in the $i$th sample (subgroup) from a stable manufacturing process. 
+We assume that $X_{i}$ are independent and identically distributed according to the binomial distribution
+with the sample size $n$ or $n_i$ and the Bernoulli probability $p$.
+
+%--------------------------------------
+\subsection{The conventional $p$ chart}
+%--------------------------------------
+Let $\hat{p}_k = X_k/n_k$. We have $E(\hat{p}_k)=p$ and  $\mathrm{Var}(\hat{p}_k) = p(1-p)/n_k$.
+To construct the control charts of the form $\mathrm{CL} \pm g\cdot\mathrm{SE}$,
+we consider the relation
+\[
+\frac{\hat{p}_k - E(\hat{p}_k)}{\sqrt{\mathrm{Var}(\hat{p}_k)}} = \pm g,
+\]
+which showed that the control limits for the conventional Shewhart-type $p$ chart with $n_k$ are given by
+%------------
+\begin{equation} \label{EQ:pbar:01}
+p \pm g \sqrt{ \frac{p(1-p)}{n_k} }.
+\end{equation}
+%------------
+It is worth noting that the value of the parameter $p$ is unknown in practice. 
+To tackle this issue, we combine all the subgroups and estimate $p$ by
+\begin{equation} \label{EQ:pbar}
+\bar{p} =\frac{\sum_{i=1}^m X_i}{ \sum_{i=1}^m n_i}.
+\end{equation}
+Replacing $p$ in (\ref{EQ:pbar:01}) with $\bar{p}$ provides the control limits of the $p$ chart 
+%------------------
+\begin{equation} \label{EQ:CIWald}
+\bar{p} \pm g \sqrt{ \frac{\bar{p} (1- \bar{p})}{n_k} }.
+\end{equation}
+%%-----------------
+Since the control limits should be between zero and one, the control limits for the $p$ chart
+are actually given by
+\begin{align*}
+\mathrm{UCL} &= \min\left\{ \bar{p} + g \sqrt{\frac{\bar{p}(1-\bar{p})}{n_k}}, 1 \right\} ,  \\
+\mathrm{CL}  &= \bar{p},    \\
+\mathrm{LCL} &= \max\left\{ \bar{p} - g \sqrt{\frac{\bar{p}(1-\bar{p})}{n_k}}, 0 \right\} .
+\end{align*}
+For the case of the known $p$, use the known value instead of $\bar{p}$ in the above.
+
+For example, one can obtain the control limits of the conventional $p$ chart using the \texttt{acc} function 
+in the R package \texttt{rQCC}.
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> acc(x, n, type="p")}
+\end{color}
+}}
+\smallskip
+
+The conventional $np$ chart is easily obtained by multiplying $n$ and the control limits of the conventional $p$ chart.
+It should be noted that this $np$ chart is appropriate only when samples are balanced. 
+Thus, we have the control limits for the $np$ chart as follows.
+\begin{align*}
+\mathrm{UCL} &= \min\left\{ n\bar{p} + g \sqrt{ n\bar{p}(1-\bar{p})} , n \right\} ,  \\
+\mathrm{CL}  &= n\bar{p},    \\
+\mathrm{LCL} &= \max\left\{ n\bar{p} - g \sqrt{ n\bar{p}(1-\bar{p})}, 0 \right\} .
+\end{align*}
+One can obtain the control limits of the conventional $np$ chart 
+by setting \texttt{type="np"} in the \texttt{acc} function.
+
+
+%---------------------------------------
+\subsection{The $p$ chart based on the Wilson confidence interval}
+%---------------------------------------
+In the statistics literature, Equation (\ref{EQ:CIWald}) is the most commonly-used interval for the Bernoulli parameter $p$ and 
+is also related to the Wald confidence interval for $p$; see \cite{Agresti/Coull:1998}.
+However, it is well-known that the Wald confidence limits are unsatisfactory for small $n$.
+See the references in \cite{Agresti/Coull:1998,Blyth/Still:1983,Ghosh:1979}.
+Wilson~\cite{Wilson:1927} obtained an improved confidence interval by using the idea of directly inverting a test statistic.
+
+Park~\cite{Park:2013b} introduced an improvement of the $p$ chart based on the approach of Wilson~\cite{Wilson:1927}.
+When $p$ is known, the control limits with the sample size $n_k$ are given by
+%---------------
+\[
+\frac{{p} + g^2/(2N)}{1+g^2/N} \pm
+\frac{g}{1+g^2/N} \sqrt{ \frac{{p}(1-{p})}{n_k} + \frac{g^2}{4n_k N} },
+\]
+%---------------
+where  $N=\sum_{i=1}^{m}n_k$.
+When $p$ is unknown, the control limits are then given by 
+%---------------
+%% \begin{equation} \label{EQ:WilsonCC1}
+\[
+\frac{\bar{p} + g^2/(2N)}{1+g^2/N}
+\pm \frac{g}{1+g^2/N}
+\sqrt{ \frac{\bar{p}(1-\bar{p})}{n_k} + \frac{g^2}{4n_k N} },
+\]
+%% \end{equation}
+%---------------
+where $\bar{p}$ is given in (\ref{EQ:pbar}).
+%%-----------------
+Since the control limits should be between zero and one, the control limits are actually given by
+\begin{align*}
+\mathrm{UCL} &= \min\left\{ \frac{\bar{p} + g^2/(2N)}{1+g^2/N}
+               +\frac{g}{1+g^2/N} \sqrt{\frac{\bar{p}(1-\bar{p})}{n_k}+\frac{g^2}{4n_k N}}, 1\right\} ,\\
+\mathrm{CL}  &= \frac{\bar{p} + g^2/(2N)}{1+g^2/N} ,     \\
+\mathrm{LCL} &= \max\left\{ \frac{\bar{p} + g^2/(2N)}{1+g^2/N}
+               - \frac{g}{1+g^2/N} \sqrt{\frac{\bar{p}(1-\bar{p})}{n_k}+\frac{g^2}{4n_k N}}, 0\right\} .
+\end{align*}
+As afore-mentioned, for the case of the known $p$,
+we can use the known value instead of $\bar{p}$ in the above.
+
+For example, one can obtain the control limits of the $p$ chart 
+using the \texttt{acc} function in the R package \texttt{rQCC}. 
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> acc(x, n, type="p", pEstimator="Wilson")}
+\end{color}
+}}
+\smallskip
+
+
+The $np$ chart based on the Wilson confidence interval is also obtained 
+by multiplying $n$ and the control limits of the $p$ chart based on the Wilson confidence interval. 
+This chart is also appropriate only when samples are balanced. 
+Thus, we have the following control limits.
+\begin{align*}
+\mathrm{UCL} &= \min\left\{ \frac{n\bar{p} + g^2/(2m)}{1+g^2/(nm)}
+               +\frac{g}{1+g^2/(nm)} \sqrt{n\bar{p}(1-\bar{p}) + {g^2}/{(4m)}}, n\right\} ,\\
+\mathrm{CL}  &= \frac{n\bar{p} + g^2/(2m)}{1+g^2/(nm)} ,     \\
+\mathrm{LCL} &= \max\left\{ \frac{n\bar{p} + g^2/(2m)}{1+g^2/(nm)}
+               - \frac{g}{1+g^2/(nm)} \sqrt{n\bar{p}(1-\bar{p}) + {g^2}/{(4m)}}, 0\right\} .
+\end{align*}
+One can obtain the control limits of the $np$ chart based on the Wilson confidence interval 
+with \texttt{type="np"} as follows. 
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> acc(x, n, type="np", pEstimator="Wilson")}
+\end{color}
+}}
+\smallskip
+
+%======================================
+\section{The $u$ and $c$ charts}
+%======================================
+The $u$ chart is the control chart for monitoring nonconformities (defects) that occur in each unit.
+Let $X_i$ be the number of defects with the $n_i$ inspection units.
+We assume that the number of defects in a \emph{single} unit is distributed as the Poisson
+distribution with the mean $\lambda$.
+Then $X_i$ are independent and identically distributed according to the Poisson distribution 
+with the mean $\lambda n_i$, such that 
+$E(X_i) = n_i\lambda$ and $\mathrm{Var}(X_i) = n_i\lambda$.
+
+Let $U_k = X_k / n_k$. We have
+$E(U_k) = \lambda$ and $\mathrm{Var}(U_k) = \lambda/n_k$.
+To construct the  $\mathrm{CL} \pm g\cdot\mathrm{SE}$ control limits,
+we consider the relation
+\[
+\frac{U_k - E(U_k)}{\sqrt{\mathrm{Var}(U_k)}} = \pm g.
+\]
+The control limits for the Shewhart-type $u$ chart with the $n_k$ inspection units are given by
+%------------
+\[
+\lambda \pm g \sqrt{ \frac{\lambda}{n_k} } .
+\]
+%------------
+It is worth noting that if $n_k=1$, this chart can be regarded as the $c$ chart.
+
+When $\lambda$ is unknown, it can be estimated by
+\[
+\bar{\lambda} = \frac{\sum_{i=1}^{m}X_i}{\sum_{i=1}^{m}n_i}.
+\]
+Since the control limits are nonnegative, we consider the following control limits
+\begin{align*}
+\mathrm{UCL} &= \bar{\lambda} + g\sqrt{\frac{\bar{\lambda}}{n_k}} ,  \\
+\mathrm{CL}  &= \bar{\lambda},  \\
+\mathrm{LCL} &= \max\left\{ \bar{\lambda} - g\sqrt{\frac{\bar{\lambda}}{n_k}}, 0 \right\} .
+\end{align*}
+Again, for the case of the known $\lambda$,
+we just use the value of $\lambda$ instead of $\bar{\lambda}$ in the above.
+
+For example, one can obtain the control limits of the $u$ chart 
+using the \texttt{acc} function as follows. 
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> acc(x, n, type="u")}
+\end{color}
+}}
+\smallskip
+
+The control limits of the $c$ chart is also easily obtained as follows.
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> acc(x, type="c")}
+\end{color}
+}}
+\smallskip
+
+%======================================
+\section{The $g$ and $h$ charts}
+%======================================
+The geometric distribution can also be used for counting event data. 
+It is widely used for monitoring the number of conforming cases between the two consecutive
+appearances of nonconformities such as defects and infections.
+
+Based on this, Kaminsky et al.\ \cite{Kaminsky/etc:1992} proposed $g$ and $h$ charts. 
+The probability mass function for the geometric distribution with location $a$ is given by 
+\begin{equation} \label{EQ:pmfofGeo}
+f(y) = P(Y=y) = p(1-p)^{y-a},
+\end{equation}
+where $y=a, a+1, \ldots$ and 
+$a$ is the known minimum possible number of events (usually $a=0,1$).
+The mean and variance of $Y$ are given by 
+\[
+\mu = E(Y) = \frac{1-p}{p}+a \quad\textrm{and}\quad 
+\sigma^2 = \mathrm{Var}(Y) = \frac{1-p}{p^2}.
+\]
+
+We construct the control chart for the total number of events ($g$ chart)
+and the average number of events (the $h$ chart) per subgroup with $\mathrm{CL} \pm g\cdot\mathrm{SE}$ control limits.
+
+The $g$ chart (total number of events) with the sample size $n_k$
+has the following control limits which are actually
+the function of $\mu$ and $\sigma^2$. 
+For more details, see Park and Wang~\cite{Park/Wang:2021a} and Kaminsky et al.\ \cite{Kaminsky/etc:1992}.
+\begin{alignat}{2}
+\mathrm{UCL} &= n_k{\mu}+g\sqrt{n_k \sigma^2} && = n_k\left(\frac{1-p}{p}+a\right) +g\sqrt{\frac{n_k(1-p)}{p^2}},\notag\\
+\mathrm{CL}  &= n_k{\mu}                      && = n_k\left(\frac{1-p}{p}+a\right), \label{EQ:CLgchart}   \\
+\mathrm{LCL} &= n_k{\mu}-g\sqrt{n_k \sigma^2} && = n_k\left(\frac{1-p}{p}+a\right) -g\sqrt{\frac{n_k(1-p)}{p^2}}. \notag 
+\end{alignat}
+The smallest possible value of the total number of events is $n_k a$.
+Thus, the $\mathrm{LCL}$ can not be smaller than $n_k a$.
+If $\mathrm{LCL} < n_k a$ in the above limit, we set up $\mathrm{LCL} = n_k a$.
+
+The $h$ chart (average number of events) with the sample size $n_k$
+has the following control limits.
+\begin{alignat}{2}
+\mathrm{UCL} &= {\mu} + g \sqrt{\frac{\sigma^2}{n_k}} && = \frac{1-p}{p}+a  + g\sqrt{\frac{1-p}{n_k p^2}}, \notag \\
+\mathrm{CL}  &= {\mu}                                 && = \frac{1-p}{p}+a,   \label{EQ:CLhchart}  \\
+\mathrm{LCL} &= {\mu} - g \sqrt{\frac{\sigma^2}{n_k}} && = \frac{1-p}{p}+a  - g\sqrt{\frac{1-p}{n_k p^2}}. \notag
+\end{alignat}
+The smallest possible value of the average number of events is $a$.
+Thus, we set up $\mathrm{LCL} = a$ if $\mathrm{LCL} < a$ in the above limit.
+
+The value of the process parameter $p$ is unknown in general so that we estimate $p$.
+We assume that we obtain $m$ samples and denote the size of each sample by $n_i$ for $i=1,2,\ldots,m$.
+Suppose that $X_{ij}$ be the number of independent Bernoulli trials (cases)
+until the first nonconforming case in the $i$th sample for $i=1,2,\ldots,m$ and $j=1,2,\ldots,n_i$.
+Then $X_{ij}$'s are independent and identically-distributed geometric random variables with location shift $a$ and $p$.
+We let $\bar{\bar{X}} = \sum_{i=1}^{m}\sum_{j=1}^{n_i} X_{ij}/N$ with $N=\sum_{i=1}^{m} n_i$.
+We can estimate $p$ using the maximum likelihood (ML) and  
+minimum variance unbiased (MVU) estimators~\cite{Park/Wang:2021a} which are given by 
+\[
+\hat{p}_{\mathrm{ML}}  = \frac{1}{\bar{\bar{X}}-a+1}  \quad\textrm{and}\quad 
+\hat{p}_{\mathrm{MVU}} = \frac{1-1/N}{\bar{\bar{X}}-a+1-1/N},
+\]
+respectively.
+It should be noted that Benneyan~\cite{Benneyan:2001} proposed 
+$\hat{p}_{\mathrm{B}} = (1-1/N)/(\bar{\bar{X}}-a+1)$ as the MVU estimator,
+but Park and Wang~\cite{Park/Wang:2021a} showed that $\hat{p}_{\mathrm{B}}$ is not a correct MVU estimator. 
+
+The ML estimator has the invariance property.
+Thus, by substituting $\hat{p}_{\mathrm{ML}}$  into (\ref{EQ:CLgchart}) and (\ref{EQ:CLhchart}), 
+we can construct the $g$ and $h$ charts based on the ML method as follows.  
+%-----------
+\begin{itemize}
+\item $g$ chart
+\begin{align*}
+\mathrm{UCL} &= n_k\bar{\bar{X}} + g \sqrt{n_k (\bar{\bar{X}}-a) (\bar{\bar{X}}-a+1)},  \\
+\mathrm{CL}  &= n_k\bar{\bar{X}},   \\
+\mathrm{LCL} &= n_k\bar{\bar{X}} - g \sqrt{n_k (\bar{\bar{X}}-a) (\bar{\bar{X}}-a+1)}.
+\end{align*}
+\item $h$ chart:
+\begin{align*}
+\mathrm{UCL} &= \bar{\bar{X}} + g\sqrt{\frac{(\bar{\bar{X}}-a) (\bar{\bar{X}}-a+1)}{n_k}},  \\
+\mathrm{CL}  &= \bar{\bar{X}},   \\
+\mathrm{LCL} &= \bar{\bar{X}} - g\sqrt{\frac{(\bar{\bar{X}}-a) (\bar{\bar{X}}-a+1)}{n_k}}.
+\end{align*}
+\end{itemize}
+%-----------
+
+When we construct the charts based on the MVU estimator, $\hat{p}_{\mathrm{MVU}}$, 
+a care should be taken because the MVU estimator has no invariance property like the ML estimator.
+Park and Wang~\cite{Park/Wang:2021a} showed that the MVU estimators of $\mu$ and $\sigma^2$ are given by 
+\[
+\hat{\mu}_{\mathrm{mvu}} = \bar{\bar{X}}
+\quad\textrm{and}\quad 
+\hat{\sigma}^2_{\mathrm{mvu}} = \frac{N}{N+1}  (\bar{\bar{X}}-a) (\bar{\bar{X}}-a+1),
+\]
+and they construct the  $g$ and $h$ charts based on $\hat{\mu}_{\mathrm{mvu}}$ and $\hat{\sigma}^2_{\mathrm{mvu}}$ 
+as follows.
+%-----------
+\begin{itemize}
+\item $g$ chart:
+\begin{align*}
+\mathrm{UCL} &= n_k\bar{\bar{X}} + g \sqrt{\frac{n_k N}{N+1} (\bar{\bar{X}}-a) (\bar{\bar{X}}-a+1)},  \\
+\mathrm{CL}  &= n_k\bar{\bar{X}},   \\
+\mathrm{LCL} &= n_k\bar{\bar{X}} - g \sqrt{\frac{n_k N}{N+1} (\bar{\bar{X}}-a) (\bar{\bar{X}}-a+1)}.
+\end{align*}
+\item $h$ chart:
+\begin{align*}
+\mathrm{UCL} &= \bar{\bar{X}} + g\sqrt{\frac{N}{N+1}\frac{(\bar{\bar{X}}-a) (\bar{\bar{X}}-a+1)}{n_k}},  \\
+\mathrm{CL}  &= \bar{\bar{X}},   \\
+\mathrm{LCL} &= \bar{\bar{X}} - g\sqrt{\frac{N}{N+1}\frac{(\bar{\bar{X}}-a) (\bar{\bar{X}}-a+1)}{n_k}}.
+\end{align*}
+\end{itemize}
+%-----------
+
+The control limits of the $g$ or $h$ chart is also easily obtained as follows.
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> acc(x, type="g")}
+
+\texttt{> acc(x, type="h")}
+\end{color}
+}}
+\smallskip
+
+
+
+
+
+
+
+%%===============================================
+\bibliographystyle{unsrt}
+\bibliography{rQCC}
+
+
+%%===============================================
+\end{document}
+%%===============================================
+
+

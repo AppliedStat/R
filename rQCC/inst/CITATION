@@ -2,26 +2,39 @@ citHeader("To cite the rQCC package in publications, please use:")
 
 citEntry(entry="Article",
 author = personList(as.person("C. Park"), as.person("H. Kim"), as.person("M. Wang")), 
-year   = 2020,
+year   = 2021,
 title  = "Investigation of finite-sample properties of robust location and scale estimators",
 journal= "Communications in Statistics - Simulation and Computation", 
-volume = "To Appear", 
-pages="X-Y", 
+volume = "To appear", 
+pages=" - ", 
 url = "https://doi.org/10.1080/03610918.2019.1699114",
-textVersion = paste("Park, C., H. Kim, and M. Wang (2020)", 
+textVersion = paste("Park, C., H. Kim, and M. Wang (2022)", 
         "Investigation of finite-sample properties of robust location and scale estimators.", 
      "Communications in Statistics - Simulation and Computation",
        "To Appear")
 )
 
-citEntry(entry="Manual",
+citEntry(entry="Article",
 author = personList(as.person("C. Park"), as.person("M. Wang")),
 year   = 2020,
+title  = "A study on the X-bar and S control charts with unequal sample sizes",
+journal= "Mathematics",
+volume = "8(5)",
+pages="698",
+url = "https://doi.org/10.3390/math8050698",
+textVersion = paste("Park, C. and M. Wang (2021)",
+        "A study on the X-bar and S control charts with unequal sample sizes.",
+     "Mathematics", "8(5), 698.")
+)
+
+citEntry(entry="Manual",
+author = personList(as.person("C. Park"), as.person("M. Wang")),
+year   = 2021,
 title  = "rQCC: Robust Quality Control Chart",
-note   = "R package version 1.20.7", 
+note   = "R package version 1.21.1", 
 url = "https://CRAN.R-project.org/package=rQCC",
-textVersion = paste("Park, C. and M. Wang (2020)",
-  "rQCC: Robust Quality Control Chart", "R Package Version 1.20.7 (published on July 5, 2020)", 
+textVersion = paste("Park, C. and M. Wang (2021)", "rQCC: Robust Quality Control Chart", 
+  "R Package Version 1.21.0 (published in January 0, 2021)", 
   "https://CRAN.R-project.org/package=rQCC")
 )
 

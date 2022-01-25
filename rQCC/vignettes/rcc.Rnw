@@ -1,5 +1,6 @@
 %\VignetteIndexEntry{A note on the "rcc" function in the "rQCC" package}
 %\VignetteKeyword{rQCC}
+%\VignetteKeyword{Shewhart chart}
 %\VignetteKeyword{control chart}
 %\VignetteKeyword{X-bar chart}
 %\VignetteKeyword{S chart}
@@ -9,15 +10,18 @@
 %\VignetteKeyword{breakdown}
 %\VignetteKeyword{unbiasing factor}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass{article}[12pt]
+\documentclass{article}
 \usepackage{Sweave}
+
+\usepackage[breaklinks]{hyperref}
+
 \usepackage{amsmath,xcolor}
 \addtolength{\textwidth}{0.5in}
 \addtolength{\oddsidemargin}{-0.25in}
 \setlength{\evensidemargin}{\oddsidemargin}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{A note on the \texttt{rcc} function in the \texttt{rQCC} package}
+\title{A note on the function for the robut control charts (\texttt{rcc}) in the \texttt{rQCC} package}
 %-------------------------------------------------------------------
 \author{Chanseok Park\footnote{Applied Statistics Laboratory,
 Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
@@ -27,20 +31,21 @@ grant funded by the Korea government (NRF-2017R1A2B4004169).}
 Min Wang\footnote{Department of Management Science and Statistics,
 The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
 }
-\date{July 5, 2020}
+\date{January 2022}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
 \begin{abstract}
-In this note, we provide a brief summary of control charts
+In this note, we provide a brief summary of variables control charts
 and a description of how they are constructed
-using the \texttt{rcc} function in the robust quality control chart (rQCC) R package.
-Using \texttt{rcc} function, one can construct the traditional Shewhart-type control charts.
-In addition, using various robust location and scale estimates provided by the rQCC package,
+using the \texttt{rcc} function in the robust quality control chart (\texttt{rQCC}) R package.
+Using \texttt{rcc} function, one can construct the traditional Shewhart-type variables control charts.
+In addition, using various robust location and scale estimates provided by the  \texttt{rQCC} package,
 one can easily obtain robust alternatives to the traditional charts.
 \end{abstract}
+
 
 %--------------------------------------
 \section{Introduction}
@@ -50,7 +55,8 @@ Control charts, also known as Shewhart control charts
 whether a manufacturing process is in a proper state of control or not.
 The traditional Shewhart-type control charts are made up of the upper control limit (UCL),
 the center line (CL) and the lower control limit (LCL) and they have
-the form of $\mathrm{CL}\pm g\cdot\mathrm{SE}$, where the American Standard is based on $g=3$
+the form of $\mathrm{CL}\pm g\cdot\mathrm{SE}$, 
+where the American Standard is based on $g=3$
 with a target false alarm rate of 0.027\% and the British Standard is based on $g=3.09$
 with a target false alarm rate of 0.020\%.
 The UCL is given by $\mathrm{CL}+g\cdot\mathrm{SE}$ and the LCL is
@@ -61,53 +67,52 @@ and robust alternatives to them using various robust location and scale estimate
 provided by the \texttt{rQCC} package.
 In this note, we assume
 that we have $m$ samples and that each sample has the same sample size of $n$.
-Let $X_{ij}$ be the $i$th sample (subgroup) from a stable manufacturing process, where
-$i=1,2,\ldots,m$ and $j=1,2,\ldots,n$.
+Let $X_{ij}$ be the $i$th sample (subgroup) from a stable manufacturing process, 
+where $i=1,2,\ldots,m$ and $j=1,2,\ldots,n$.
 We also assume that $X_{ij}$ are independent and identically distributed
 as normal with mean $\mu$ and variance $\sigma^2$.
 The $A$, $B$ and $D$ notations here follow the definitions in ASTM (STP 15-C)~\cite{ASTM:1951}
 and ASTM (STP 15-D)~\cite{ASTM:1976}.
 
-
-
 %--------------------------------------
-\section{The $\bar{X}$ chart} \label{subsection:4:03}
+\section{The $\bar{X}$ chart} 
 %--------------------------------------
 In order to construct the $\mathrm{CL} \pm g\cdot\mathrm{SE}$ control limits,
 we consider the relation
 \[
 \frac{\bar{X}_k - E(\bar{X}_k)}{\mathrm{SE}(\bar{X}_k)} = \pm g.
 \]
-Since $E(\bar{X}_k) = \mu$ and $\mathrm{SE}(\bar{X}_k)=\sigma/\sqrt{n}$, we have
+Since $E(\bar{X}_k) = \mu$ and $\mathrm{SE}(\bar{X}_k)=\sigma/\sqrt{n_k}$, we have
 %% \begin{equation} \label{EQ:EXk}
 %---
 \[
 E(\bar{X}_k) \pm g\cdot\mathrm{SE}(\bar{X}_k)
-= \mu \pm  \frac{g}{\sqrt{n}}\sigma.
+= \mu \pm  \frac{g}{\sqrt{n_k}}\sigma.
 \]
 %---
-Then the control limits for the $\bar{X}$ chart are given by
+Then the control limits for the $\bar{X}$ chart with the sample size $n_k$ are given by
 \begin{align*}
-\mathrm{UCL} &= {\mu} + A(n) \sigma,  \\
+\mathrm{UCL} &= {\mu} + A(n_k) \sigma,  \\
 \mathrm{CL}  &= {\mu},    \\
-\mathrm{LCL} &= {\mu} - A(n) \sigma,
+\mathrm{LCL} &= {\mu} - A(n_k) \sigma,
 \end{align*}
-where $A(n) = g/\sqrt{n}$.
+where $A(n_k) = g/\sqrt{n_k}$.
 In practice, the values of the parameters, ${\mu}$ and $\sigma$, are not known.
 Thus, with the estimates $\hat\mu$ and $\hat\sigma$, we have
 \begin{align}
-\mathrm{UCL} &= \hat{\mu} + \frac{g}{\sqrt{n}}\hat{\sigma}  \notag, \\
+\mathrm{UCL} &= \hat{\mu} + \frac{g}{\sqrt{n_k}}\hat{\sigma}  \notag, \\
 \mathrm{CL}  &= \hat{\mu}   \label{EQ:CCwitheEstimates},  \\
-\mathrm{LCL} &= \hat{\mu} - \frac{g}{\sqrt{n}}\hat{\sigma} . \notag
+\mathrm{LCL} &= \hat{\mu} - \frac{g}{\sqrt{n_k}}\hat{\sigma} . \notag
 \end{align}
 
-Thus, we need to estimate  $\mu$ and $\sigma$ by using each sample and then pooling these estimates. Using the $i$th sample above,
+Thus, we need to estimate  $\mu$ and $\sigma$ by using each sample and then pooling these estimates. 
+Using the $i$th sample above,
 the sample mean and variance are given by
 %-----------
 \[
-\bar{X}_i = \frac{1}{n} \sum_{j=1}^{n} X_{ij}
+\bar{X}_i = \frac{1}{n_i} \sum_{j=1}^{n_i} X_{ij}
 \textrm{~~and~~}
-{S}_i^2   = \frac{1}{n-1} \sum_{j=1}^{n} (X_{ij}-\bar{X}_i)^2,
+{S}_i^2   = \frac{1}{n_i-1} \sum_{j=1}^{n_i} (X_{ij}-\bar{X}_i)^2,
 \]
 %-----------
 where $i=1,2,\ldots,m$.
@@ -118,10 +123,13 @@ Then we can estimate $\mu$ using all the samples as below:
 \]
 Note that it is easily seen that $\bar{\bar{X}}$ is unbiased for $\mu$.
 However, ${S}_i$ is not unbiased for $\sigma$ since
-$E({S}_i) = c_4(n) \sigma$, where
-$c_4(n) = \sqrt{{2}/{(n-1)}} \cdot {\Gamma(n/2)}/{\Gamma(n/2-1/2)}$.
-Thus, ${S}_i/c_4(n)$ is unbiased for $\sigma$.
-Then we can easily show that $\bar{S}/c_4(n)$ is unbiased for $\sigma$, where
+$E({S}_i) = c_4(n_i) \sigma$, 
+where
+\[
+c_4(n_i) = \sqrt{\frac{2}{n_i-1}} \cdot \frac{\Gamma(n_i/2)}{\Gamma(n_i/2-1/2)}.
+\]
+Thus, ${S}_i/c_4(n_i)$ is unbiased for $\sigma$.
+Then we can easily show that $\bar{S}/c_4(n_k)$ is unbiased for $\sigma$, where
 %%\begin{equation}\label{EQ:Sbar}
 \[
 \bar{S} = \frac{1}{m} \sum_{i=1}^m  {S}_i.
@@ -148,9 +156,15 @@ d_2(n) = {2}\int_{{0}}^{{\infty}}
          \Big\{ 1-\big[\Phi(z)\big]^n  - \big[1-\Phi(z)\big]^n \Big\} dz.
 \]
 For more details on $d_2(n)$, one can refer to the vignette below.
-\begin{center}
-{\texttt{vignette("factors.cc", package="rQCC")}}
-\end{center}
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> vignette("factors.cc", package="rQCC")} 
+\end{color}
+}}
+\smallskip
+
+
 
 Then, with the $i$th sample,
 $R_i / d_2(n)$ is unbiased for $\sigma$, where
@@ -198,12 +212,12 @@ Here $\Phi^{-1}({3}/{4})$ is needed to make this estimator
 {Fisher-consistent \cite{Fisher:1922} for the standard deviation
 under the normal distribution}.
 For more details, see the references
-\cite{Hampel/etc:1986,Park/Kim/Wang:2020}.
+\cite{Hampel/etc:1986,Park/Kim/Wang:2022}.
 It should be noted that the above conventional MAD estimator is Fisher-consistent 
 but not unbiased.
 The ``\emph{unbiased} MAD'' (uMAD)
 with a finite sample is developed by
-Park, Kim and Wang~\cite{Park/Kim/Wang:2020}
+Park, Kim and Wang~\cite{Park/Kim/Wang:2022}
 and implemented in the \texttt{rQCC} package 
 (see \texttt{mad.unbiased} function).
 
@@ -221,9 +235,15 @@ The \texttt{rcc} function constructs the control charts
 based on various \emph{unbiased} estimates.
 For example, with the median and uMAD estimates, one can obtain the control limits
 using the following
-\begin{center}
-{\texttt{rcc(data, loc="median", scale="mad")}}
-\end{center}
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> rcc(data, loc="median", scale="mad")}
+\end{color}
+}}
+\smallskip
+
+
 
 
 Another way of constructing the control limits is to use
@@ -244,16 +264,22 @@ For the Hodges-Lehmann estimate, the median is obtained by
 three ways: (i) the pairwise averages with $i<j$ (denoted by HL1),
 (ii) the pairwise averages with $i \le j$ (HL2),
 and (iii) all the pairwise averages (HL3).
-For more details, refer to \cite{Park/Kim/Wang:2020}.
+For more details, refer to \cite{Park/Kim/Wang:2022}.
 It should be noted that the above Shamos is Fisher-consistent but not unbiased.
 The Hodges-Lehmann and ``\emph{unbiased} Shamos''
-are also developed by \cite{Park/Kim/Wang:2020}
+are also developed by \cite{Park/Kim/Wang:2022}
 and implemented in R (see \texttt{HL} and \texttt{shamos.unbiased}).
 For example, with the HL2 and unbiased Shamos estimates,
 one can obtain the control limits as below.
-\begin{center}
-{\texttt{rcc(data, loc="HL2", scale="shamos")}}
-\end{center}
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> rcc(data, loc="HL2", scale="shamos")}
+\end{color}
+}}
+\smallskip
+
+
 As shown above, by choosing the options for \texttt{loc} and \texttt{scale},
 one can construct various control charts.
 
@@ -300,10 +326,19 @@ To obtain the robustness property, one can consider a robust estimate of $\sigma
 For example, the unbiased MAD or unbiased Shamos estimates of $\sigma$ can be used
 as seen before. The limits for the $S$ chart are calculated using the
 \texttt{rcc} function with \texttt{type="S"} as below. 
-\begin{verbatim}
-                rcc(data, scale="mad", type="S")
-                rcc(data, scale="shamos", type="S")
-\end{verbatim}
+
+%% \begin{verbatim}
+%%                 rcc(data, scale="mad", type="S")
+%%                 rcc(data, scale="shamos", type="S")
+%% \end{verbatim}
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> rcc(data, scale="mad", type="S")}\\
+\texttt{> rcc(data, scale="shamos", type="S")}
+\end{color}
+}}
+\smallskip
 
 
 
@@ -344,89 +379,32 @@ One can consider $\hat{\sigma} = \bar{R}/d_2(n)$. Then we have
 \end{align*}
 where $D_3(n) = D_1(n)/d_2(n)$ and $D_4(n) = D_2(n)/d_2(n)$.
 These limits are easily calculated using the \texttt{rcc} function as below. 
-\begin{verbatim}
-                rcc(data, scale="range", type="R")
-\end{verbatim}
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> rcc(data, scale="range", type="R")}
+\end{color}
+}}
+\smallskip
+
 
 As afore-mentioned, we can consider a robust estimate of $\sigma$.
 For example, the control limits with the unbiased Shamos are calculated as below. 
-\begin{verbatim}
-                rcc(data, scale="shamos", type="R")
-\end{verbatim}
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> rcc(data, scale="shamos", type="R")}
+\end{color}
+}}
+\smallskip
+
+
+
 
 %%===============================================
 \bibliographystyle{unsrt}
+\bibliography{rQCC}
 
-\begin{thebibliography}{99}
-
-\bibitem{Shewhart:1926b}
-W.~A. Shewhart.
-\newblock Quality control charts.
-\newblock {\em Bell Systems Technical Journal}, pages 593--603, 1926.
-
-\bibitem{Shewhart:1927}
-W.~A. Shewhart.
-\newblock Quality control.
-\newblock {\em Bell Systems Technical Journal}, pages 722--735, 1927.
-
-\bibitem{Shewhart:1931}
-W.~A. Shewhart.
-\newblock {\em Economic Control of Quality of Manufactured Product}.
-\newblock Van Nostrand Reinhold, Princeton, NJ, 1931.
-\newblock Republished in 1981 by the American Society for Quality Control,
-  Milwaukee, WI.
-
-\bibitem{ASTM:1951}
-{ASTM Committee E-11}.
-\newblock {\em {ASTM} Manual on Quality Control of Materials ({STP} {15-C})}.
-\newblock American Society for Testing and Materials, Philadelphia, PA, 1951.
-
-\bibitem{ASTM:1976}
-{ASTM Committee E-11}.
-\newblock {\em Manual on Presentation of Data and Control Chart Analysis ({STP}
-  {15-D})}.
-\newblock American Society for Testing and Materials, Philadelphia, PA, 4th
-  edition, 1976.
-
-\bibitem{Fisher:1922}
-R.~A. Fisher.
-\newblock On the mathematical foundations of theoretical statistics.
-\newblock {\em Philosophical Transactions of the Royal Society of London.
-  Series A, Containing Papers of a Mathematical or Physical Character},
-  222:309--368, 1922.
-
-\bibitem{Hampel/etc:1986}
-F.~R. Hampel, E.~Ronchetti, P.~J. Rousseeuw, and W.~A. Stahel.
-\newblock {\em Robust Statistics: The Approach Based on Influence Functions}.
-\newblock John Wiley \& Sons, New York, 1986.
-
-\bibitem{Park/Kim/Wang:2020}
-C.~Park, H.~Kim, and M.~Wang.
-\newblock Investigation of finite-sample properties of robust location and
-  scale estimators.
-\newblock {\em Communication in Statistics -- Simulation and Computation},
-  2020.
-\newblock doi:10.1080/03610918.2019.1699114.
-
-\bibitem{Hodges/Lehmann:1963}
-J.~L. Hodges and E.~L. Lehmann.
-\newblock Estimates of location based on rank tests.
-\newblock {\em Annals of Mathematical Statistics}, 34:598--611, 1963.
-
-\bibitem{Shamos:1976}
-M.~I. Shamos.
-\newblock Geometry and statistics: Problems at the interface.
-\newblock In J.~F. Traub, editor, {\em Algorithms and Complexity: New
-  Directions and Recent Results}, pages 251--280. Academic Press, New York,
-  1976.
-
-\bibitem{Levy/etc:2011}
-C.~L\`{e}vy-Leduc, H.~Boistard, E.~Moulines, M.~S. Taqqu, and V.~A. Reisen.
-\newblock Large sample behaviour of some well-known robust estimators under
-  long-range dependence.
-\newblock {\em Statistics}, 45:59--71, 2011.
-
-\end{thebibliography}
 
 %%===============================================
 \end{document}
