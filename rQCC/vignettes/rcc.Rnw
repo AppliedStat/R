@@ -2,6 +2,7 @@
 %\VignetteKeyword{rQCC}
 %\VignetteKeyword{Shewhart chart}
 %\VignetteKeyword{control chart}
+%\VignetteKeyword{variable chart}
 %\VignetteKeyword{X-bar chart}
 %\VignetteKeyword{S chart}
 %\VignetteKeyword{R chart}
@@ -155,6 +156,7 @@ where $R$ is the sample range from $X_i \sim N(\mu,\sigma^2)$ and
 d_2(n) = {2}\int_{{0}}^{{\infty}}
          \Big\{ 1-\big[\Phi(z)\big]^n  - \big[1-\Phi(z)\big]^n \Big\} dz.
 \]
+%---------------------------------------------------------------------
 For more details on $d_2(n)$, one can refer to the vignette below.
 
 \bigskip\noindent\fbox{\parbox{\textwidth}{%
@@ -163,8 +165,7 @@ For more details on $d_2(n)$, one can refer to the vignette below.
 \end{color}
 }}
 \smallskip
-
-
+%---------------------------------------------------------------------
 
 Then, with the $i$th sample,
 $R_i / d_2(n)$ is unbiased for $\sigma$, where

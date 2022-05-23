@@ -18,7 +18,7 @@ acc (x, n, type=c("p","np","c","u","g","h"), parameter, pEstimator=c("Wald","Wil
  \item{x}{a numeric vector of the number of nonconforming units.}
  \item{n}{a numeric vector of sample sizes.}
  \item{type}{a character string specifying the type of control chart.}
- \item{parameter}{a known parameter value for the \eqn{p}{p}, \eqn{np}{np} and \eqn{u}{u} charts.
+ \item{parameter}{a known Bernoulli parameter value for the corresponding chart.
 If not known, it is estimated. For more details, refer to \code{vignette("acc", package="rQCC")}.}
  \item{pEstimator}{a method for estimating the Bernoulli parameter for \eqn{p}{p} and \eqn{np}{np} charts.}
  \item{gEstimator}{a method for estimating the Bernoulli parameter for \eqn{g}{g} and \eqn{h}{h} charts.}
@@ -43,18 +43,23 @@ ASTM (2010).
 \emph{Manual on Presentation of Data and Control Chart Analysis} (STP 15-D), 8th edition. 
 American Society for Testing and Materials, West Conshohocken, PA.
 
-Park, C. (2013).
-An Improved \emph{p} Chart Based on the Wilson Interval.
-\emph{Journal of Statistics and Management Systems}, \bold{16}(2-03), 201-221.\cr
-\doi{10.1080/09720510.2013.777576}
+Kaminsky, F. C., J. C. Benneyan and R. D. Davis (1992).
+Statistical Control Charts Based on a Geometric Distribution.
+\emph{Journal of Quality Technology}, \bold{24}, 63-69.
 
 Montgomery, D. C. (2013). 
 \emph{Statistical Quality Control: An Modern Introduction}, 7th edition.
 John Wiley & Sons, New York, NY.
 
-Kaminsky, F. C., J. C. Benneyan and R. D. Davis (1992).
-Statistical Control Charts Based on a Geometric Distribution.
-\emph{Journal of Quality Technology}, \bold{24}, 63-69.
+Park, C. (2013).
+An Improved \emph{p} Chart Based on the Wilson Interval.
+\emph{Journal of Statistics and Management Systems}, \bold{16}(2-03), 201-221.\cr
+\doi{10.1080/09720510.2013.777576}
+
+Park, C. and M. Wang (2022). 
+A study on the g and h control charts. 
+\emph{Communications in Statistics - Theory and Methods}, \bold{To Appear}.\cr
+\doi{10.1080/03610926.2022.2044492}
 }
 
 \examples{

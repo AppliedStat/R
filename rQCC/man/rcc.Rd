@@ -51,7 +51,8 @@ and the function \code{plot} is used to plot the control chart.
 \references{
 Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators. 
-\emph{Communications in Statistics - Simulation and Computation}, To appear.\cr
+\emph{Communications in Statistics - Simulation and Computation}, 
+\bold{51}, 2619-2645. \cr 
 \doi{10.1080/03610918.2019.1699114}
 
 ASTM (2010).

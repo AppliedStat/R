@@ -1,6 +1,7 @@
 %\VignetteIndexEntry{Factors for constructing control limits}
 %\VignetteKeyword{rQCC}
 %\VignetteKeyword{control chart}
+%\VignetteKeyword{variable chart}
 %\VignetteKeyword{control limits}
 %\VignetteKeyword{X-bar chart}
 %\VignetteKeyword{S chart}

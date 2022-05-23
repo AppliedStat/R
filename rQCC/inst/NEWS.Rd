@@ -5,8 +5,7 @@
 \section{version 2.22.5}{
   \itemize{
     \item Some references are updated.
-    \item new \code{racc} function for the robust attributes control charts is added.
-    \item References are updated. 
+    \item The new \code{racc} function for the robust attributes control charts is added.
 }}
 
 \section{version 2.22.1}{

@@ -1,4 +1,4 @@
-%\VignetteIndexEntry{A note on the "acc" function in the "rQCC" package}
+%\VignetteIndexEntry{Attributes control charts acc in the rQCC package}
 %\VignetteKeyword{rQCC}
 %\VignetteKeyword{attribute chart}
 %\VignetteKeyword{p chart}
@@ -23,7 +23,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{A note on the function for the attributes control charts (\texttt{acc}) in the \texttt{rQCC} package}
+\title{Attributes control charts (\texttt{acc}) in the \texttt{rQCC} package}
 %-------------------------------------------------------------------
 \author{Chanseok Park\footnote{Applied Statistics Laboratory,
 Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
@@ -40,7 +40,7 @@ The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
 \begin{document}
 \maketitle
 \begin{abstract}
-In this note, we provide a brief summary of attribute control charts
+We provide a brief summary of attribute control charts
 along with a description of how they are constructed
 using the \texttt{acc} function in the R package \texttt{rQCC}. In addition, 
 various traditional attribute control charts such as $p$, $c$ and $u$ can be easily
@@ -306,7 +306,7 @@ and the average number of events (the $h$ chart) per subgroup with $\mathrm{CL} 
 The $g$ chart (total number of events) with the sample size $n_k$
 has the following control limits which are actually
 the function of $\mu$ and $\sigma^2$. 
-For more details, see Park and Wang~\cite{Park/Wang:2021a} and Kaminsky et al.\ \cite{Kaminsky/etc:1992}.
+For more details, see Kaminsky et al.\ \cite{Kaminsky/etc:1992} and Park and Wang~\cite{Park/Wang:2022}.
 \begin{alignat}{2}
 \mathrm{UCL} &= n_k{\mu}+g\sqrt{n_k \sigma^2} && = n_k\left(\frac{1-p}{p}+a\right) +g\sqrt{\frac{n_k(1-p)}{p^2}},\notag\\
 \mathrm{CL}  &= n_k{\mu}                      && = n_k\left(\frac{1-p}{p}+a\right), \label{EQ:CLgchart}   \\
@@ -333,15 +333,18 @@ until the first nonconforming case in the $i$th sample for $i=1,2,\ldots,m$ and 
 Then $X_{ij}$'s are independent and identically-distributed geometric random variables with location shift $a$ and $p$.
 We let $\bar{\bar{X}} = \sum_{i=1}^{m}\sum_{j=1}^{n_i} X_{ij}/N$ with $N=\sum_{i=1}^{m} n_i$.
 We can estimate $p$ using the maximum likelihood (ML) and  
-minimum variance unbiased (MVU) estimators~\cite{Park/Wang:2021a} which are given by 
+minimum variance unbiased (MVU) estimators~\cite{Park/Wang:2022} which are given by 
 \[
 \hat{p}_{\mathrm{ML}}  = \frac{1}{\bar{\bar{X}}-a+1}  \quad\textrm{and}\quad 
 \hat{p}_{\mathrm{MVU}} = \frac{1-1/N}{\bar{\bar{X}}-a+1-1/N},
 \]
 respectively.
-It should be noted that Benneyan~\cite{Benneyan:2001} proposed 
-$\hat{p}_{\mathrm{B}} = (1-1/N)/(\bar{\bar{X}}-a+1)$ as the MVU estimator,
-but Park and Wang~\cite{Park/Wang:2021a} showed that $\hat{p}_{\mathrm{B}}$ is not a correct MVU estimator. 
+It should be noted that Benneyan~\cite{Benneyan:2001b} proposed 
+\[
+\hat{p}_{\mathrm{B}} = \frac{1-1/N}{\bar{\bar{X}}-a+1}
+\]
+as the MVU estimator, but Park and Wang~\cite{Park/Wang:2022} showed that 
+$\hat{p}_{\mathrm{B}}$ is not a correct MVU estimator. 
 
 The ML estimator has the invariance property.
 Thus, by substituting $\hat{p}_{\mathrm{ML}}$  into (\ref{EQ:CLgchart}) and (\ref{EQ:CLhchart}), 
@@ -365,7 +368,7 @@ we can construct the $g$ and $h$ charts based on the ML method as follows.
 
 When we construct the charts based on the MVU estimator, $\hat{p}_{\mathrm{MVU}}$, 
 a care should be taken because the MVU estimator has no invariance property like the ML estimator.
-Park and Wang~\cite{Park/Wang:2021a} showed that the MVU estimators of $\mu$ and $\sigma^2$ are given by 
+Park and Wang~\cite{Park/Wang:2022} showed that the MVU estimators of $\mu$ and $\sigma^2$ are given by 
 \[
 \hat{\mu}_{\mathrm{mvu}} = \bar{\bar{X}}
 \quad\textrm{and}\quad 

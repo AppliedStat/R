@@ -1,0 +1,275 @@
+%\VignetteIndexEntry{Robust g-type attributes control charts (racc) in the rQCC package}
+%\VignetteKeyword{rQCC}
+%\VignetteKeyword{attribute chart}
+%\VignetteKeyword{g chart}
+%\VignetteKeyword{h chart}
+%\VignetteKeyword{robust}
+%\VignetteKeyword{robustness}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+\usepackage{Sweave}
+\usepackage{amsmath,amssymb,xcolor}
+\usepackage[breaklinks]{hyperref}
+
+
+\addtolength{\textwidth}{0.5in}
+\addtolength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Robust $g$-type attributes control charts (\texttt{racc})
+in the \texttt{rQCC} package}
+%-------------------------------------------------------------------
+\author{Chanseok Park\footnote{Applied Statistics Laboratory,
+Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
+His work was partially supported by the National Research Foundation of Korea (NRF)
+grant funded by the Korea government (NRF-2017R1A2B4004169).}
+~{and}
+Min Wang\footnote{Department of Management Science and Statistics,
+The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
+}
+\date{May 2022}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\begin{abstract}
+The $g$-type attributes control charts based on the geometric distribution are widely
+used in many engineering applications to monitor the number of conforming cases
+between the two consecutive appearances of nonconformities.
+However, conventional $g$-type charts are based on the maximum likelihood
+and minimum variance unbiased estimators which are very sensitive to outliers.
+Thus, they could result in severe bias for obtaining the control limits of the charts.
+In this note, we provide a brief summary of robust $g$-type attributes control charts
+and a description of how they are constructed using the \texttt{racc} function in the R package \texttt{rQCC}.
+\end{abstract}
+
+%======================================
+\section{Geometric distribution and its parameter estimation}
+%======================================
+Denote $Y_i$ ($i=1, 2, \ldots, n$) to be the number of normal cases (or failures)
+before observing the first adverse case (or success) in a series of independent Bernoulli trials
+where its success probability is given by $p$.
+Considering the location parameter $a$,
+the probability mass function (pmf) of the geometric distribution is given by
+\begin{equation}
+f(y) = P(Y_i=y) = p (1-p)^{y-a} \label{EQ:pmfofGeo}
+\end{equation}
+and its corresponding cumulative distribution function (cdf) is
+\begin{equation}
+F(y) = P(Y_i \le y) = 1 - (1-p)^{y+1-a}, \label{EQ:cdfofGeo}
+\end{equation}
+where $y=a, a+1, \ldots$.
+In general, the location shift $a$ is the known minimum possible number of events (usually $a=0,1$).
+Then the mean and variance of $Y_i$ are given by
+\[
+\mu = E(Y_i) = \frac{1-p}{p}+a \quad\textrm{and}\quad
+\sigma^2 = \mathrm{Var}(Y_i) = \frac{1-p}{p^2},
+\]
+respectively.
+
+In many practical applications, the process parameter $p$ is unknown and needs to be estimated. 
+By using the maximum likelihood (ML) method, we have
+\begin{equation} \label{EQ:pml}
+\hat{p}_{\mathrm{ML}} = \frac{1}{\bar{Y}-a+1},
+\end{equation}
+where $\bar{Y} = \sum_{i=1}^{n}Y_i/n$.
+Note that the Method-of-Moments (MM) estimator yields the same estimator for $p$ as the ML estimator.
+One can also use the minimum variance unbiased (MVU) estimator proposed by \cite{Benneyan:2001b},
+which is given by
+\begin{equation} \label{EQ:pb}
+\hat{p}_{\mathrm{B}} = \frac{1-1/n}{\bar{Y}-a+1}.
+\end{equation}
+However, it is shown to be biased. For more details, see \cite{Park/Wang:2022}.
+The correct MVU estimator is given by
+\begin{equation} \label{EQ:pmvu}
+\hat{p}_{\mathrm{MVU}} = \frac{1-1/n}{\bar{Y}-a+1-1/n}.
+\end{equation}
+
+%----------------------------------------------------------------------------------------------------------
+For more details on the conventional $g$-type attributes control charts based on the above estimators,
+one can refer to the vignette below.
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> vignette("acc", package="rQCC")}
+\end{color}
+}}
+\smallskip
+%----------------------------------------------------------------------------------------------------------
+
+Here we introduce two robust estimators for $p$ developed by \cite{Park/Ouyang/Wang:2021}, which are
+based on the memoryless property of the geometric distribution
+and truncation of an empirical distribution.
+
+First, we provide a robust estimator based on the memoryless property.
+It is immediate from the memoryless property that we have
+\begin{equation} \label{EQ:memory1}
+P(X>s+t) = P(X>s) \cdot P(X>t).
+\end{equation}
+It should be noted that the above equation works only when $X$ has the pmf of the form
+$f(x) = p(1-p)^{x-1}$.
+Care should be taken to use this formula for the geometric random variable $Y$
+with location shift $a$, whose pmf is given by $f(y) = p (1-p)^{y-a}$.
+Note that $X=Y-a+1$ is the geometric random variable with
+the pmf $f(x) = p(1-p)^{x-1}$ regardless of the value of $a$. Thus, by
+substituting $X=Y-a+1$ into (\ref{EQ:memory1}), we obtain
+\begin{equation} \label{EQ:memory2}
+P(Y>s+t+a-1) = P(Y>s+a-1) \cdot P(Y>t+a-1),
+\end{equation}
+which works with any location shift $a$.
+Simplifying the arguments on the right-hand side of (\ref{EQ:memory2}) with
+$s \leftarrow s+a-1$ and  $t \leftarrow t+a-1$, we have
+\begin{equation} \label{EQ:memory3}
+P(Y>s+t-a+1) = P(Y>s) \cdot P(Y>t) .
+\end{equation}
+Rewriting (\ref{EQ:memory3}) using (\ref{EQ:cdfofGeo}), we have
+\[
+1-F(s+t-a+1) = \big\{ 1-F(s) \big\} \cdot \big\{ 1-F(t) \big\},
+\]
+which results in
+\[
+\frac{F(s+t-a+1)-F(t)}{F(s)} = 1 - F(t).
+\]
+Using $F(t)=1-(1-t)^{t+1-a}$, we have
+\begin{equation} \label{EQ:EEforp}
+\frac{\hat{F}(s+t-a+1)-\hat{F}(t)}{\hat{F}(s)} = (1-\hat{p})^{t+1-a}.
+\end{equation}
+Here $\hat{F}$ is an estimator of $F$ given by
+\[
+\hat{F}(t) = \frac{1}{n} \sum_{i=1}^n \mathbb{I}(Y_i \le t),
+\]
+where $\mathbb{I}(\cdot)$ is an indicator function.
+Solving  (\ref{EQ:EEforp}) for $\hat{p}$, we have
+\begin{equation} \label{EQ:pcdf}
+\hat{p}_\mathrm{cdf} = 1 - \left[ \frac{\hat{F}(s+t-a+1)-\hat{F}(t)}{\hat{F}(s)} \right]^{1/(t+1-a)}.
+\end{equation}
+The estimator in (\ref{EQ:pcdf}) uses the empirical cdf,
+which could discard large outliers by selecting appropriate values of $t$ and $s$.
+We recommend the choices of $t$ and $s$ such that $\hat{F}(s+t-a+1)$ and $\hat{F}(t)$ approximately cover
+$\gamma$ and $\gamma/2$ fractions of the data, respectively.
+Then we have $t=[q_{\gamma/2}]$ and $s=[q_{\gamma} - q_{\gamma/2}+a-1]$.
+
+Next, another method for estimating $p$ is based on the truncated geometric
+distribution with the pmf given by
+\[
+f(y) = \frac{p(1-p)^{y-a}}{1-(1-p)^{d-a+1}},
+\]
+where $y=a, a+1, \ldots, d$.
+The ML estimator of this truncated distribution is not in a closed-form expression,
+but it is unique under a certain condition. For more details, see \cite{Park/Gou/Wang:2022}.
+The closed-form MM estimator, which is quite comparable to the ML estimator, is provided in \cite{Kapadia/Thomasson:1975},
+but it works only for the case of location shift $a=1$.
+We can modify this MM estimator so that it works with any location shift and it is given by
+%----------------------------
+\begin{equation} \label{EQ:pt}
+\hat{p}_\mathrm{t} = \frac{(a+d) - 2\bar{Y}}{ (\bar{Y}-a+1)(d-\bar{Y}) - S^2},
+\end{equation}
+%----------------------------
+where $S^2 = \frac{1}{n} \sum_{i=1}^{n}(Y_i - \bar{Y})^2$.
+Note that the value of the above MM estimator can be smaller than zero or larger than one.
+For the case that $\hat{p}_\mathrm{t} \ge 1$, we set up $\hat{p}_\mathrm{t}=1$ which
+implies that $Y$ degenerates at $Y=a$.
+For the case that $\hat{p}_\mathrm{t}=0$, $Y$ degenerates at $Y=\infty$.
+Note that $Y$ should always be between $a$ and $d$ with the truncation at $d$.
+Thus, we should avoid degenerating at $Y=\infty$ with $\hat{p}_\mathrm{t}=0$.
+This degeneration occurs if the value of $d$ is too small.
+Thus, by increasing the value of $d$ we can avoid this case.
+The condition $(a+d) - 2\bar{Y} >0$ guarantees the existence of the MM estimator over the open interval $(0,1)$.
+For more details, see \cite{Park/Gou/Wang:2022}.
+Thus, with $d>2\bar{Y}-a$, we can avoid degenerating at $Y=\infty$.
+The minimum positive integer value of $d$ satisfying $d>2\bar{Y}-a$ is given by $d^*=\lfloor 2\bar{Y}-a \rfloor +1$,
+where $\lfloor\cdot\rfloor$ is a floor function.
+
+
+%======================================
+\section{Construction of the $g$-type quality control charts} \label{Section:03}
+%======================================
+The $g$ chart (about the total number of events) with the sample size $n_k$
+has the following control limits
+\begin{align}
+\mathrm{UCL}(p) &= n_k\left(\frac{1-p}{p}+a\right) + g\sqrt{\frac{n_k(1-p)}{p^2}}, \notag \\
+\mathrm{CL}(p)  &= n_k\left(\frac{1-p}{p}+a\right),  \label{EQ:glimits}   \\
+\mathrm{LCL}(p) &= n_k\left(\frac{1-p}{p}+a\right) - g\sqrt{\frac{n_k(1-p)}{p^2}} . \notag
+\end{align}
+Note that the smallest possible value of the total number of events is $n_k a$.
+Thus, if $\mathrm{LCL} < n_k a$ in the above limit, we set up $\mathrm{LCL} = n_k a$.
+
+The $h$ chart (about the average number of events) with $n_k$ has the following control limits.
+\begin{align}
+\mathrm{UCL}(p) &= \frac{1-p}{p}+a  + g\sqrt{\frac{1-p}{n_k p^2}}, \notag \\
+\mathrm{CL}(p)  &= \frac{1-p}{p}+a   \label{EQ:hlimits},  \\
+\mathrm{LCL}(p) &= \frac{1-p}{p}+a  - g\sqrt{\frac{1-p}{n_k p^2}} . \notag
+\end{align}
+Note that the smallest possible value of the average number of events is $a$.
+Thus, if $\mathrm{LCL} < a$ in the above limit, we set up $\mathrm{LCL} = a$.
+
+Since the parameter $p$ is unknown in practice, we need to estimate it.
+Suppose that there are $m$ samples (subgroups) from the experiments
+and the sample size of the $i$th sample is $n_i$.
+Let $X_{ij}$ be the number of independent Bernoulli trials (events)
+until the appearance of the first nonconforming event in the $i$th sample,
+where $i=1,2,\ldots,m$ and $j=1,2,\ldots,n_i$.
+Then $X_{ij}$'s are independent and identically distributed
+geometric random variables with location shift $a$ and Bernoulli probability $p$.
+Then the estimators, $\hat{p}_\mathrm{t}$ and $\hat{p}_\mathrm{cdf}$, with these samples
+are easily obtained from (\ref{EQ:pcdf}) and (\ref{EQ:pt}), given by
+\begin{align*}
+\hat{p}_\mathrm{cdf} &= 1 - \left[ \frac{\hat{F}(s+t-a+1)-\hat{F}(t)}{\hat{F}(s)} \right]^{1/(t+1-a)}
+\intertext{and}
+\hat{p}_\mathrm{t}   &= \frac{(a+d) - 2\bar{\bar{X}}}{ (\bar{\bar{X}} -a+1)(d-\bar{\bar{X}}) - S^2},
+\end{align*}
+where
+$\hat{F}(t) = \frac{1}{N}  \sum_{i=1}^{m}\sum_{j=1}^{n_i} \mathbb{I}(X_{ij} \le t)$,
+$\bar{\bar{X}} = \sum_{i=1}^{m}\sum_{j=1}^{n_i} X_{ij}/N$ with $N=\sum_{i=1}^{m} n_i$, and
+$S^2 = \frac{1}{N} \sum_{i=1}^{m}\sum_{j=1}^{n_i} (X_{ij} - \bar{\bar{X}})^2$.
+For $\hat{p}_\mathrm{cdf}$,
+$t=[q_{\gamma/2}]$ and $s=[q_{\gamma} - q_{\gamma/2}+a-1]$ are obtained from all the $m$ samples.
+
+For a given robust estimator $\hat{p}=\hat{p}_\mathrm{cdf}$ or $\hat{p}=\hat{p}_\mathrm{t}$
+we can obtain the $g$-type robust control limits by plugging $\hat{p}$
+into the control limits in (\ref{EQ:glimits}) or (\ref{EQ:hlimits}).
+As an illustration, the robust control limits of the $g$ or $h$ chart are easily obtained as follows.
+
+\bigskip\noindent\fbox{\parbox{\linewidth}{%
+\begin{color}{red}
+\texttt{> library(rQCC)} \\
+\texttt{> x1 = c(11, 2,  8,  2, 4) } \\
+\texttt{> x2 = c(1,  1, 11,  2, 1) } \\
+\texttt{> x3 = c(1,  7,  1)   } \\
+\texttt{> x4 = c(5,  1,  3,  6, 5) } \\
+\texttt{> x5 = c(13, 2,  3,  3)  } \\
+\texttt{> x6 = c(3,  2,  6,  1, 5) } \\
+\texttt{> x7 = c(2,  2,  8,  3, 1) } \\
+\texttt{> x8 = c(1,  3,  4,  6, 5) } \\
+\texttt{> x9 = c(2,  8,  1,  1, 4) } \\
+\texttt{> data = list(x1, x2, x3, x4, x5, x6, x7, x8, x9) } \\
+ \\
+\texttt{> result = racc(data, gamma=0.9, type="g", location=1, gEstimator="cdf", nk=5)}\\
+\texttt{> summary(result) } \\
+\texttt{> plot(result) }
+\end{color}
+}}
+\smallskip
+
+
+
+
+%%===============================================
+\bibliographystyle{unsrt}
+\bibliography{rQCC}
+
+
+%%===============================================
+\end{document}
+%%===============================================
+
+

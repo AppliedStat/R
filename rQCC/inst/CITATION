@@ -5,13 +5,14 @@ author = personList(as.person("C. Park"), as.person("H. Kim"), as.person("M. Wan
 year   = 2022,
 title  = "Investigation of finite-sample properties of robust location and scale estimators",
 journal= "Communications in Statistics - Simulation and Computation", 
-volume = "To appear", 
-pages=" - ", 
+volume = "51", 
+number = "5",
+pages="2619-2645", 
 url = "https://doi.org/10.1080/03610918.2019.1699114",
 textVersion = paste("Park, C., H. Kim, and M. Wang (2022)", 
         "Investigation of finite-sample properties of robust location and scale estimators.", 
-     "Communications in Statistics - Simulation and Computation",
-       "To Appear")
+     "Communications in Statistics - Simulation and Computation", 
+       "51(5), 2619-2645")
 )
 
 citEntry(entry="Article",
@@ -20,7 +21,7 @@ year   = 2020,
 title  = "A study on the X-bar and S control charts with unequal sample sizes",
 journal= "Mathematics",
 volume = "8",
-number ="5",
+number = "5",
 pages="698",
 url = "https://doi.org/10.3390/math8050698",
 textVersion = paste("Park, C. and M. Wang (2021)",
@@ -34,7 +35,7 @@ year   = 2022,
 title  = "rQCC: Robust Quality Control Chart",
 note   = "R package version 2.22.5", 
 url = "https://CRAN.R-project.org/package=rQCC",
-textVersion = paste("Park, C. and M. Wang (2021)", "rQCC: Robust Quality Control Chart", 
+textVersion = paste("Park, C. and M. Wang (2022)", "rQCC: Robust Quality Control Chart", 
   "R Package Version 2.22.5 (published in May 1, 2022)", 
   "https://CRAN.R-project.org/package=rQCC")
 )
