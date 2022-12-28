@@ -1,5 +1,6 @@
-%\VignetteIndexEntry{Attributes control charts acc in the rQCC package}
+%\VignetteIndexEntry{Attributes control charts (acc) in the rQCC package}
 %\VignetteKeyword{rQCC}
+%\VignetteKeyword{control chart}
 %\VignetteKeyword{attribute chart}
 %\VignetteKeyword{p chart}
 %\VignetteKeyword{c chart}
@@ -27,13 +28,13 @@
 %-------------------------------------------------------------------
 \author{Chanseok Park\footnote{Applied Statistics Laboratory,
 Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
-His work was partially supported by the National Research Foundation of Korea (NRF)
-grant funded by the Korea government (NRF-2017R1A2B4004169).}
+His work was supported by the National Research Foundation of Korea(NRF) grant funded
+by the Korea government(MSIT) (No.\ 2022R1A2C1091319).}
 ~{and}
 Min Wang\footnote{Department of Management Science and Statistics,
 The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
 }
-\date{January 2022}
+\date{December 2022}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,7 +44,7 @@ The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
 We provide a brief summary of attribute control charts
 along with a description of how they are constructed
 using the \texttt{acc} function in the R package \texttt{rQCC}. In addition, 
-various traditional attribute control charts such as $p$, $c$ and $u$ can be easily
+various traditional attribute control charts such as $p$, $np$, $c$, $u$, $g$, $h$, and $t$ can be easily
 constructed using the \texttt{acc} function.
 \end{abstract}
 
@@ -200,7 +201,6 @@ using the \texttt{acc} function in the R package \texttt{rQCC}.
 }}
 \smallskip
 
-
 The $np$ chart based on the Wilson confidence interval is also obtained 
 by multiplying $n$ and the control limits of the $p$ chart based on the Wilson confidence interval. 
 This chart is also appropriate only when samples are balanced. 
@@ -271,7 +271,7 @@ using the \texttt{acc} function as follows.
 }}
 \smallskip
 
-The control limits of the $c$ chart is also easily obtained as follows.
+The control limits of the $c$ chart are also easily obtained as follows.
 
 \bigskip\noindent\fbox{\parbox{\textwidth}{%
 \begin{color}{red}
@@ -306,14 +306,14 @@ and the average number of events (the $h$ chart) per subgroup with $\mathrm{CL} 
 The $g$ chart (total number of events) with the sample size $n_k$
 has the following control limits which are actually
 the function of $\mu$ and $\sigma^2$. 
-For more details, see Kaminsky et al.\ \cite{Kaminsky/etc:1992} and Park and Wang~\cite{Park/Wang:2022}.
+For more details, see Kaminsky et al.\ \cite{Kaminsky/etc:1992} and Park and Wang~\cite{Park/Wang:2023}.
 \begin{alignat}{2}
 \mathrm{UCL} &= n_k{\mu}+g\sqrt{n_k \sigma^2} && = n_k\left(\frac{1-p}{p}+a\right) +g\sqrt{\frac{n_k(1-p)}{p^2}},\notag\\
 \mathrm{CL}  &= n_k{\mu}                      && = n_k\left(\frac{1-p}{p}+a\right), \label{EQ:CLgchart}   \\
 \mathrm{LCL} &= n_k{\mu}-g\sqrt{n_k \sigma^2} && = n_k\left(\frac{1-p}{p}+a\right) -g\sqrt{\frac{n_k(1-p)}{p^2}}. \notag 
 \end{alignat}
 The smallest possible value of the total number of events is $n_k a$.
-Thus, the $\mathrm{LCL}$ can not be smaller than $n_k a$.
+Thus, the $\mathrm{LCL}$ cannot be smaller than $n_k a$.
 If $\mathrm{LCL} < n_k a$ in the above limit, we set up $\mathrm{LCL} = n_k a$.
 
 The $h$ chart (average number of events) with the sample size $n_k$
@@ -333,7 +333,7 @@ until the first nonconforming case in the $i$th sample for $i=1,2,\ldots,m$ and 
 Then $X_{ij}$'s are independent and identically-distributed geometric random variables with location shift $a$ and $p$.
 We let $\bar{\bar{X}} = \sum_{i=1}^{m}\sum_{j=1}^{n_i} X_{ij}/N$ with $N=\sum_{i=1}^{m} n_i$.
 We can estimate $p$ using the maximum likelihood (ML) and  
-minimum variance unbiased (MVU) estimators~\cite{Park/Wang:2022} which are given by 
+minimum variance unbiased (MVU) estimators~\cite{Park/Wang:2023} which are given by 
 \[
 \hat{p}_{\mathrm{ML}}  = \frac{1}{\bar{\bar{X}}-a+1}  \quad\textrm{and}\quad 
 \hat{p}_{\mathrm{MVU}} = \frac{1-1/N}{\bar{\bar{X}}-a+1-1/N},
@@ -343,7 +343,7 @@ It should be noted that Benneyan~\cite{Benneyan:2001b} proposed
 \[
 \hat{p}_{\mathrm{B}} = \frac{1-1/N}{\bar{\bar{X}}-a+1}
 \]
-as the MVU estimator, but Park and Wang~\cite{Park/Wang:2022} showed that 
+as the MVU estimator, but Park and Wang~\cite{Park/Wang:2023} showed that 
 $\hat{p}_{\mathrm{B}}$ is not a correct MVU estimator. 
 
 The ML estimator has the invariance property.
@@ -368,7 +368,7 @@ we can construct the $g$ and $h$ charts based on the ML method as follows.
 
 When we construct the charts based on the MVU estimator, $\hat{p}_{\mathrm{MVU}}$, 
 a care should be taken because the MVU estimator has no invariance property like the ML estimator.
-Park and Wang~\cite{Park/Wang:2022} showed that the MVU estimators of $\mu$ and $\sigma^2$ are given by 
+Park and Wang~\cite{Park/Wang:2023} showed that the MVU estimators of $\mu$ and $\sigma^2$ are given by 
 \[
 \hat{\mu}_{\mathrm{mvu}} = \bar{\bar{X}}
 \quad\textrm{and}\quad 
@@ -393,7 +393,7 @@ as follows.
 \end{itemize}
 %-----------
 
-The control limits of the $g$ or $h$ chart is also easily obtained as follows.
+The control limits of the $g$ and $h$ charts are also easily obtained as follows.
 
 \bigskip\noindent\fbox{\parbox{\textwidth}{%
 \begin{color}{red}
@@ -405,9 +405,55 @@ The control limits of the $g$ or $h$ chart is also easily obtained as follows.
 \smallskip
 
 
+%======================================
+\section{The $t$ chart}
+%======================================
+The $t$ chart is the control chart for monitoring the stability of a process
+\cite{Santiago/Smith:2013} with the assumption that the time between
+events can be modeled with exponential or Weibull distribution.
+Since the underlying distributions are not symmetric, 
+the use of the probability-limit control chart is suggested 
+instead of the traditional Shewhart-type three-sigma limits.
 
+The cumulative distribution function (cdf) of the exponential distribution is given by 
+\[
+F(x) = 1 - e^{-x/\theta}.
+\]
+Then the ML estimator is obtained by 
+$\hat{\theta}=\bar{X}=(1/n)\sum_{i=1}^n X_i$ with a sample $\{X_1, X_2, \allowbreak \ldots,\allowbreak X_n\}$.
+Then the LCL, CL and UCL are calculated equating
+$F(x)$ to $\alpha/2$, $1/2$, and $1-\alpha/2$, respectively.
+Solving these for $x$, we have the exponential $t$ chart given by
+\begin{align*}
+\textrm{LCL} &= -\log(1-\alpha/2)\cdot\hat{\theta},  \\
+\textrm{CL}  &= -\log(1/2)\cdot\hat{\theta},         \\
+\textrm{UCL} &= -\log(\alpha/2)\cdot\hat{\theta},
+\end{align*}
+where $\alpha/2$ is generally given by $\alpha/2 = \Phi(-g)$.
+Here $\Phi(\cdot)$ is the cdf of the standard normal distribution.
 
+The cdf of the Weibull distribution is given by
+\[
+F(x) = 1 - \exp\left\{-\left(\frac{x}{\theta}\right)^\beta\right\},
+\]
+where $\theta > 0$ and $\beta >0$ represent the scale and shape parameters, respectively.
+Let $\hat{\beta}$ and $\hat{\theta}$ be the ML estimators of the Weibull parameters.
+Then, similar to the exponential $t$ chart, the Weibull $t$ chart is given by 
+\begin{align*}
+\textrm{LCL} &= \left\{-\log(1-\alpha/2)\right\}^{1/\hat{\beta}} \cdot\hat{\theta},  \\
+\textrm{CL}  &= \left\{-\log(1/2)\right\}^{1/\hat{\beta}}  \cdot\hat{\theta},         \\
+\textrm{UCL} &= \left\{-\log(\alpha/2)\right\}^{1/\hat{\beta}}  \cdot\hat{\theta}.
+\end{align*}
+The control limits of the exponential and Weibull $t$ charts are obtained as follows.
 
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> acc(x, type="t")} \qquad \texttt{\# Exponential t chart}
+
+\texttt{> acc(x, type="t", tModel="W")} \qquad \texttt{\# Weibull t chart}
+\end{color}
+}}
+\smallskip
 
 
 %%===============================================

@@ -5,7 +5,8 @@ export(finite.breakdown, HL, shamos, c4.factor, w4.factor,
 mad.unbiased, shamos.unbiased, RE, evar, 
 mad2.unbiased, shamos2.unbiased, factors.cc, acc, rcc, racc)
 
-importFrom("stats", integrate, mad, median, weighted.mean, pnorm, sd, var, quantile)
+importFrom("stats", integrate, mad, median, weighted.mean, pnorm, sd, var, quantile,
+                    uniroot, qexp, qweibull, ppoints)
 importFrom("graphics", abline, axis, lines, plot, points, polygon, text, par)
 
 #

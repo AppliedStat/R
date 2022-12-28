@@ -1,5 +1,5 @@
 \encoding{utf-8}
-\name{factors.for.control.chart}
+\name{factors.for.chart}
 \alias{factors.cc}
 
 \title{Factors for constructing control charts}

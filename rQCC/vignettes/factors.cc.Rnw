@@ -1,12 +1,12 @@
-%\VignetteIndexEntry{Factors for constructing control limits}
+%\VignetteIndexEntry{Factors for constructing control limits in the rQCC package}
 %\VignetteKeyword{rQCC}
 %\VignetteKeyword{control chart}
 %\VignetteKeyword{variable chart}
-%\VignetteKeyword{control limits}
 %\VignetteKeyword{X-bar chart}
 %\VignetteKeyword{S chart}
 %\VignetteKeyword{R chart}
 %\VignetteKeyword{factor}
+%\VignetteKeyword{unbiasing factor}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass{article}[12pt]
 \usepackage{Sweave}
@@ -22,17 +22,17 @@
 \newtheorem{lemma}[theorem]{Lemma}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Factors for Constructing Control Limits}
+\title{Factors for Constructing Control Limits in the \texttt{rQCC} package}
 %-------------------------------------------------------------------
 \author{Chanseok Park\footnote{Applied Statistics Laboratory,
 Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
-His work was partially supported by the National Research Foundation of Korea (NRF)
-grant funded by the Korea government (NRF-2017R1A2B4004169).}
+His work was supported by the National Research Foundation of Korea(NRF) grant funded
+by the Korea government(MSIT) (No.\ 2022R1A2C1091319).}
 ~{and}
 Min Wang\footnote{Department of Management Science and Statistics,
 The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
 }
-\date{January 2022}
+\date{December 2022}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

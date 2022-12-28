@@ -1,16 +1,16 @@
 \encoding{utf-8}
-\name{robust.attributes.control.chart.unbalanced}
+\name{robust.attributes.chart.unbalanced}
 \alias{racc}
 \alias{print.racc}
 \alias{summary.racc}
 
-\title{Robust g-type attributes control charts with balanced/unbalanced samples}
+\title{Robust attributes control charts with balanced/unbalanced samples}
 
 \description{Constructs the robust g and h attributes control charts with balanced/unbalanced samples.}
 
 \usage{
-racc (x, gamma, type=c("g","h"), parameter, gEstimator = c("cdf", "MM"), 
-      location.shift = 0, sigmaFactor=3, nk)
+racc (x, gamma, type=c("g","h","t"), parameter, gEstimator=c("cdf", "MM"), 
+      tModel=c("E", "W"), location.shift = 0, sigmaFactor=3, nk)
 }
 
 \arguments{
@@ -23,6 +23,7 @@ If not known, it is estimated. For more details, refer to \code{vignette("racc",
  \item{gEstimator}{a method for estimating the Bernoulli parameter for \eqn{g}{g} and \eqn{h}{h} charts.
 "cdf" is based on the memoryless property and "MM" is based on the truncated geometric distribution.
 }
+ \item{tModel}{Probability model for \eqn{t}{t} chart. "E" for Exponential and "W" for Weibull.}
  \item{location.shift}{a known location shift parameter value for  \eqn{g}{g} and \eqn{h}{h} charts.}
  \item{sigmaFactor}{a factor for the standard deviation (\eqn{\sigma}{\sigma}).  
 For example, the American Standard uses "\emph{3*sigma}" limits (0.27\% false alarm rate),
@@ -98,8 +99,32 @@ data = list(x1, x2, x3, x4, x5, x6, x7, x8, x9)
 result = racc(data, gamma=0.9, type="g", location=1, gEstimator="cdf", nk=5)
 summary(result)
 plot(result)
+
+
+# ===============================
+# Example 3: t charts 
+# -------------------------------
+x = c(0.35, 0.92, 0.59, 4.28, 0.21, 0.79, 1.75, 0.07, 3.3,
+1.7, 0.33, 0.97, 0.96, 2.23, 0.88, 0.37, 1.3, 0.4, 0.19, 1.59)
+
+# Exponential t chart
+result = racc(x, type="t", tModel="E")
+summary(result)
+
+plot(result, cex.text=0.8)
+text(10, 6, labels="Robust exponential t chart" )
+
+
+# Weibull t chart
+result = racc(x, type="t", tModel="W")
+summary(result)
+
+plot(result, cex.text=0.8)
+text(10, 5.5, labels="Robust Weibull t chart" )
+
 }
 
 \author{Chanseok Park}
 \keyword{control chart}
+\keyword{robust}
 \keyword{unbalanced}

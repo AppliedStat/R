@@ -1,14 +1,15 @@
 #============================================
 # Attribute Control Chart
 #--------------------------------------------
-acc <- function(x, n, type=c("p", "np", "c", "u" ,"g", "h"), parameter, 
-                pEstimator=c("Wald","Wilson"), gEstimator=c("ML","MVU"), 
+acc <- function(x, n, type=c("p", "np", "c", "u" ,"g", "h", "t"), parameter, 
+                pEstimator=c("Wald","Wilson"), gEstimator=c("ML","MVU"), tModel=c("E","W"), 
                 location.shift=0, sigmaFactor=3, nk) 
 {
   if (is.matrix(x)) x <- unname( split(x, row(x)) )
         type = match.arg(type)
   pEstimator = match.arg(pEstimator)
   gEstimator = match.arg(gEstimator)
+      tModel = match.arg(tModel)
 
   m = length(x)
 
@@ -25,7 +26,6 @@ acc <- function(x, n, type=c("p", "np", "c", "u" ,"g", "h"), parameter,
   g  = sigmaFactor
   g2 = g^2 
 
-  ## parameter.missing = missing(parameter)
   parameter.missing = missing(parameter)
   #--------------------------------------------
   if (type == "p") {
@@ -98,7 +98,7 @@ acc <- function(x, n, type=c("p", "np", "c", "u" ,"g", "h"), parameter,
      LCL = max(lam - g*SE, 0)
 
      res <- list(LCL=LCL, CL=CL, UCL=UCL, data=x, m=m, is.balanced=is.balanced, SE=SE,
-                 type=type, pEstimator=pEstimator, parameter=parameter,
+                 type=type, parameter=parameter,
                  parameter.missing=parameter.missing, sig=sigmaFactor)
      class(res) <- "acc"
      return(res)
@@ -207,8 +207,59 @@ acc <- function(x, n, type=c("p", "np", "c", "u" ,"g", "h"), parameter,
                  parameter.missing=parameter.missing, sig=sigmaFactor)
      class(res) <- "acc"
      return(res)
-  } else {
-     stop("Type should be either one of \"p\", \"np\", \"c\", \"u\", \"g\", and \"h\".")
+  } else if (type == "t")  { 
+  # t chart (exponential or Weibull)
+     is.balanced = TRUE
+     a.over.2 = pnorm(sigmaFactor,lower.tail=FALSE)
+
+     # MLE of Weibull
+     weibull.MLE <- function (x, tol=.Machine$double.eps^0.25, maxiter=1000, trace=0) {   
+       # Setup for interval 
+         meanlog = mean(log(x))
+         lower = 1/(log(max(x)) - meanlog)
+         upper = sum((x^lower) * log(x))/sum(x^lower) - meanlog
+         interval = c(lower, 1/upper)
+       # EE equation 
+         EEweibull = function(alpha, x) {
+             xalpha = x^alpha
+             sum(log(x) * (xalpha))/sum(xalpha) - 1/alpha - mean(log(x))
+         }
+         tmp = uniroot(EEweibull, interval = interval, x = x, tol = tol,
+             maxiter = maxiter, trace = trace)
+         alpha = tmp$root
+         beta = mean(x^alpha)^(1/alpha)
+         return( c(alpha,beta) )
+     } # END of MLE of Weibull
+
+     if (parameter.missing) {
+        if (tModel == "E") {
+           parameter = mean(x) 
+        } else if ( tModel == "W") {
+           parameter = weibull.MLE(x)
+        } else {
+          stop("tModel should be one of \"E\" or \"W\".")
+        }
+     } 
+
+     # LCL and UCL for t chart 
+     if (tModel == "E") {
+         CL = qexp(0.5, rate=1/parameter)
+         SE = parameter 
+        UCL = qexp(a.over.2, rate=1/parameter, lower.tail=FALSE)
+        LCL = qexp(a.over.2, rate=1/parameter, lower.tail=TRUE)
+     } else  {
+         CL = qweibull(0.5, shape=parameter[1], scale=parameter[2])
+         SE = parameter[2] * ( gamma(1+2/parameter[1]) - gamma(1+1/parameter[1])^2 )
+        UCL = qweibull(a.over.2, shape=parameter[1], scale=parameter[2], lower.tail=FALSE)
+        LCL = qweibull(a.over.2, shape=parameter[1], scale=parameter[2], lower.tail=TRUE)
+     }
+     res <- list(LCL=LCL, CL=CL, UCL=UCL, data=x, m=m, is.balanced=is.balanced, SE=SE,
+                 type=type, parameter=parameter, tModel=tModel,
+                 parameter.missing=parameter.missing, sig=sigmaFactor)
+     class(res) <- "acc"
+     return(res)
+  }  else {
+     stop("Type should be either one of \"p\", \"np\", \"c\", \"u\", \"g\", \"h\", and \"t\".")
   }
 }
 #============================================
@@ -231,7 +282,8 @@ summary.acc <- function(object, ...) {
       } else {
           TITLE = paste0("The p Control Chart based on the Wilson CI with ", z$sig, "*sigma." )
       } 
-      cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
 
       # Basic info. Sample info. 
       cat("=================", "\n")
@@ -266,7 +318,8 @@ summary.acc <- function(object, ...) {
       } else {
           TITLE = paste0("The np Control Chart based on the Wilson CI with ", z$sig, "*sigma." )
       }
-      cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
 
       # Basic info. Sample info. 
       cat("=================", "\n")
@@ -292,7 +345,8 @@ summary.acc <- function(object, ...) {
    } else if (z$type == "c") {
    # c chart
       TITLE = paste0("The c Control Chart with ", z$sig, "*sigma." )
-      cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
 
       # Basic info. Sample info.  
       cat("=================", "\n")
@@ -315,7 +369,8 @@ summary.acc <- function(object, ...) {
    } else if (z$type == "u") {
    # u chart
       TITLE = paste0("The u Control Chart with ", z$sig, "*sigma." )
-      cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
 
       # Basic info. Sample info.  
       cat("=================", "\n")
@@ -345,7 +400,8 @@ summary.acc <- function(object, ...) {
    } else if (z$type == "g") {
    # g chart
       TITLE = paste0("The g Control Chart with ", z$sig, "*sigma", " based on ", z$gEstimator, " method.")
-      cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
 
       # Basic info. Sample info. 
       cat("=================", "\n")
@@ -371,7 +427,8 @@ summary.acc <- function(object, ...) {
    } else if (z$type == "h") {
    # h chart
       TITLE = paste0("The h Control Chart with ", z$sig, "*sigma", " based on ", z$gEstimator, " method.")
-      cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
 
       # Basic info. Sample info. 
       cat("=================", "\n")
@@ -389,6 +446,56 @@ summary.acc <- function(object, ...) {
       # LCL, CL, UCL
       cat("=================", "\n")
       cat( paste0("Control Limits (with sample size = ", z$nk, "):"), "\n" )
+      cat("-----------------", "\n")
+      limits = c(z$LCL, z$CL, z$UCL)
+      names(limits) = c("LCL", "CL", "UCL")
+      print(limits, quote=FALSE)
+      cat("\n")
+   } else if ( (z$type=="t")&&(z$tModel=="E") ) {
+   # Exponential t chart
+      TITLE = paste0("The exponential t Control Chart with ", z$sig, "*sigma." )
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
+      
+      # Basic info. Sample info.  
+      cat("=================",  "\n")
+      cat("Basic Information ", "\n")
+      cat("-----------------",  "\n")
+      cat("* Number of observations =", z$m, "\n")
+      tmp = ifelse(z$parameter.missing, "* Parameter estimate (mean) =", "* Parameter value (mean) =")
+      cat(tmp, z$parameter, "\n")
+      cat("\n")
+
+      # LCL, CL, UCL
+      cat("=================", "\n")
+      cat( "Control Limits:",  "\n")
+      cat("-----------------", "\n")
+      limits = c(z$LCL, z$CL, z$UCL)
+      names(limits) = c("LCL", "CL", "UCL")
+      print(limits, quote=FALSE)
+      cat("\n")
+   } else if ( (z$type=="t")&&(z$tModel=="W") ) {
+   # Weibull t chart
+      TITLE = paste0("The Weibull t Control Chart with ", z$sig, "*sigma." )
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
+      
+      # Basic info. Sample info.  
+      cat("=================",  "\n")
+      cat("Basic Information ", "\n")
+      cat("-----------------",  "\n")
+      cat("* Number of observations =", z$m, "\n")
+
+      if(z$parameter.missing) {
+         cat("* Parameter estimate:", "shape =", z$parameter[1], " scale =", z$parameter[2])
+      } else {
+         cat("* Parameter value:", "shape =", z$parameter[1], " scale =", z$parameter[2])
+      }
+      cat("\n")
+
+      # LCL, CL, UCL
+      cat("=================", "\n")
+      cat("Control Limits:",  "\n" )
       cat("-----------------", "\n")
       limits = c(z$LCL, z$CL, z$UCL)
       names(limits) = c("LCL", "CL", "UCL")
@@ -492,7 +599,7 @@ plot.acc <- function(x, digits= getOption("digits")-2,
       ymax = max(lami,UCL)
 
       index1 = (lami >= LCL) & (lami <= UCL)  ## in-control
-      index2 = !index1                          ## out-of-control 
+      index2 = !index1                        ## out-of-control 
 
       plot(NA,NA, xlim=c(1, m), ylim=c( max(ymin-0.5*SE,0), min(ymax+0.5*SE) ),
            type="p", pch=1, frame=FALSE, axes=FALSE, ylab=NA, xlab="Subgroup" )
@@ -597,8 +704,25 @@ plot.acc <- function(x, digits= getOption("digits")-2,
       lines(  subgr.index, xbari, lty=1, col=col.line)
       points( subgr.index[index1], xbari[index1], pch=20, col="blue" )
       points( subgr.index[index2], xbari[index2], pch=4,  col="red" )
+   } else if (x$type == "t") {
+      ## t chart
+      xi = x$data
+      ymin = min(xi,LCL)
+      ymax = max(xi,UCL)
+
+      index1 = (xi >= LCL) & (xi <= UCL)  ## in-control
+      index2 = !index1                    ## out-of-control 
+
+      plot(NA,NA, xlim=c(1, m), ylim=c( max(ymin,0), min(ymax) ),
+           type="p", pch=1, frame=FALSE, axes=FALSE, ylab=NA, xlab="Observations" )
+
+      drawpolygon(xrange=c(1,m), yrange=c(LCL, UCL), delta=half/4)
+
+      lines(  subgr.index, xi, lty=1, col=col.line)
+      points( subgr.index[index1], xi[index1], pch=20, col="blue" )
+      points( subgr.index[index2], xi[index2], pch=4,  col="red" )
    } else { 
-      stop("Type should be either one of \"p\", \"np\", \"c\", \"u\", \"g\", and \"h\".")
+      stop("Type should be either one of \"p\", \"np\", \"c\", \"u\", \"g\", \"h\", and \"t\".")
    }
 
    ## Write CL, LCL, UCL on the right margin

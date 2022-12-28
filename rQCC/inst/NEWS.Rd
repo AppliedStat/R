@@ -1,6 +1,14 @@
 \name{news}
 \title{Package news for rQCC package}
 
+\section{version 2.22.12}{
+  \itemize{
+    \item The \code{vignette} for the \code{pooledEstimator} function is added.
+    \item The updated \code{acc} function privides the exponential and Weibull t control charts.
+    \item The updated \code{racc} function privides the robust exponential and Weibull t control charts.
+    \item The updated \code{rcc}  function can handle unbalanced samples with different pooling methods. 
+    \item Some references are updated.
+}}
 
 \section{version 2.22.5}{
   \itemize{
@@ -24,7 +32,7 @@
 \section{version 1.20.7}{
   \itemize{
     \item The S and R charts are added in the \code{rcc} function.
-    \item The \code{vignettes} for the \code{factors.cc} and \code{rcc} functions are added.
+    \item The \code{vignette}s for the \code{factors.cc} and \code{rcc} functions are added.
     \item The \code{A3.factor} function is replaced with the updated \code{factors.cc} function.
     \item Typos are corrected. For example, some typos in the help page of shamos function. 
 }}

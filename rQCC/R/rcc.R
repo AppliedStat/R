@@ -124,7 +124,8 @@ summary.rcc <- function(object, ...) {
    # Xbar 
       TITLE = paste0(" Xbar Control chart using location (", z$loc, ")", " and ",
                      "scale (unbiased ", z$scale, ")", " with ", z$sig, "*sigma." )
-      cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
 
       # Basic info. Sample info. 
       cat("=================", "\n")
@@ -214,7 +215,8 @@ summary.rcc <- function(object, ...) {
    # S chart
       TITLE = paste0(" S Control chart using scale (unbiased ", z$scale, ")",
                      " with ", z$sig, "*sigma." )
-      cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
 
       # Basic info. Sample info.  
       cat("=================", "\n")
@@ -273,7 +275,8 @@ summary.rcc <- function(object, ...) {
    # R chart
       TITLE = paste0(" R Control chart using scale (unbiased ", z$scale, ")",
                      " with ", z$sig, "*sigma." )
-      cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+   ## cat("\n", "\033[1m", TITLE, "\033(B\033[m", "\n\n")
+      cat("\n", TITLE, "\n\n")
 
       # Basic info. Sample info.  
       cat("=================", "\n")

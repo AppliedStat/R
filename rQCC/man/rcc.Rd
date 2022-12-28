@@ -1,5 +1,5 @@
 \encoding{utf-8}
-\name{robust.control.chart.unbalanced}
+\name{robust.chart.unbalanced}
 \alias{rQCC}
 \alias{rcc}
 \alias{print.rcc}
@@ -49,6 +49,11 @@ and the function \code{plot} is used to plot the control chart.
 }
 
 \references{
+Park, C., L. Ouyang, and M. Wang (2022).
+Development of robust X-bar charts with unequal sample sizes.
+\emph{ArXiv e-prints},	2212.10731.  \cr 
+\doi{10.48550/arXiv.2212.10731}
+
 Park, C., H. Kim, and M. Wang (2022).
 Investigation of finite-sample properties of robust location and scale estimators. 
 \emph{Communications in Statistics - Simulation and Computation}, 
@@ -366,9 +371,14 @@ data = list(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15,
 # Xbar chart (witn nk=5)
 rcc(data, nk=5)
 
+# Xbar chart (witn nk=5) with different pooling methods
+rcc(data, nk=5, poolLoc="C", poolScale="C")
+
 # S chart (witn nk=5)
 rcc(data, type="S", nk=5)
 
+# S chart (witn nk=5) with plling method C.
+rcc(data, type="S", nk=5, poolScale="C")
 
 # ==========
 # Example 5b
@@ -379,14 +389,21 @@ rcc(data, type="S", nk=5)
 datan = data
 datan[[1]] = c(data[[1]], 70.5, 77.0)
 
-# Xbar chart with non-robust estimators
+# Xbar chart with non-robust estimators 
 rcc(datan, nk=5)
 
-# Xbar chart with robust estimators (median and mad)
+# robust Xbar chart (median and mad estimates)
 rcc(datan, loc="median", sc="mad", nk=5)
+
+# robust Xbar chart (median and mad estimates) with different pooling methods
+rcc(datan, loc="median", sc="mad", nk=5, poolLoc="C", poolScale="C")
+
+# robust S chart (mad estimate) with different pooling methods
+rcc(datan, type="S", sc="mad", nk=5, poolScale="B")
+rcc(datan, type="S", sc="mad", nk=5, poolScale="C")
 }
 
-\author{Chanseok Park}
+\author{Chanseok Park and Min Wang}
 \keyword{control chart}
 \keyword{robust}
 \keyword{unbalanced}

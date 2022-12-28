@@ -1,0 +1,158 @@
+%\VignetteIndexEntry{Pooled location and scale estimators}
+%\VignetteKeyword{rQCC}
+%\VignetteKeyword{pooled estimator}
+%\VignetteKeyword{unbalanced}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}[12pt]
+\usepackage{Sweave}
+
+\usepackage[breaklinks]{hyperref}
+
+\usepackage{amsmath,xcolor}
+\addtolength{\textwidth}{0.5in}
+\addtolength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Pooled location and scale estimators}
+%-------------------------------------------------------------------
+\author{Chanseok Park\footnote{Applied Statistics Laboratory,
+Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
+His work was supported by the National Research Foundation of Korea(NRF) grant funded
+by the Korea government(MSIT) (No.\ 2022R1A2C1091319).}
+~{and}
+Min Wang\footnote{Department of Management Science and Statistics,
+The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
+}
+\date{December 2022}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\begin{abstract}
+In this note, we provide a brief summary of pooled location and scale estimators, 
+which are provided in the \texttt{pooledEstimator} function of the robust quality control chart (rQCC) R package.
+The \texttt{rcc} function is based on the pooled location and scale estimators provided here.
+\end{abstract}
+
+%====================================================================
+\section{Location Estimation}
+The pooled location estimator has three types, denoted by A, B, C. 
+Type A estimator is obtained by the unweighted average of the unbiased estimators.
+Type B estimator is obtained by the weighted average with the weight proportional to the sample size.
+Type C estimator is obtained by the optimally weighted average in a sense of the BLUE.
+
+Suppose that there are $m$ samples and $\hat{\mu}_i$ is an unbiased estimator of $\mu$ 
+from the $i$th sample of size $n_i$. 
+The \texttt{pooledEstimator} calculates the pooled estimator for the sample mean (default), 
+the sample median, and the Hodges-Lehmann \cite{Hodges/Lehmann:1963} estimator 
+based on one of the following three pooling methods.
+\begin{itemize}
+\item Type A: \\
+\[
+\bar{\hat{\mu}}_A =  \sum_{i=1}^m w_i \hat{\mu}_i,
+\]
+where $w_i = 1/m$.
+\item Type B: \\
+\[
+\bar{\hat{\mu}}_B =  \sum_{i=1}^m w_i \hat{\mu}_i,
+\]
+where $w_i = n_i/\sum_{j=1}^{m} n_j$.
+\item Type C: \\
+\[
+\bar{\hat{\mu}}_C =  \sum_{i=1}^m w_i \hat{\mu}_i,
+\]
+where $w_i$ is given by the BLUE in \cite{Park/Ouyang/Wang:2022}.
+\end{itemize}
+It should be noted that $\bar{\hat{\mu}}_A$, $\bar{\hat{\mu}}_B$, and $\bar{\hat{\mu}}_C$ are 
+all unbiased for $\mu$.
+
+%====================================================================
+\section{Scale Estimation}
+The \texttt{pooledEstimator} also calculates the pooled sclae estimator for the standard deviation (sd),
+range, median absolute deviation, and Shamos estimators
+based on one of the following three pooling methods.
+
+Suppose that there are $m$ samples and $\hat{\sigma}_i$ is an estimator of $\sigma$ from the $i$th sample of size $n_i$.
+Let $C_i$ is an unbiasing factor so that $E(\hat{\sigma}_i)/C_i = \sigma$.
+Type A estimator is obtained by the unweighted average of the unbiased estimators.
+Type B estimator is obtained by the weighted average with the weight proportional to the unbiasing factors.
+Type C estimator is obtained by the optimally weighted average in a sense of the BLUE.
+\begin{itemize}
+\item Type A: \\
+\[
+\bar{\hat{\sigma}}_A =  \sum_{i=1}^m w_i \cdot \frac{\hat{\sigma}_i}{C_i},
+\]
+where $w_i = 1/m$.
+\item Type B: \\
+\[
+\bar{\hat{\sigma}}_B =  \sum_{i=1}^m w_i \cdot \frac{\hat{\sigma}_i}{C_i}
+\]
+where $w_i = C_i/\sum_{j=1}^{m} C_j$.
+\item Type C: \\
+\[
+\bar{\hat{\sigma}}_C =  \sum_{i=1}^m w_i \frac{\hat{\sigma}_i}{C_i},
+\]
+where $w_i$ is given by the BLUE in \cite{Park/Ouyang/Wang:2022}.
+\end{itemize}
+It should be noted that $\bar{\hat{\sigma}}_A$, $\bar{\hat{\sigma}}_B$, and $\bar{\hat{\sigma}}_C$ 
+are all unbiased for $\sigma$.
+
+
+
+\bigskip
+%====================================================================
+\section{R Usages}
+%====================================================================
+%%-----------------------------------------------
+\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> \# Type A with mean (default)} \\
+\texttt{> x1 = c(1,2)} \\
+\texttt{> x2 = c(2,5,9)} \\
+\texttt{> data = list(x1, x2)} \\
+\texttt{> pooledEstimator(data)}
+\end{color}
+}}
+\smallskip
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> \# Type C with HL1 (Hodges-Lehmann)} \\
+\texttt{> pooledEstimator(data, estimator="HL1", poolType="C")}
+\end{color}
+}}
+\smallskip
+
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> \# Type A with standard deviation (sd) } \\
+\texttt{> pooledEstimator(data, estimator="sd")}
+\end{color}
+}}
+\smallskip
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> \# Type C with Shamos} \\
+\texttt{> pooledEstimator(data, estimator="shamos", poolType="C")}
+\end{color}
+}}
+\smallskip
+
+
+
+
+%%===============================================
+\bigskip
+\bibliographystyle{unsrt}
+\bibliography{rQCC}
+
+
+%%===============================================
+\end{document}
+%%===============================================
+
+

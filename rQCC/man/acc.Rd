@@ -1,5 +1,5 @@
 \encoding{utf-8}
-\name{attributes.control.chart.unbalanced}
+\name{attributes.chart.unbalanced}
 \alias{acc}
 \alias{print.acc}
 \alias{summary.acc}
@@ -9,8 +9,8 @@
 \description{Constructs the attributes control charts with balanced/unbalanced samples.}
 
 \usage{
-acc (x, n, type=c("p","np","c","u","g","h"), parameter, pEstimator=c("Wald","Wilson"),
-     gEstimator = c("ML", "MVU"), location.shift = 0,
+acc (x, n, type=c("p","np","c","u","g","h","t"), parameter, pEstimator=c("Wald","Wilson"),
+     gEstimator = c("ML", "MVU"), tModel=c("E","W"), location.shift = 0,
      sigmaFactor=3, nk)
 }
 
@@ -22,6 +22,7 @@ acc (x, n, type=c("p","np","c","u","g","h"), parameter, pEstimator=c("Wald","Wil
 If not known, it is estimated. For more details, refer to \code{vignette("acc", package="rQCC")}.}
  \item{pEstimator}{a method for estimating the Bernoulli parameter for \eqn{p}{p} and \eqn{np}{np} charts.}
  \item{gEstimator}{a method for estimating the Bernoulli parameter for \eqn{g}{g} and \eqn{h}{h} charts.}
+ \item{tModel}{Probability model for \eqn{t}{t} chart. "E" for Exponential and "W" for Weibull.}
  \item{location.shift}{a known location shift parameter value for  \eqn{g}{g} and \eqn{h}{h} charts.}
  \item{sigmaFactor}{a factor for the standard deviation (\eqn{\sigma}{\sigma}).  
 For example, the American Standard uses "\emph{3*sigma}" limits (0.27\% false alarm rate),
@@ -273,6 +274,29 @@ data = list(x1, x2, x3, x4, x5, x6, x7, x8, x9)
 result = acc(data, type="g", location=1, gEstimator="MVU", nk=5)
 summary(result)
 plot(result)
+
+
+# ===============================
+# Example 7: t charts 
+# -------------------------------
+x = c(0.35, 0.92, 0.59, 4.28, 0.21, 0.79, 1.75, 0.07, 3.3, 
+1.7, 0.33, 0.97, 0.96, 2.23, 0.88, 0.37, 1.3, 0.4, 0.19, 1.59)
+
+# Exponential t chart
+result = acc(x, type="t", tModel="E")
+summary(result)
+
+plot(result, cex.text=0.8)
+text(10, 6, labels="Exponential t chart" )
+
+
+# Weibull t chart
+result = acc(x, type="t", tModel="W")
+summary(result)
+
+plot(result, cex.text=0.8)
+text(10, 6, labels="Weibull t chart" )
+
 }
 
 \author{Chanseok Park}

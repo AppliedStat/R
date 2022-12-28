@@ -1,9 +1,9 @@
 %\VignetteIndexEntry{Robust g-type attributes control charts (racc) in the rQCC package}
 %\VignetteKeyword{rQCC}
+%\VignetteKeyword{control chart}
 %\VignetteKeyword{attribute chart}
 %\VignetteKeyword{g chart}
 %\VignetteKeyword{h chart}
-%\VignetteKeyword{robust}
 %\VignetteKeyword{robustness}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass{article}
@@ -24,32 +24,34 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Robust $g$-type attributes control charts (\texttt{racc})
+\title{Robust attributes control charts (\texttt{racc})
 in the \texttt{rQCC} package}
 %-------------------------------------------------------------------
 \author{Chanseok Park\footnote{Applied Statistics Laboratory,
 Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
-His work was partially supported by the National Research Foundation of Korea (NRF)
-grant funded by the Korea government (NRF-2017R1A2B4004169).}
+His work was supported by the National Research Foundation of Korea(NRF) grant funded
+by the Korea government(MSIT) (No.\ 2022R1A2C1091319).}
 ~{and}
 Min Wang\footnote{Department of Management Science and Statistics,
 The University of Texas at San Antonio, San Antonio, TX 78249, USA.}
 }
-\date{May 2022}
+\date{December 2022}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
 \begin{abstract}
-The $g$-type attributes control charts based on the geometric distribution are widely
+The $g$ control charts based on the geometric distribution are widely
 used in many engineering applications to monitor the number of conforming cases
 between the two consecutive appearances of nonconformities.
-However, conventional $g$-type charts are based on the maximum likelihood
+However, conventional $g$ charts are based on the maximum likelihood
 and minimum variance unbiased estimators which are very sensitive to outliers.
 Thus, they could result in severe bias for obtaining the control limits of the charts.
-In this note, we provide a brief summary of robust $g$-type attributes control charts
+In this note, we provide a brief summary of robust $g$ control charts
 and a description of how they are constructed using the \texttt{racc} function in the R package \texttt{rQCC}.
+
+In addition, we also provide 
 \end{abstract}
 
 %======================================
@@ -88,14 +90,14 @@ which is given by
 \begin{equation} \label{EQ:pb}
 \hat{p}_{\mathrm{B}} = \frac{1-1/n}{\bar{Y}-a+1}.
 \end{equation}
-However, it is shown to be biased. For more details, see \cite{Park/Wang:2022}.
+However, it is shown to be biased. For more details, see \cite{Park/Wang:2023}.
 The correct MVU estimator is given by
 \begin{equation} \label{EQ:pmvu}
 \hat{p}_{\mathrm{MVU}} = \frac{1-1/n}{\bar{Y}-a+1-1/n}.
 \end{equation}
 
 %----------------------------------------------------------------------------------------------------------
-For more details on the conventional $g$-type attributes control charts based on the above estimators,
+For more details on the \emph{conventional} $g$ control charts based on the above estimators,
 one can refer to the vignette below.
 
 \bigskip\noindent\fbox{\parbox{\textwidth}{%
@@ -191,7 +193,7 @@ where $\lfloor\cdot\rfloor$ is a floor function.
 
 
 %======================================
-\section{Construction of the $g$-type quality control charts} \label{Section:03}
+\section{Construction of the robust $g$ control charts} 
 %======================================
 The $g$ chart (about the total number of events) with the sample size $n_k$
 has the following control limits
@@ -235,7 +237,7 @@ For $\hat{p}_\mathrm{cdf}$,
 $t=[q_{\gamma/2}]$ and $s=[q_{\gamma} - q_{\gamma/2}+a-1]$ are obtained from all the $m$ samples.
 
 For a given robust estimator $\hat{p}=\hat{p}_\mathrm{cdf}$ or $\hat{p}=\hat{p}_\mathrm{t}$
-we can obtain the $g$-type robust control limits by plugging $\hat{p}$
+we can obtain the $g$ robust control limits by plugging $\hat{p}$
 into the control limits in (\ref{EQ:glimits}) or (\ref{EQ:hlimits}).
 As an illustration, the robust control limits of the $g$ or $h$ chart are easily obtained as follows.
 
@@ -259,6 +261,131 @@ As an illustration, the robust control limits of the $g$ or $h$ chart are easily
 \end{color}
 }}
 \smallskip
+
+%======================================
+\section{Construction of the robust exponential and Weibull $t$ control charts} 
+%======================================
+%--------------------------------------
+\subsection{Robust exponential $t$ control chart}
+%--------------------------------------
+The cdf of the exponential distribution is given by
+\[
+F(x) = 1 - e^{-x/\theta},
+\]
+where $\theta>0$.
+Let $x_{(i)}$ be the values of the order statistics such that $x_{(1)} \le x_{(2)} \le \cdots \le x_{(n)}$.
+For notational convenience, we denote $p_i = F(x_{(i)})$.
+Then the exponential cdf can be linearized as
+\[
+-\log(1-p_i) \cdot \theta = x_{(i)}, 
+\]
+where $i  = 1, \cdots, n$.
+We propose a robust estimate of $\theta$ as follows:
+\begin{equation} \label{EQ:thetahat}
+\hat{\theta} = \mathop{\mathrm{median}}_{1\le i\le n}\left\{ -\frac{x_{(i)}}{\log(1-p_i)} \right\} . 
+\end{equation}
+
+Then, similar to the conventional exponential $t$ chart, its robust version is constructed as follows:
+\begin{align*}
+\textrm{LCL} &= \left\{-\log(1-\alpha/2)\right\} \cdot\hat{\theta},  \\
+\textrm{CL}  &= \left\{-\log(1/2)\right\}        \cdot\hat{\theta},         \\
+\textrm{UCL} &= \left\{-\log(\alpha/2)\right\}   \cdot\hat{\theta},
+\end{align*}
+\begin{color}{black}
+where $\alpha/2=\Phi(-g)$ and $\hat{\theta}$ is obtained by (\ref{EQ:thetahat}).
+\end{color}
+For more details on the conventional exponential $t$ control chart,
+one can refer to \texttt{vignette("acc", package="rQCC")}.
+The control limits of the exponential $t$ chart are obtained as follows.
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> racc(x, type="t")}
+\end{color}
+}}
+\smallskip
+
+%--------------------------------------
+\subsection{Robust Weibull $t$ control chart}
+%--------------------------------------
+The cdf of the Weibull distribution is given by 
+\[
+F(x) = 1 - \exp\left\{-\left(\frac{x}{\theta}\right)^\beta\right\},
+\]
+where $\theta > 0$ and $\beta >0$ represent the scale and shape parameters, respectively. 
+Let $x_{(i)}$ be the values of the order statistics such that $x_{(1)} \le x_{(2)} \le \cdots \le x_{(n)}$.
+For notational convenience, we denote $p_i = F(x_{(i)})$.
+Then $p_i$ can be easily estimated by using the plotting position, 
+an increasing step function jumping at $x_{(i)}$.
+In this \texttt{rQCC} package, we use the \texttt{ppoints()} function to estimate $p_i = F(x_{(i)})$, 
+which is based on Blom \cite{Blom:1958}.  Then it is given by 
+\begin{equation}
+p_i = \left\{ 
+\begin{array}{l@{\quad\mathrm{for}\quad}l}
+  \displaystyle\frac{j-3/8}{n+1/4} & n\le 10 \\[3ex]
+  \displaystyle\frac{j-1/2}{n}     & n\ge 11
+\end{array}, \right..
+\label{EQ:pi}
+\end{equation}
+
+The Weibull cdf can be linearized as
+\begin{equation} \label{EQ:Weibull-linear}
+\log\left( -\log(1-p_i) \right) = -\beta\log\theta + \beta\log x_{(i)}, 
+\end{equation}
+where $i  = 1, \cdots, n$.
+By denoting $y_i^* = \log\left( -\log(1-p_i) \right)$, $x_i^* = \log x_{(i)}$,
+$\beta_0^* = -\beta\log\theta$, and $\beta_1^* = \beta$, we can rewrite (\ref{EQ:Weibull-linear}) as
+\[
+y_i^* = \beta_0^* + \beta_1^* x_i^*, \quad i  = 1, \cdots, n. 
+\]
+Then, based on observations $\{ (x_1^*,y_2^*), \cdots (x_n^*,y_n^*)\}$, 
+we can easily calculate the estimate of $\beta_1^*$, denoted by $\hat{\beta}_1^*$, 
+by using the repeated median estimate \cite{Siegel:1982}, which is given by 
+%------------------------------
+\[
+ \hat{\beta}_1^* = \mathop{\mathrm{median}}_{1\le i\le n}\mathop{\mathrm{median}}_{j \neq i} 
+            \frac{y_i^* - y_j^*}{x_i^* - x_j^*} .
+\]
+%------------------------------
+After $\hat{\beta}_1^*$ is obtained, we can estimate $\hat{\beta}_0^*$ easily using 
+%------------------------------
+\[
+ \hat{\beta}_0^* = \mathop{\mathrm{median}}_{1\le i\le n}\big(y_i^* - \hat{\beta}_1^* x_i^* \big).
+\]
+%------------------------------
+After $\hat{\beta}_0^*$ and $\hat{\beta}_1^*$ are obtained, 
+we obtain the original parameter estimates by reparametrizing as
+\begin{color}{black}
+\begin{equation}   \label{EQ:alphatheta}
+\hat{\beta} = \hat{\beta}_1^* \textrm{~~and~~} 
+\hat{\theta} = e^{-\hat{\beta}_0^*/\hat{\beta}_1^*}.
+\end{equation}
+\end{color}
+
+Then, similar to the conventional Weibull $t$ chart, its robust version is constructed as follows: 
+\begin{color}{black}
+\begin{align*}
+\textrm{LCL} &= \left\{-\log(1-\alpha/2)\right\}^{1/\hat{\beta}} \cdot\hat{\theta},  \\
+\textrm{CL}  &= \left\{-\log(1/2)\right\}^{1/\hat{\beta}}  \cdot\hat{\theta},         \\
+\textrm{UCL} &= \left\{-\log(\alpha/2)\right\}^{1/\hat{\beta}}  \cdot\hat{\theta},
+\end{align*}
+\end{color}
+where $\hat{\beta}$ and $\hat{\theta}$ are from (\ref{EQ:alphatheta}).
+For more details on the conventional Weibull $t$ control chart, 
+one can refer to \texttt{vignette("acc", package="rQCC")}. 
+The control limits of the Weibull $t$ chart are obtained as follows.
+
+\bigskip\noindent\fbox{\parbox{\textwidth}{%
+\begin{color}{red}
+\texttt{> racc(x, type="t", tModel="W")} 
+\end{color}
+}}
+\smallskip
+
+
+
+
+
 
 
 
