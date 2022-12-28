@@ -32,9 +32,8 @@ the estimate, its lower bound is extended (see also \code{\link{uniroot}}).
 \references{
 Park, C. (2018).
 A Note on the Existence of the Location Parameter Estimate of the Three-Parameter Weibull Model Using the Weibull Plot.
-\emph{Mathematical Problems in Engineering},
-\bold{2018}, 1-6. \cr
-\url{https://doi.org/10.1155/2018/6056975}
+\emph{Mathematical Problems in Engineering}, \bold{2018}, 6056975. \cr
+\doi{10.1155/2018/6056975}
 
 Park, C. (2017).
 Weibullness test and parameter estimation of the three-parameter
@@ -47,7 +46,9 @@ Applications and Practice},
 \author{Chanseok Park}
 
 \seealso{
-\code{\link{weibull.mle}} 
+\code{\link{weibull.mle}} for the maximum likelihood estimate.
+
+\code{\link{weibull.wp}} for the parameter estimation using the Weibull plot.
 } 
 \examples{
 library(weibullness)

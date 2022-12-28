@@ -1,7 +1,7 @@
 Package: weibullness
 Title: Goodness-of-Fit Test for Weibull Distribution (Weibullness)
-Version: 1.19.8
-Date: 2019-08-19
+Version: 1.22.12
+Date: 2022-12-01
 Authors@R: person(given="Chanseok",
                     family="Park",
                     role = c("aut", "cre"),
@@ -10,9 +10,9 @@ Authors@R: person(given="Chanseok",
 Author: Chanseok Park [aut, cre] (<https://orcid.org/0000-0002-2208-3498>)
 Maintainer: Chanseok Park <statpnu@gmail.com>
 Depends: R (>= 3.1.0)
-Description: Performs a goodness-of-fit test of Weibull distribution (weibullness test) and provides the maximum likelihood estimates of the three-parameter Weibull distribution. Note that the threshold parameter is estimated based on the correlation from the Weibull plot. For more details, see Park (2018) <doi:10.1155/2018/6056975>. This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (No. NRF-2017R1A2B4004169).
+Description: Performs a goodness-of-fit test of Weibull distribution (weibullness test) and provides the maximum likelihood estimates of the three-parameter Weibull distribution. Note that the threshold parameter is estimated based on the correlation from the Weibull plot. For more details, see Park (2018) <doi:10.1155/2018/6056975>. This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (MSIT) (No. 2022R1A2C1091319).
 License: GPL-2 | GPL-3
-URL: https://github.com/AppliedStat/R
+URL: https://AppliedStat.GitHub.io/R/
 BugReports: https://github.com/AppliedStat/R/issues
 Encoding: UTF-8
 LazyData: yes

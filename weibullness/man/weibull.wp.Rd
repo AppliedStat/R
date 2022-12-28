@@ -7,13 +7,13 @@
 \description{Calculates the estimates of the shape and scale
 parameters.}
 \usage{
-weibull.wp(x, n, a=0.5)
+weibull.wp(x, n, a)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
  \item{x}{a numeric vector of observations.}
  \item{n}{The number of observations is needed if there is right-censoring.}
- \item{a}{the offset fraction to be used; typically in (0,1).}
+ \item{a}{the offset fraction to be used; typically in (0,1). See \code{ppoints}.}
 }
 \details{ 
 \code{weibull.wp} obtains the estimates of the shape and scale
@@ -25,9 +25,8 @@ two parameter estimates}
 \references{
 Park, C. (2018).
 A Note on the Existence of the Location Parameter Estimate of the Three-Parameter Weibull Model Using the Weibull Plot.
-\emph{Mathematical Problems in Engineering},
-\bold{2018}, 1-6. \cr
-\url{https://doi.org/10.1155/2018/6056975}
+\emph{Mathematical Problems in Engineering}, \bold{2018}, 6056975. \cr
+\doi{10.1155/2018/6056975}
 
 Park, C. (2017).
 Weibullness test and parameter estimation of the three-parameter

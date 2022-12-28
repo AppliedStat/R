@@ -5,7 +5,7 @@ exportPattern("^[[:alpha:]]+")
 export(wp.test, wp.test.pvalue, wp.test.critical)
 export(weibull.mle, weibull.wp, weibull.threshold)
 
-importFrom("stats", approxfun, complete.cases, cor, ppoints, uniroot, coef, lm, sd) 
+importFrom("stats", approxfun, complete.cases, cor, ppoints, uniroot, coef, lm, sd, median) 
 
 S3method(print, wp.test.critical)
 S3method(print, weibull.estimate)

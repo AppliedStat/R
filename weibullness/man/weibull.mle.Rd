@@ -59,9 +59,8 @@ two parameter estimates (if \code{threshold} is given) or three parameter estima
 \references{
 Park, C. (2018). 
 A Note on the Existence of the Location Parameter Estimate of the Three-Parameter Weibull Model Using the Weibull Plot.
-\emph{Mathematical Problems in Engineering},
-\bold{2018}, 1-6. \cr
-\url{https://doi.org/10.1155/2018/6056975}
+\emph{Mathematical Problems in Engineering}, \bold{2018}, 6056975. \cr
+\doi{10.1155/2018/6056975}
 
 Park, C. (2017).
 Weibullness test and parameter estimation of the three-parameter
@@ -80,6 +79,8 @@ Uniqueness of Maximum Likelihood Estimators of the 2-Parameter Weibull Distribut
 %% ~Make other sections like Warning with \section{Warning }{\ldots} ~
 \seealso{
 \code{\link{weibull.wp}} for the parameter estimation using the Weibull plot.
+
+\code{\link{weibull.threshold}} for the estimate of the threshold parameter.
 
 \code{\link[MASS:fitdistr]{fitdistr}} for maximum-likelihood fitting of univariate distributions in package \CRANpkg{MASS}. 
 }

@@ -14,3 +14,16 @@ textVersion = paste("C. Park (2017)",
      "International Journal of Industrial Engineering: Theory, Applications and Practice",
        "24",  "376--391")
 )
+
+
+citEntry(entry="Manual",
+author = personList(as.person("C. Park")),
+year   = 2022,
+title  = "weibullness: Goodness-of-Fit Test for Weibull Distribution",
+note   = "R package version 1.22.12",
+url = "https://CRAN.R-project.org/package=weibullness",
+textVersion = paste("Park, C. (2022)", "weibullness: Goodness-of-Fit Test for Weibull Distribution", 
+  "R Package Version 1.22.12 (published in December 1, 2022)",
+  "https://CRAN.R-project.org/package=weibullness")
+)
+
