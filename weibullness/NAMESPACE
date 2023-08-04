@@ -1,10 +1,11 @@
-exportPattern("^[[:alpha:]]+")
+## exportPattern("^[[:alpha:]]+")
+## exportPattern("^[^_]+")
 ## exportPattern(".")
 
 #functions
 export(wp.test, wp.test.pvalue, wp.test.critical)
-export(weibull.mle, weibull.wp, weibull.threshold)
-export(weibull.ic, GAMMA.incomplete, lGAMMA.incomplete, U.i.s, V.i.s, U.i.s.0.inf, U.i.s.0.bi, U.i.s.ai.inf)
+export(weibull.mle, weibull.wp, weibull.rm, weibull.threshold)
+export(weibull.ic)
 export(wp.plot)
 
 importFrom("stats", approxfun, complete.cases, cor, ppoints, uniroot, coef, lm, sd, median, predict) 

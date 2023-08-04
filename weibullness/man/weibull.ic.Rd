@@ -1,12 +1,5 @@
 \name{weibull.ic}
 \alias{weibull.ic}
-\alias{lGAMMA.incomplete}
-\alias{GAMMA.incomplete}
-\alias{U.i.s}
-\alias{V.i.s}
-\alias{U.i.s.0.inf}
-\alias{U.i.s.0.bi}
-\alias{U.i.s.ai.inf}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Maximum likelihood estimates with Interval Censoring}
 \description{Calculates the maximum likelihood estimates with Interval Censoring Using the EM Algorithm.
