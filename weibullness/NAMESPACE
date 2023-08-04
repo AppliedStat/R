@@ -1,0 +1,16 @@
+exportPattern("^[[:alpha:]]+")
+## exportPattern(".")
+
+#functions
+export(wp.test, wp.test.pvalue, wp.test.critical)
+export(weibull.mle, weibull.wp, weibull.threshold)
+export(weibull.ic, GAMMA.incomplete, lGAMMA.incomplete, U.i.s, V.i.s, U.i.s.0.inf, U.i.s.0.bi, U.i.s.ai.inf)
+export(wp.plot)
+
+importFrom("stats", approxfun, complete.cases, cor, ppoints, uniroot, coef, lm, sd, median, predict) 
+importFrom("stats", pgamma, nlm)
+importFrom("graphics", axis, curve)
+
+S3method(print, wp.test.critical)
+S3method(print, weibull.estimate)
+
