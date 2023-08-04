@@ -1,0 +1,15 @@
+5df75c78037cd88f09b79b2171aecb05 *data/bs_quantiles_from_3_to_1000-bunzip2.rda
+31b910954fa973170be9d8a16d961e1b *DESCRIPTION
+694260c42f70ac69c2adb3be1cbdf086 *inst/CITATION
+44ae83710d8a30f8c86b0fe4e44ee11b *man/bs.mle.Rd
+c5f68d99a714e7cf8f14af6f2cca23e4 *man/bs.mme.Rd
+9192431259e93e494443476a778d378b *man/bs.plot.quantiles.Rd
+30e5e4d0ada45c61896b072d64ab61a1 *man/bs.plot.Rd
+5cdef58f9e119b81281177cf44dfd01f *man/BS.Rd
+bc8b169652418584eb539e3ce1760932 *man/bs.test.Rd
+d4767976a1a413d70996e154aeb96de0 *man/print.bs.critical.value.Rd
+ac48e7d6141ef0e9ce9936ac33c41ffa *man/print.bs.estimate.Rd
+38577f06acdf6de447780c6fc7695210 *NAMESPACE
+c2a09dc2705ad0a6bf3ed57ef68e2a19 *R/bs.estimate.R
+2aebcc75995b003b2f08e1faa7007f4a *R/bs.test.R
+2910a80014588852b3ad69e4e05b367b *R/zzz.R
