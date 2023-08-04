@@ -33,7 +33,7 @@ Weibull model using the sample correlation coefficient.
 \emph{International Journal of Industrial Engineering - Theory,
 Applications and Practice},  
 \bold{24}(4), 376-391. \cr 
-\url{http://journals.sfu.ca/ijietap/index.php/ijie/article/view/2848}
+\doi{10.23055/ijietap.2017.24.4.2848}
 
 Vogel, R. M. and C. N. Kroll (1989). 
 Low-Flow Frequency Analysis Using Probability-Plot Correlation Coefficients.

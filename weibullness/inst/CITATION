@@ -6,24 +6,51 @@ year   = 2017,
 title  = "Weibullness test and parameter estimation of the three-parameter Weibull model using the sample correlation coefficient", 
 journal = "International Journal of Industrial Engineering: Theory, Applications and Practice",
 volume="24", 
-pages="376--391", 
-url = "http://journals.sfu.ca/ijietap/index.php/ijie/article/view/2848/", 
+pages="376-391", 
+url = "https://doi.org/10.23055/ijietap.2017.24.4.2848", 
 ISSN="1943-670X", 
 textVersion = paste("C. Park (2017)", 
         "Weibullness test and parameter estimation of the three-parameter Weibull model using the sample correlation coefficient.", 
      "International Journal of Industrial Engineering: Theory, Applications and Practice",
-       "24",  "376--391")
+       "24",  "376-391")
 )
 
+citEntry(entry="Article",
+author = personList(as.person("C. Park")),
+year   = 2018,
+title  = "A Note on the Existence of the Location Parameter Estimate of the Three-Parameter Weibull Model Using the Weibull Plot", 
+journal= "Mathematical Problems in Engineering",
+volume = "2018",
+pages="6056975",
+url = "https://doi.org/10.1155/2018/6056975",
+textVersion = paste("C. Park (2018)",
+"A Note on the Existence of the Location Parameter Estimate of the Three-Parameter Weibull Model Using the Weibull Plot",
+     "Mathematical Problems in Engineering", "2018", "6056975")
+)
+
+citEntry(entry="Article",
+author = personList(as.person("C. Park")),
+year   = 2023,
+title  = "A Note on Weibull Parameter Estimation with Interval Censoring Using the EM Algorithm",
+journal= "Mathematics",
+volume = "11",
+number = "14", 
+pages="3156",
+url = "https://doi.org/10.3390/math11143156", 
+EISSN = "2227-7390",
+textVersion = paste("C. Park (2023)",
+     "A Note on Weibull Parameter Estimation with Interval Censoring Using the EM Algorithm",
+     "Mathematics", "11(14)", "3156")
+)
 
 citEntry(entry="Manual",
 author = personList(as.person("C. Park")),
-year   = 2022,
+year   = 2023,
 title  = "weibullness: Goodness-of-Fit Test for Weibull Distribution",
-note   = "R package version 1.22.12",
+note   = "R package version 1.23.8",
 url = "https://CRAN.R-project.org/package=weibullness",
-textVersion = paste("Park, C. (2022)", "weibullness: Goodness-of-Fit Test for Weibull Distribution", 
-  "R Package Version 1.22.12 (published in December 1, 2022)",
+textVersion = paste("Park, C. (2023)", "weibullness: Goodness-of-Fit Test for Weibull Distribution", 
+  "R Package Version 1.23.8 (published in August 8, 2023)",
   "https://CRAN.R-project.org/package=weibullness")
 )
 

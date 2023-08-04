@@ -45,7 +45,7 @@ wp.test.pvalue <- function (r,n) {
 ## critical value for wp.test 
 print.wp.test.critical <- function (x,...) { 
    cat("\n       ", x$title, "\n\n") 
-   cat("significan level = ",x$alpha, ", ", 
+   cat("significance level = ",x$alpha, ", ", 
        "sample size = ", x$sample.size,"\n\n",sep="" )
    cat("critical value =",   x$critical.value, "\n\n")
 }
