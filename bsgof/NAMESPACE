@@ -5,8 +5,8 @@ export(bs.test, bs.test.pvalue, bs.test.critical)
 export(bs.mle, bs.mme, bs.plot)
 ## export(corr.bs, Dcorr.bs, bs.threshold)  # later
 
-importFrom("stats", approxfun, complete.cases, cor, ppoints, uniroot, sd, dnorm, pnorm, qnorm, rnorm, lm) 
-importFrom("graphics", abline) 
+importFrom("stats", approxfun, complete.cases, cor, ppoints, uniroot, sd, dnorm, pnorm, qnorm, rnorm, lm, predict, quantile) 
+importFrom("graphics", abline, axis, curve) 
 
 S3method(print, bs.test.critical.value)
 S3method(print, bs.estimate)
