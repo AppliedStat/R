@@ -22,7 +22,7 @@ The expectation-maximization(EM) algorithm is used for estimating the parameters
 Park, C. (2023). 
 A Note on Weibull Parameter Estimation with Interval Censoring Using the EM Algorithm.
 \emph{Mathematics}, \bold{11}(14), 3156. \cr
-\doi{10.1155/2018/6056975}
+\doi{10.3390/math11143156}
 
 Lawless, J. F. (2003).
 Statistical Models and Methods for Lifetime Data, 2nd ed.; John Wiley & Sons: New York, NY.
@@ -35,30 +35,15 @@ Statistical Models and Methods for Lifetime Data, 2nd ed.; John Wiley & Sons: Ne
 }
 \examples{
 library(weibullness)
-## Data from Table 3.10 of Lawless (2003). 
-X1 = c(
- 8, 0, 24, 17, 17, 24, 16, 13, 11, 16,
-18, 17, 32, 23, 44, 10, 0, 5, 12, 11,
-33, 31, 13, 19, 34, 13, 16, 35, 15, 11,
-22, 48, 30, 13, 10, 8, 4, 11, 14, 4,
-34, 30, 18, 16, 35, 21, 11 ) 
-X2 = c(
- 12, 22, 31, 27, 23, 30, 24, Inf, 13, 20, 
- 25, 26, Inf, Inf, 48, 35, 5, 8, 20, Inf, 
- 40, Inf, 39, 32, Inf, Inf, 24, Inf, 22, 17, 
- 32, Inf, 34, Inf, 17, 21, 9, Inf, 19, 8, 
- Inf, 36, 24, 60, 39, Inf, 20)
-XX = cbind(X1,X2)
-weibull.ic(XX)
+
+attach(Wdata)
+weibull.ic(radio.chemotherapy)
 
 # Two-parameter Weibull with full observations
-data = c(355,725,884,462,1092,190,166,172,188,224,267,298,355,471,
-        154,101,76,811,80,249,752,305,301,386,667,212,186,127,
-        121,214,242,237,355,210,253,400,401,514,211,285)
-weibull.ic( cbind(data,data) )
+weibull.ic( cbind(bearings,bearings) )
 
 # Two-parameter Weibull with full observations (using weibull.mle)
-weibull.mle(data, threshold=0)
+weibull.mle(bearings, threshold=0)
 }
 
 \keyword{Maximum likelihood estimator (MLE)}

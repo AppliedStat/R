@@ -37,14 +37,15 @@ wp.plot(x, plot.it=TRUE, a, col.line="black", lty.line=1,
 }
 
 \examples{ 
-set.seed(1)
-x = rweibull(100, shape=2.5) 
+attach(Wdata)
 
-wp.plot( x )
+wp.plot( bearings )
 
-wp.plot( x, main="Weibull Probability Plot", col.line="red", lty.line=1, pch=3)
+# With cosmetic lines 
+wp.plot(bearings, main="Weibull Probability Plot", col.line="red", 
+        xlab="Lifetimes of bearings", lty.line=1, pch=3)
 hline = log(-log(1- c( (1:5)/100, (1:9)/10)  ))
 abline( h=hline, col=gray(0.1), lty=3, lwd=0.5 )
-abline( v=  seq(0.1, 2,by=0.1), col=gray(0.1), lty=3, lwd=0.5 )
+abline( v=  seq(15, 200,by=5), col=gray(0.1), lty=3, lwd=0.5 )
 }
 

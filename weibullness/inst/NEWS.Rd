@@ -5,6 +5,7 @@
   \itemize{
     \item The new \code{weibull.ic} function provides the estimates of the Weibull parameters with interval censored data.
     \item The new \code{wp.plot} function provides the Weibull probability plot for the two-parameter Weibull distribution.
+    \item The new \code{Wdata} variable provides the collection of the data sets following the Weibull distribution.
 }}
 
 \section{version 1.22.12}{

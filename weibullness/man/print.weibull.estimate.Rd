@@ -8,6 +8,6 @@ Print the estimated values
   Printing objects of class "weibull.estimate".
 }
 \seealso{
-weibull.mle, weibull.wp, \code{\link{print}}
+\code{\link{weibull.mle}}, \code{\link{weibull.wp}}, \code{\link{weibull.rm}}, \code{\link{print}}
 }
 \keyword{print}

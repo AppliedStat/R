@@ -80,6 +80,8 @@ Uniqueness of Maximum Likelihood Estimators of the 2-Parameter Weibull Distribut
 \seealso{
 \code{\link{weibull.wp}} for the parameter estimation using the Weibull plot.
 
+\code{\link{weibull.rm}} for robust parameter estimation using the repeated median method.
+
 \code{\link{weibull.threshold}} for the estimate of the threshold parameter.
 
 \code{\link[MASS:fitdistr]{fitdistr}} for maximum-likelihood fitting of univariate distributions in package \CRANpkg{MASS}. 

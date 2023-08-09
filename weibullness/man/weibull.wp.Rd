@@ -32,14 +32,14 @@ Park, C. (2017).
 Weibullness test and parameter estimation of the three-parameter
 Weibull model using the sample correlation coefficient.
 \emph{International Journal of Industrial Engineering - Theory,
-Applications and Practice},
-\bold{24}(4), 376-391. \cr
+Applications and Practice}, \bold{24}(4), 376-391. \cr
 \doi{10.23055/ijietap.2017.24.4.2848}
 }
 \author{Chanseok Park}
 \seealso{
-\code{\link{weibull.mle}} for the parameter estimation 
-using the maximum likelihood method.
+\code{\link{weibull.mle}} for the parameter estimation using the maximum likelihood method.
+
+\code{\link{weibull.rm}} for robust parameter estimation using the repeated median method.
 
 \code{\link[MASS:fitdistr]{fitdistr}} for maximum-likelihood fitting of univariate distributions in package \CRANpkg{MASS}.
 }
@@ -51,6 +51,6 @@ data = c(355,725,884,462,1092,190,166,172,188,224,267,298,355,471,
         121,214,242,237,355,210,253,400,401,514,211,285)
 weibull.wp(data)
 }
-\keyword{Weibull plot}% use one of  RShowDoc("KEYWORDS")
+\keyword{Weibull plot}
 \keyword{parameter}
 \keyword{estimate}

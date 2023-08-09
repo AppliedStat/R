@@ -28,6 +28,8 @@ Siegel, A. F. (1982). Robust Regression Using Repeated Medians.
 \seealso{
 \code{\link{weibull.mle}} for the parameter estimation using the maximum likelihood method.
 
+\code{\link{weibull.wp}} for the parameter estimation using the Weibull plot.
+
 \code{\link[MASS:fitdistr]{fitdistr}} for maximum-likelihood fitting of univariate distributions in package \CRANpkg{MASS}.
 }
 \examples{
