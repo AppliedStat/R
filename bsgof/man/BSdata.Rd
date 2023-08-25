@@ -7,7 +7,7 @@
 \alias{fatigue}
 \alias{repair}
 
-\title{The data sets following Birnbaum-Saunders distributions}
+\title{Data set}
 
 \description{
 \code{psi21k}, \code{psi26k}, and \code{psi31k} are from  Birnbaum and Saunders (1969). 

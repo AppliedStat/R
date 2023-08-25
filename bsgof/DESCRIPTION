@@ -1,7 +1,7 @@
 Package: bsgof
-Title: Birnbaum-Saunders goodness-of-fit test
-Version: 0.23.8
-Date: 2023-08-8
+Title: Birnbaum-Saunders Goodness-of-Fit Test
+Version: 0.24.1
+Date: 2024-01-05
 Authors@R: c(person(given="Chanseok",
                     family="Park",
                     role = c("aut", "cre"),
@@ -14,8 +14,11 @@ Authors@R: c(person(given="Chanseok",
                     comment = c(ORCID = "https://orcid.org/0000-0002-9233-7844")) )
 Author: Chanseok Park [aut, cre] (<https://orcid.org/0000-0002-2208-3498>), Min Wang [ctb] (<https://orcid.org/0000-0002-9233-7844>)
 Maintainer:  Chanseok Park <statpnu@gmail.com>
-Depends: R (>= 3.2.3)
-Description: Performs goodness of fit test for the Birnbaum-Saunders distribution and provides the maximum likelihood estimate and the method-of-moments estimate. This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (MSIT) (No. 2022R1A2C1091319, RS-2023-00242528).
+Depends: R (>= 4.0), graphics, stats
+Suggests: weibullness
+Description: Performs goodness-of-fit test for the Birnbaum-Saunders distribution and provides the maximum likelihood estimate and the method-of-moments estimate. 
+    For more details, see Park and Wang (2013) <arXiv:2308.10150>. 
+    This work was supported by the National Research Foundation of Korea (NRF) grants funded by the Korea government (MSIT) (No. 2022R1A2C1091319, RS-2023-00242528).
 License: GPL-2 | GPL-3
 URL: https://AppliedStat.GitHub.io/R/
 BugReports: https://GitHub.com/AppliedStat/R/issues

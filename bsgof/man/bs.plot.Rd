@@ -38,8 +38,7 @@ Birnbaum, Z. W. and Saunders, S. C. (1969). Estimation for a Family of Life Dist
 \author{Chanseok Park}
 
 \seealso{
-\code{\link{qqnorm}}, \code{\link{qqplot}}.
-
+\code{\link{qqnorm}}, \code{\link{qqplot}}, and 
 \code{\link[weibullness:wp.plot]{wp.plot}} for the Weibull probability plot in package \CRANpkg{weibullness}.
 }
 

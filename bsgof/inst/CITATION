@@ -1,14 +1,23 @@
 citHeader("To cite the bsgof package in publications use:")
 
-
-citEntry(entry="Manual",
-author = personList(as.person("C. Park"), as.person("M. Wang")),
-year   = 2023,
+bibentry(bibtype="Manual",
+author = c("C. Park", "M. Wang"),
+year   = "2023",
 title  = "bsgof: Birnbaum-Saunders goodness-of-fit test",
 note   = "R package version 0.23.8",
-url = "https://CRAN.R-project.org/package=bsgof",
+url    = "https://CRAN.R-project.org/package=bsgof",
 textVersion = paste("Park, C. and M. Wang (2023)", "bsgof: Birnbaum-Saunders goodness-of-fit test",
   "R Package Version 0.23.8 (published in August 2023)",
   "https://CRAN.R-project.org/package=bsgof")
+)
+
+bibentry(bibtype="Misc",
+author= c("C. Park", "M. Wang"),
+year  = "2023",
+title = "A goodness-of-fit test for the Birnbaum-Saunders distribution based on the probability plot",
+url   = "https://doi.org/10.48550/arXiv.2308.10150", 
+textVersion = paste("Park, C. and M. Wang (2023).",
+                    "A goodness-of-fit test for the Birnbaum-Saunders distribution based on the probability plot.",
+                    "ArXiv e-prints", "2308.10150.")
 )
 

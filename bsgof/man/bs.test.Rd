@@ -2,6 +2,7 @@
 \alias{bs.test}
 \alias{bs.test.pvalue}
 \alias{bs.test.critical}
+\alias{bsgof}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{The Birnbaum-Saunders goodness-of-fit test from the probability plot}
 \description{
@@ -32,7 +33,12 @@ bs.test.critical(alpha, n)
    \item{method}{a character string indicating the goodness fit test for the Birnbaum-Saunders distribution.}
    \item{data.name}{a character string giving the name(s) of the data.}
 }
-%% \references{ }
+\references{ 
+Park, C. and M. Wang (2023).
+A goodness-of-fit test for the Birnbaum-Saunders distribution based on the probability plot.
+\emph{ArXiv e-prints}, 2308.10150. \cr
+\doi{10.48550/arXiv.2308.10150}
+}
 \author{Chanseok Park}
 % \note{
 % %%  ~~further notes~~
