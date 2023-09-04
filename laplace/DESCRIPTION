@@ -1,0 +1,28 @@
+Package: laplace
+Title: Goodness-of-Fit Test for the Laplace Distribution
+Version: 0.24.1
+Date: 2024-01-05
+Authors@R: c(person(given="Chanseok",
+                    family="Park",
+                    role = c("aut", "cre"),
+                    email="statpnu@gmail.com",
+                    comment = c(ORCID = "https://orcid.org/0000-0002-2208-3498")),
+             person(given="Min",
+                    family="Wang",
+                    role = "ctb",
+                    email="min.wang3@utsa.edu",
+                    comment = c(ORCID = "https://orcid.org/0000-0002-9233-7844")) )
+Author: Chanseok Park [aut, cre] (<https://orcid.org/0000-0002-2208-3498>), 
+  Min Wang [ctb] (<https://orcid.org/0000-0002-9233-7844>)
+Maintainer:  Chanseok Park <statpnu@gmail.com>
+Depends: R (>= 4.0), graphics, stats
+Imports: methods
+Suggests: weibullness, bsgof
+Description: Performs goodness-of-fit test for the Laplace distribution using the probability plot.
+  This work was supported by the National Research Foundation of Korea (NRF) grants funded by the Korea government (MSIT) (No. 2022R1A2C1091319, RS-2023-00242528).
+License: GPL-2 | GPL-3
+URL: https://AppliedStat.GitHub.io/R/
+BugReports: https://GitHub.com/AppliedStat/R/issues
+Encoding: UTF-8
+LazyData: yes
+LazyDataCompression: xz

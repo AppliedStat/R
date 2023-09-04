@@ -1,0 +1,12 @@
+citHeader("To cite the laplace package in publications use:")
+
+bibentry(bibtype="Manual",
+author = c("C. Park", "M. Wang"),
+year   = "2024",
+title  = "laplace: Goodness-of-fit test for the Laplace distribution",
+note   = "R package version 0.24.1",
+url    = "https://CRAN.R-project.org/package=laplace",
+textVersion = paste("Park, C. and M. Wang (2024)", "laplace: Goodness-of-fit test for the Laplace distribution",
+  "R Package Version 0.24.1 (published in January 2024)",
+  "https://CRAN.R-project.org/package=laplace")
+)

@@ -1,0 +1,17 @@
+# exportPattern("^[[:alpha:]]+")
+
+# functions
+## export(lp.plot, lp.test, lp.test.pvalue, lp.test.critical)
+export(laplace.mle, laplace.lp, laplace.rm) 
+export(dlaplace, plaplace, qlaplace, rlaplace)
+export(lp.plot)
+
+## importFrom("stats", approxfun, complete.cases, cor, ppoints, uniroot, sd, dnorm, pnorm, qnorm, rnorm, lm, predict, quantile) 
+importFrom("stats", runif, ppoints, median, lm, coef, complete.cases, predict)
+importFrom("graphics", axis, curve)
+
+## importFrom("graphics", abline, axis, curve) 
+
+## S3method(print, lp.test.critical.value)
+## S3method(print, laplace.estimate)
+
