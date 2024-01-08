@@ -13,17 +13,21 @@ function(x, threshold, interval, interval.threshold, extendInt="downX",
   if (missing(interval)) {
      meanlog = mean(log(x))
      lower = 1 / ( log(max(x)) - meanlog )
-     upper = sum( (x^lower)*log(x) ) / sum( x^lower ) - meanlog
-     interval = c(lower,1/upper)
+     upper.rev = sum( (x^lower)*log(x) ) / sum( x^lower ) - meanlog
+     upper = 1 / upper.rev
+     if (is.nan(upper)) upper=.Machine$double.xmax^0.2
+     interval = c(lower,upper)
   }
   EEweibull = function(alpha,x) {
+     TINY = .Machine$double.neg.eps
      xalpha = x^alpha
+     if ( sum(xalpha) < TINY ) return( mean(log(x)) - 1/alpha - mean(log(x)) )
      sum(log(x)*(xalpha)) / sum(xalpha) - 1/alpha - mean(log(x))
   }
-  tmp = uniroot(EEweibull, interval=interval, x=x,tol=tol,maxiter=maxiter,trace=trace)
+  tmp = uniroot(EEweibull, interval=interval, x=x, extendInt="upX", tol=tol,maxiter=maxiter,trace=trace)
   alpha = tmp$root   
   beta  = mean(x^alpha)^(1/alpha)
-  structure(list(shape=alpha,scale=beta,threshold=threshold),class="weibull.estimate"  )
+  structure(list(shape=alpha,scale=beta,threshold=threshold),class="weibull.estimate")
 }
 #------------------------------
 # We need n when the data are right-censored at the max. obs
@@ -72,11 +76,12 @@ function(x, a, interval.threshold, extendInt="downX") {
       w0 = w - mean(w)
       return( sum(w0*v0)/sum(u0*v0) - sum(u0*w0)/sum(u0*u0) )
    }
+   minx = min(x)
+   TINY = .Machine$double.neg.eps^0.5 
+   SD = mad(x)
    if  (missing(interval.threshold)) {
-      SD = sd(x)
-      TINY = SD * .Machine$double.neg.eps
-      LOWER = min(x) - SD
-      UPPER = min(x) - TINY 
+      LOWER = minx - TINY - SD
+      UPPER = minx - TINY 
       interval.threshold = c(LOWER,UPPER) 
    }
    tmp = uniroot(EE.weibull.threshold, 
@@ -235,5 +240,4 @@ weibull.ic = function(X, start=c(1,1), maxits=10000, eps=1E-5){
    }
    list( shape=newkappa, scale=newtheta, iter=iter, conv=converged )
 }
-#------------------------------------------------------------------
-
+###################################################################

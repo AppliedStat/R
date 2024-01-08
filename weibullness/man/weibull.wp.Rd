@@ -44,13 +44,10 @@ Applications and Practice}, \bold{24}(4), 376-391. \cr
 \code{\link[MASS:fitdistr]{fitdistr}} for maximum-likelihood fitting of univariate distributions in package \CRANpkg{MASS}.
 }
 \examples{
-library(weibullness)
-
 data = c(355,725,884,462,1092,190,166,172,188,224,267,298,355,471,
         154,101,76,811,80,249,752,305,301,386,667,212,186,127,
         121,214,242,237,355,210,253,400,401,514,211,285)
 weibull.wp(data)
 }
 \keyword{Weibull plot}
-\keyword{parameter}
-\keyword{estimate}
+\keyword{parameter estimate}

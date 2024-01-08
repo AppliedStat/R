@@ -76,6 +76,7 @@ Uniqueness of Maximum Likelihood Estimators of the 2-Parameter Weibull Distribut
 \bold{46}, 523-525.
 }
 \author{Chanseok Park}
+
 %% ~Make other sections like Warning with \section{Warning }{\ldots} ~
 \seealso{
 \code{\link{weibull.wp}} for the parameter estimation using the Weibull plot.
@@ -87,8 +88,6 @@ Uniqueness of Maximum Likelihood Estimators of the 2-Parameter Weibull Distribut
 \code{\link[MASS:fitdistr]{fitdistr}} for maximum-likelihood fitting of univariate distributions in package \CRANpkg{MASS}. 
 }
 \examples{
-library(weibullness)
-
 # Three-parameter Weibull
 data = c(355,725,884,462,1092,190,166,172,188,224,267,298,355,471,
         154,101,76,811,80,249,752,305,301,386,667,212,186,127,
@@ -99,6 +98,5 @@ weibull.mle(data)
 weibull.mle(data, threshold=0)
 }
 
-\keyword{Maximum likelihood estimator (MLE)}
-\keyword{parameter}
-\keyword{estimate}
+\keyword{maximum likelihood estimator}
+\keyword{parameter estimate}

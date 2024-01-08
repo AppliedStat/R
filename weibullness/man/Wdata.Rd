@@ -7,14 +7,14 @@
 \alias{radiotherapy}
 \alias{radio.chemotherapy}
 
-\title{Data set}
+\title{Dataset}
 
 \description{
 \code{bearings}: It is from Lieblein and Zelen (1956). 
 These data are deep-groove ball bearings failure times (number of millions of revolutions) in eudurance tests.
 
 \code{glassfiber1.5} and \code{glassfiber15}: They are from Smith and Naylor (1987).
-These data sets are from experimental data for the strength of glass fiber of length 1.5cm and 15cm, respectively.
+These datasets are from experimental data for the strength of glass fiber of length 1.5cm and 15cm, respectively.
 
 \code{urinary}: It is from Santiago and Smith (2013).
 It is about the days in between discharge of males in nosocomial urinary tract infections in patients.
@@ -49,7 +49,7 @@ Lindsey, J. C. and L. M. Ryan (1998). Tutorial in biostatistics: Methods for int
 
 
 \examples{
-# Attach data sets
+# Attach datasets
 attach(Wdata)
 bearings
 glassfiber1.5

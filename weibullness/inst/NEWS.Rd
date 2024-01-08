@@ -1,6 +1,13 @@
 \name{news}
 \title{Package news for weibullness package}
 
+
+\section{version 1.24.1}{
+  \itemize{
+     \item The Gumbel goodness-of-fit test is added.
+     \item The exponential goodness-of-fit test is added.
+}}
+
 \section{version 1.23.8}{
   \itemize{
     \item The new \code{weibull.ic} function provides the estimates of the Weibull parameters with interval censored data.

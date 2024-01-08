@@ -1,15 +1,14 @@
-\name{wp.test}
-\alias{wp.test}
-%- \alias{print.wp.test.critical}
-\alias{weibullness}
+\name{iwp.test}
+\alias{iwp.test}
+%- \alias{print.iwp.test.critical}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Weibullness Test from a Weibull Plot}
+\title{Weibullness Test from a inverse Weibull Plot}
 \description{
-Performs the statistical test of Weibullness 
-(Goodness-of-fit test for the Weibull distribution) 
-using the sample correlation from the Weibull plot.}
+Performs the statistical test of inverse Weibullness 
+(Goodness-of-fit test for the inverse Weibull distribution) 
+using the sample correlation from the inverse Weibull plot.}
 \usage{
-wp.test(x, a)
+iwp.test(x, a)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -17,17 +16,17 @@ wp.test(x, a)
    but the number of non-missing values must be between 3 and 1000.  } 
   \item{a}{the offset fraction to be used; typically in (0,1). See ppoints().}
 }
-\details{The Weibullness test is constructed using the sample correlation 
-which is calculated using the associated Weibull plot. 
-The critical value is then looked up in Weibull.Plot.Quantiles.
+\details{The inverse Weibullness test is constructed using the sample correlation 
+which is calculated using the associated inverse Weibull plot. 
+The critical value is then looked up in IW.Plot.Quantiles.
 There is \code{\link{print}} method for class \code{"htest"}.
 } 
 \value{
 A list with class "htest" containing the following components:
-   \item{statistic}{the value of the test statistic (sample correlation from the Weibull plot)}
+   \item{statistic}{the value of the test statistic (sample correlation from the inverse Weibull plot)}
    \item{p.value}{the p-value for the test.}
    \item{sample.size}{sample size (missing observations are deleted).}
-   \item{method}{a character string indicating the Weibullness test.}
+   \item{method}{a character string indicating the inverse Weibullness test.}
    \item{data.name}{a character string giving the name(s) of the data.}
 }
 \references{
@@ -52,16 +51,17 @@ Low-Flow Frequency Analysis Using Probability-Plot Correlation Coefficients.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
+\code{\link{wp.test}} for performing the Weibullness test. \cr 
 \code{\link{ks.test}} for performing the Kolmogorov-Smirnov test 
   for the goodness of fit test of two samples.  \cr 
-\code{\link{shapiro.test}} for  performing the Shapiro-Wilk test for normality.
+\code{\link{shapiro.test}} for performing the Shapiro-Wilk test for normality.
 }
 \examples{
-# For Weibullness hypothesis test. 
+# For inverse Weibullness hypothesis test. 
 attach(Wdata)
-wp.test(urinary)
+iwp.test(urinary)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Weibull plot} %% RShowDoc("KEYWORDS")
+\keyword{inverse Weibull plot} %% RShowDoc("KEYWORDS")
 \keyword{hypothesis test}

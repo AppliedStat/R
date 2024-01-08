@@ -1,12 +1,12 @@
-\name{wp.test.pvalue}
-\alias{wp.test.pvalue}
+\name{iwp.test.pvalue}
+\alias{iwp.test.pvalue}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{The p-value for the Weibullness Test}
+\title{The p-value for the inverse Weibullness Test}
 \description{
-Calculates the p-value for the Weibullness test which is based on
-the sample correlation from the Weibull plot.}
+Calculates the p-value for the inverse Weibullness test which is based on
+the sample correlation from the inverse Weibull plot.}
 \usage{
-wp.test.pvalue(r, n)
+iwp.test.pvalue(r, n)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -14,15 +14,15 @@ wp.test.pvalue(r, n)
            r is in (0,1).}
   \item{n}{the sample size.}
 }
-\details{The p-value for the Weibullness test which is based on
-the sample correlation from the Weibull plot.
+\details{The p-value for the inverse Weibullness test which is based on
+the sample correlation from the inverse Weibull plot.
 There is \code{\link{print}}  method for class \code{"htest"}. 
 }
 \value{
 A list with class "htest" containing the following components:
    \item{statistic}{the value of the test statistic (sample correlation from the Weibull plot)}
    \item{p.value}{the p-value for the test.}
-   \item{method}{a character string indicating the Weibullness test.}
+   \item{method}{a character string indicating the inverse Weibullness test.}
 }
 \references{
 Park, C. (2017).
@@ -52,12 +52,12 @@ Low-Flow Frequency Analysis Using Probability-Plot Correlation Coefficients.
 \code{\link{shapiro.test}} for  performing the Shapiro-Wilk test for normality.
 }
 \examples{
-# p.value with r (sample correlation from the Weibull plot) and n (sample size).
-wp.test.pvalue(r=0.6, n=10)
+# p.value with r (sample correlation from the inverse Weibull plot) and n (sample size).
+iwp.test.pvalue(r=0.6, n=10)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{p-value}
-\keyword{Weibull plot}
+\keyword{inverse Weibull plot}
 
 %% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

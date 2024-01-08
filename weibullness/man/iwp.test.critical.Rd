@@ -1,28 +1,30 @@
-\name{wp.test.pvalue}
-\alias{wp.test.pvalue}
+\name{iwp.test.critical}
+\alias{iwp.test.critical}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{The p-value for the Weibullness Test}
+\title{Critical Value for the inverse Weibullness Test}
 \description{
-Calculates the p-value for the Weibullness test which is based on
-the sample correlation from the Weibull plot.}
+Calculates the critical value for the inverse Weibullness test}
 \usage{
-wp.test.pvalue(r, n)
+iwp.test.critical(alpha, n)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{r}{the sample correlation coefficient from the Weibull plot; 
-           r is in (0,1).}
+  \item{alpha}{the significance level.}
   \item{n}{the sample size.}
 }
-\details{The p-value for the Weibullness test which is based on
-the sample correlation from the Weibull plot.
-There is \code{\link{print}}  method for class \code{"htest"}. 
-}
+\details{
+This function calculates the critical value for the inverse Weibullness test
+which is  constructed using the sample correlation 
+from the  associated inverse Weibull plot.
+The critical value is then looked up in IW.Plot.Quantiles.
+There is \code{\link{print}} method for class \code{"iwp.test.critical"}. 
+} 
 \value{
-A list with class "htest" containing the following components:
-   \item{statistic}{the value of the test statistic (sample correlation from the Weibull plot)}
-   \item{p.value}{the p-value for the test.}
-   \item{method}{a character string indicating the Weibullness test.}
+A list with class \code{"iwp.test.critical"} containing the following components:
+   \item{sample.size}{sample size (missing observations are deleted).}
+   \item{alpha}{significance level.}
+   \item{critical.value}{critical value.}
+   \item{data.name}{a character string giving the name(s) of the data.}
 }
 \references{
 Park, C. (2017).
@@ -47,17 +49,15 @@ Low-Flow Frequency Analysis Using Probability-Plot Correlation Coefficients.
 
 \seealso{
 \code{\link{ks.test}} for performing the Kolmogorov-Smirnov test 
-  for the goodness of fit test of two samples. 
+for the goodness of fit test of two samples. \cr 
 
 \code{\link{shapiro.test}} for  performing the Shapiro-Wilk test for normality.
 }
 \examples{
-# p.value with r (sample correlation from the Weibull plot) and n (sample size).
-wp.test.pvalue(r=0.6, n=10)
+# Critical value with alpha (significance level) and n (sample size).
+iwp.test.critical(alpha=0.01, n=10)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{p-value}
-\keyword{Weibull plot}
-
-%% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{critical value}
+\keyword{inverse Weibull plot}

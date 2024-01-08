@@ -1,9 +1,9 @@
-\name{wp.plot}
-\alias{wp.plot}
-\title{Weibull Plot}
-\description{\code{wp.plot} produces a Weibull plot.}
+\name{ep.plot}
+\alias{ep.plot}
+\title{Exponential Probability Plot}
+\description{\code{ep.plot} produces a exponential probability plot.}
 \usage{
-wp.plot(x, plot.it=TRUE, a, col.line="black", lty.line=1, 
+ep.plot(x, plot.it=TRUE, a, col.line="black", lty.line=1, 
         xlim=NULL, ylim=NULL, main=NULL, sub=NULL, xlab=NULL, ylab="Probability", ...) 
 }
 
@@ -22,32 +22,27 @@ wp.plot(x, plot.it=TRUE, a, col.line="black", lty.line=1,
  \item{...}{graphical parameters.}
 }
 
-\details{The Weibull plot is based on taking the logarithm of the Weibull cumulative distribution function twice.
-The horizontal axis is logarithmic.}
+\details{The exponential probability plot is based on taking the logarithm of the exponential  cumulative distribution function.}
 
 \value{A list with the following components:
     \item{x}{The sorted data}
-    \item{y}{log(-log(1-ppoints(n,a=a)))}
+    \item{y}{-log(1-ppoints(n,a=a))}
 
 }
 
 \author{Chanseok Park}
 
 \seealso{
-\code{\link{plot}}, \code{\link{qqnorm}}, \code{\link{qqplot}}, \code{\link{iwp.plot}}, \code{\link{ep.plot}}. \cr 
+\code{\link{plot}}, \code{\link{qqnorm}}, \code{\link{qqplot}}, \code{\link{wp.plot}}, \code{\link{iwp.plot}}. \cr
 \code{\link[bsgof:bs.plot]{bs.plot}} for the Birnbaum-Saunders probability plot in package \CRANpkg{bsgof}.
 }
 
 \examples{ 
-attach(Wdata)
-
-wp.plot(bearings)
-
+x = rexp(50)
 # With cosmetic lines 
-wp.plot(bearings, main="Weibull Plot", col.line="red", 
-        xlab="Lifetimes of bearings", lty.line=1, pch=3)
-hline = log(-log(1- c( (1:5)/100, (1:9)/10)  ))
+ep.plot(x, main="Exponential Probability Plot", col.line="red", lty.line=1, pch=3)
+hline = -log(1- c(0.01,(1:9)/10,0.99))
 abline( h=hline, col=gray(0.1), lty=3, lwd=0.5 )
-abline( v=seq(15, 200,by=5), col=gray(0.1), lty=3, lwd=0.5 )
+abline( v=seq(0, 5,by=0.5), col=gray(0.1), lty=3, lwd=0.5 )
 }
 

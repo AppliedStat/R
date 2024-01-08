@@ -51,8 +51,6 @@ Applications and Practice},
 \code{\link{weibull.wp}} for the parameter estimation using the Weibull plot.
 } 
 \examples{
-library(weibullness)
-
 # Data
 data = c(355,725,884,462,1092,190,166,172,188,224,267,298,355,471,
         154,101,76,811,80,249,752,305,301,386,667,212,186,127,
@@ -62,6 +60,4 @@ weibull.threshold(data)
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{Weibull plot}
-\keyword{parameter}% use one of  RShowDoc("KEYWORDS")
-\keyword{estimate}
-
+\keyword{parameter estimate}

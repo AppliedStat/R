@@ -1,21 +1,21 @@
 %
-\name{Weibull.Plot.Quantiles}
-\alias{Weibull.Plot.Quantiles}
+\name{IW.Plot.Quantiles}
+\alias{IW.Plot.Quantiles}
+\alias{inverse.Weibull.Plot.Quantiles}
 \title{
-Weibull quantile values
+Inverse Weibull quantile values
 }
 \description{
-Quantiles for the Weibullness Test. They are obtained 
-from the sample correlation from the Weibull plot. 
+Quantiles for the inverse Weibullness Test. They are obtained 
+from the sample correlation from the inverse Weibull plot. 
 The number of Monte Carlo iterations is 1E08.
 
-
-Dataset representing the quantiles and the associated critical values for the Weibullness
+Dataset representing the quantiles and the associated critical values for the inverse Weibullness
 test. They were obtained by conducting Monte Carlo simulations where the
-sample correlation coefficients were calculated based on the Weibull plot. 
+sample correlation coefficients were calculated based on the inverse Weibull plot. 
 We used 1.0E08 Monte Carlo iterations in the simulation.
 }
-\usage{Weibull.Plot.Quantiles}
+\usage{IW.Plot.Quantiles}
 \format{
 This data frame contains 998 rows and 1001 columns.
 }
@@ -29,4 +29,4 @@ Applications and Practice}
 \doi{10.23055/ijietap.2017.24.4.2848}
 }
 \keyword{datasets}
-\keyword{Weibull plot}% use one of  RShowDoc("KEYWORDS")
+\keyword{inverse Weibull plot}% use one of  RShowDoc("KEYWORDS")

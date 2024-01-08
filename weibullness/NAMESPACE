@@ -2,16 +2,28 @@
 ## exportPattern("^[^_]+")
 ## exportPattern(".")
 
-#functions
-export(wp.test, wp.test.pvalue, wp.test.critical)
-export(weibull.mle, weibull.wp, weibull.rm, weibull.threshold)
-export(weibull.ic)
-export(wp.plot)
+# functions
+export( ep.test, ep.test.pvalue, ep.test.critical)
+export( gp.test, gp.test.pvalue, gp.test.critical)
+export( wp.test, wp.test.pvalue, wp.test.critical)
+export(iwp.test,iwp.test.pvalue,iwp.test.critical)
+export(wp.plot, iwp.plot, ep.plot, gp.plot)
+export(weibull.mle, weibull.wp, weibull.rm, weibull.threshold, weibull.ic) 
+export(gumbel.gp)
+export(dinvweibull, pinvweibull, qinvweibull, rinvweibull, invweibull.mle)
 
-importFrom("stats", approxfun, complete.cases, cor, ppoints, uniroot, coef, lm, sd, median, predict) 
+# 
+importFrom("stats", approxfun, complete.cases, cor, ppoints, uniroot, coef, lm, sd, var, mad, median, predict) 
 importFrom("stats", pgamma, nlm)
+importFrom("stats", pweibull, qweibull, rweibull)
 importFrom("graphics", axis, curve)
 
-S3method(print, wp.test.critical)
+# print parameter estimates
 S3method(print, weibull.estimate)
+S3method(print,  gumbel.estimate)
+
+# 
+S3method(print, wp.test.critical)
+S3method(print, ep.test.critical)
+S3method(print, gp.test.critical)
 

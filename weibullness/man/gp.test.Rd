@@ -1,15 +1,13 @@
-\name{wp.test}
-\alias{wp.test}
-%- \alias{print.wp.test.critical}
-\alias{weibullness}
+\name{gp.test}
+\alias{gp.test}
+%- \alias{print.gp.test.critical}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Weibullness Test from a Weibull Plot}
+\title{Gumbel Goodness-of-Fit Test from a Gumbel Probability Plot}
 \description{
-Performs the statistical test of Weibullness 
-(Goodness-of-fit test for the Weibull distribution) 
-using the sample correlation from the Weibull plot.}
+Performs the statistical goodness-of-fit test for the Gumbel distribution
+using the sample correlation from the Gumbel probability plot.}
 \usage{
-wp.test(x, a)
+gp.test(x, a)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -17,27 +15,24 @@ wp.test(x, a)
    but the number of non-missing values must be between 3 and 1000.  } 
   \item{a}{the offset fraction to be used; typically in (0,1). See ppoints().}
 }
-\details{The Weibullness test is constructed using the sample correlation 
-which is calculated using the associated Weibull plot. 
-The critical value is then looked up in Weibull.Plot.Quantiles.
+\details{The Gumbel goodness-of-fit test is constructed using the sample correlation 
+which is calculated using the associated Gumbel probability plot. 
+The critical value is then looked up in Gumbel.Plot.Quantiles.
 There is \code{\link{print}} method for class \code{"htest"}.
 } 
 \value{
 A list with class "htest" containing the following components:
-   \item{statistic}{the value of the test statistic (sample correlation from the Weibull plot)}
+   \item{statistic}{the value of the test statistic (sample correlation from the Gumbel probability plot)}
    \item{p.value}{the p-value for the test.}
    \item{sample.size}{sample size (missing observations are deleted).}
-   \item{method}{a character string indicating the Weibullness test.}
+   \item{method}{a character string indicating the Gumbel goodness-of-fit test.}
    \item{data.name}{a character string giving the name(s) of the data.}
 }
 \references{
-Park, C. (2017).
-Weibullness test and parameter estimation of the three-parameter
-Weibull model using the sample correlation coefficient. 
-\emph{International Journal of Industrial Engineering - Theory,
-Applications and Practice},  
-\bold{24}(4), 376-391. \cr 
-\doi{10.23055/ijietap.2017.24.4.2848}
+Kinnison, R. (1989). 
+Correlation Coefficient Goodness-of-Fit Test for the Extreme-Value Distribution. 
+\emph{The American Statistician}, 
+\bold{43}(2), 98-100. 
 
 Vogel, R. M. and C. N. Kroll (1989). 
 Low-Flow Frequency Analysis Using Probability-Plot Correlation Coefficients.
@@ -54,14 +49,15 @@ Low-Flow Frequency Analysis Using Probability-Plot Correlation Coefficients.
 \seealso{
 \code{\link{ks.test}} for performing the Kolmogorov-Smirnov test 
   for the goodness of fit test of two samples.  \cr 
-\code{\link{shapiro.test}} for  performing the Shapiro-Wilk test for normality.
+\code{\link{shapiro.test}} for  performing the Shapiro-Wilk test for normality. \cr 
+\code{\link{wp.test}} for performing the Weibullness test.
 }
 \examples{
-# For Weibullness hypothesis test. 
-attach(Wdata)
-wp.test(urinary)
+# Gumbel goodness-of-fit test. 
+x = c(-3.16, -3.07, -2.24, -1.8, -1.48, -0.92, -0.87, -0.41, -0.06, 1.15)
+gp.test(x)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{Weibull plot} %% RShowDoc("KEYWORDS")
+\keyword{Gumbel probability plot} %% RShowDoc("KEYWORDS")
 \keyword{hypothesis test}

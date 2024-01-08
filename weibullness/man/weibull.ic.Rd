@@ -1,8 +1,8 @@
 \name{weibull.ic}
 \alias{weibull.ic}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Maximum likelihood estimates with Interval Censoring}
-\description{Calculates the maximum likelihood estimates with Interval Censoring Using the EM Algorithm.
+\title{Maximum likelihood estimates with interval censoring}
+\description{Calculates the maximum likelihood estimates with interval censoring using the EM Algorithm.
 }
 \usage{
 weibull.ic(X, start=c(1,1), maxits=10000, eps=1E-5)
@@ -34,8 +34,6 @@ Statistical Models and Methods for Lifetime Data, 2nd ed.; John Wiley & Sons: Ne
 \code{\link{weibull.mle}} for the parameter estimation using the maximum likelihood method with full observations.
 }
 \examples{
-library(weibullness)
-
 attach(Wdata)
 weibull.ic(radio.chemotherapy)
 
@@ -46,7 +44,6 @@ weibull.ic( cbind(bearings,bearings) )
 weibull.mle(bearings, threshold=0)
 }
 
-\keyword{Maximum likelihood estimator (MLE)}
+\keyword{maximum likelihood estimator}
 \keyword{interval censored}
-\keyword{parameter}
-\keyword{estimate}
+\keyword{parameter estimate}
