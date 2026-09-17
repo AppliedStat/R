@@ -1,6 +1,5 @@
 exportPattern("^[[:alpha:]]+")
 
-
 #functions
 export(HL.estimate, rt.test, q.robustified.t) 
 
