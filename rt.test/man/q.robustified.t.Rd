@@ -16,13 +16,19 @@
 \details{Using the empirical distributions of TA and TB statistics, it calculates the quantile.}
 
 \references{
-Park, C. and M. Wang (2018).
+Park, C., M. Wang, and W.-Y. Hwang (2022).
 Empirical distributions of the robustified \emph{t}-test statistics.
-\emph{ArXiv e-prints}, 1807.02215. \cr
-\url{https://arxiv.org/abs/1807.02215}
+\emph{Industrial Engineering & Management Systems}, \bold{21}(3), 432-439. \cr 
+\doi{10.7232/iems.2022.21.3.432}
+
+Park, C., M. Wang, and W.-Y. Hwang (2020).
+A study on robustness of the paired sample tests. 
+Empirical distributions of the robustified \emph{t}-test statistics.
+\emph{Industrial Engineering & Management Systems}, \bold{19}(2), 386-397. \cr
+\doi{10.7232/iems.2020.19.2.386} 
 }
 
-\author{Chanseok Park and Min Wang}
+\author{Chanseok Park}
 
 \seealso{
  \code{\link{qt}} for obtaining quantile value of Student t-distribution.

@@ -35,22 +35,24 @@ A list with class "htest" containing the following components:
 
 
 \references{
-Park, C. and M. Wang (2018).
+Park, C., M. Wang, and W.-Y. Hwang (2022).
 Empirical distributions of the robustified \emph{t}-test statistics.
-\emph{ArXiv e-prints}, 1807.02215. \cr
-\url{https://arxiv.org/abs/1807.02215}
+\emph{Industrial Engineering & Management Systems}, \bold{21}(3), 432-439. \cr 
+\doi{10.7232/iems.2022.21.3.432}
 
-Jeong, R., S. B. Son, H. J. Lee, and H. Kim (2018).
-On the robustification of the z-test statistic.
-Presented at KIIE Conference, Gyeongju, Korea. April 6, 2018.
+Park, C., M. Wang, and W.-Y. Hwang (2020).
+A study on robustness of the paired sample tests. 
+Empirical distributions of the robustified \emph{t}-test statistics.
+\emph{Industrial Engineering & Management Systems}, \bold{19}(2), 386-397. \cr
+\doi{10.7232/iems.2020.19.2.386} 
 
 Park, C. (2018). 
 Note on the robustification of the Student \emph{t}-test statistic using the median 
  and the median absolute deviation.  
 \emph{ArXiv e-prints}, 1805.12256. \cr 
-\url{https://arxiv.org/abs/1805.12256} 
+\doi{10.48550/arXiv.1805.12256}
 }
-\author{Chanseok Park and Min Wang}
+\author{Chanseok Park}
 % \note{
 % %%  ~~further notes~~
 % }

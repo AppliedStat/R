@@ -18,7 +18,7 @@ Estimates of location based on rank tests.
 \emph{Annals of Mathematical Statistics}, \bold{34}, 598--611.
 }
 
-\author{Chanseok Park and Min Wang}
+\author{Chanseok Park}
 
 \seealso{
  \code{\link{mean}} for calculating sample mean and 

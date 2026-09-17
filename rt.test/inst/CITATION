@@ -1,11 +1,28 @@
 citHeader("To cite the weibullness package in publications, please use:")
 
-citEntry(entry="Misc",
-         author = personList(as.person("C. Park and M. Wang")),
-         year   = "2018",
-         title  = "Empirical distributions of the robustified t-test statistics",
-         url = "https://arxiv.org/abs/1807.02215",
- textVersion = paste("Park, C. and M. Wang (2018).",
-                    "Empirical distributions of the robustified t-test statistics.",
-                    "ArXiv e-prints", "1807.02215.")
+bibentry(bibtype="Article",
+author = c(person("C.", "Park"), person("M.", "Wang"), person("W.-Y.", "Hwang")),
+year   = 2022,
+title  = "Empirical distributions of the robustified t-test statistics",
+journal= "Industrial Engineering & Management Systems", 
+volume = "21",
+number = "3",
+pages  = "432-439",
+url ="https://doi.org/10.7232/iems.2022.21.3.432",
 )
+
+bibentry(bibtype="Manual",
+author = c(person("C.", "Park"), person("M.", "Wang")), 
+year   = 2026,
+title  = "rt.test: Robustified t-Test", 
+note   = "R package version 1.26.9",
+url = "https://doi.org/10.32614/CRAN.package.rt.test",
+textVersion = paste("Park, C. and M. Wang (2026)", 
+  "rt.test: Robustified t-Test",
+  "R Package Version 1.26.9 (published in September, 2026)",
+  "DOI: 10.32614/CRAN.package.rt.test")
+)
+
+
+
+

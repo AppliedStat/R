@@ -1,0 +1,202 @@
+%\VignetteIndexEntry{Robust test statistics}
+%\VignetteKeyword{rt.test}
+%\VignetteKeyword{robust}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}[12pt]
+\usepackage{Sweave}
+
+\usepackage[breaklinks]{hyperref}
+
+\usepackage{amsmath,xcolor}
+\addtolength{\textwidth}{0.5in}
+\addtolength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{\oddsidemargin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Robust test statistics}
+%-------------------------------------------------------------------
+\author{Chanseok Park\footnote{Applied Statistics Laboratory,
+Department of Industrial Engineering, Pusan National University, Busan 46241, Korea.
+His work was partially supported by the National Research Foundation of Korea (NRF)
+grant funded by the Korea government (No. 2022R1A2C1091319).}
+}
+\date{September 2026}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+\begin{abstract}
+In this note, we provide three robust test statistics which are
+based on median and median absolute deviation (MAD) estimators,
+Hodges-Lehmann and Shamos estimators, and Huber location and RC estimators.
+\end{abstract}
+%%
+
+%====================================================================
+\section{Introduction}
+One of the widely-used conventional methods to test $H_0: \mu = \mu_0$
+is to use the $z$-test statistic (with $n \ge 30$),
+\[
+T= \frac{\bar{X}-\mu}{S/\sqrt{n}},
+\]
+where $\bar{X}$ is the sample mean and $S$ is the sample standard deviation.
+However, this method is very sensitive to data contamination.
+In this note, we provide three robustified $z$-test statistics that can be used when
+the sample size is large. However, when the sample size is small, it may not be appropriate to use
+the standard normal distribution. In this note, we provide a method for obtaining the empirical distributions
+of these test statistics. These results are implemented in the \texttt{rt.test} package.
+
+%====================================================================
+\section{Robustified test statistics}
+For the sake of completeness, we briefly review the test statistics
+proposed by \cite{Park:2018a}, \cite{Jeong/Son/Lee/Kim:2018}, 
+and \cite{Park/Wang/Hwang:2022}.
+By replacing the mean and the standard deviation
+with robust location and scale estimators,
+they proposed the following robustified $z$-test statistics.
+These are given by
+%-------------------------------
+\begin{align} 
+T_A &= \sqrt{\frac{2n}{\pi}} {\Phi^{-1}\Big(\frac{3}{4}\Big)} \cdot
+\frac{\displaystyle\mathop{\mathrm{median}}_{1\le i\le n}X_i-\mu}%
+{\displaystyle\mathop{\mathrm{median}}_{1\le i\le n}
+  \big| X_i - \mathop{\mathrm{median}}_{1\le i\le n} X_i  \big|}
+\stackrel{d}{\longrightarrow} N(0,1),   \label{EQ:TA} \\
+%-------------------------------
+T_{B} &= \sqrt{\frac{6n}{\pi}} {\Phi^{-1}\Big( \frac{3}{4} \Big)}
+  \frac{\displaystyle\mathop{\mathrm{median}}_{i \le j} \Big(\frac{X_i+X_j}{2}\Big) - \mu }%
+{\displaystyle\mathop{\mathrm{median}}_{i \le j}\big(|X_i-X_j|\big)}
+\stackrel{d}{\longrightarrow} N(0,1), \label{EQ:TB}
+\end{align} 
+{where $\Phi^{-1}(\cdot)$ is the inverse of the standard normal cumulative distribution function and $\stackrel{d}{\longrightarrow}$ denotes convergence in distribution.}
+%----------------------------------------------------------------
+
+%% Recently, En Xie et al.\ obtained the following statistic based 
+%% on the Huber and RC estimators.
+%% It should be noted that this test statistic has a higher breakdown point of 50\%, while
+%% $T_B$ has a breakdown point of only 29\%. In Table~\ref{TABLE}, we provide a summary of the
+%% asymptotic relative efficiencies (AREs) and breakdown points of various estimators.
+%% For more details, see \cite{Rousseeuw/Croux:1993}, \cite{Serfling:2011}, and \cite{Staudte/Sheather:1990}.
+%% \begin{equation} \label{EQ:TC}
+%% T_C = \frac{\sqrt{2n}\;\Phi^{-1}(5/8)\, \big\{2\Phi(\kappa)-1\big\}\cdot(\hat{\mu}_M-\mu)}%
+%% {\sqrt{2(\kappa^2-1)\big\{1-\Phi(\kappa)\big\} - 2\kappa \phi(\kappa)+1}\cdot\big\{ |X_i-X_j| : i<j \big\}_{(s)}}
+%% \stackrel{d}{\longrightarrow} N(0,1).
+%% \end{equation}
+
+
+%% %--------------------------------------------------
+%% \begin{table}[t!]
+%% \begin{center}
+%% %% \begin{color}{red}
+%% \caption{Breakdown Points and AREs of the estimators under consideration.}
+%% \label{TABLE:ARL}
+%% \begin{tabular}{clccccl@{\quad}ccccc} %% \\[-0.5ex]
+%% \hline
+%%         && \multicolumn{4}{c}{Location} && \multicolumn{5}{c}{Scale}  \\
+%%        \cline{3-6} \cline{8-12}   \\[-1.5ex]
+%%         && Mean & Median & HL & Huber && SD & IQR & MAD & Shamos & RC \\
+%%        \cline{3-6} \cline{8-12}   \\[-1.5ex]
+%% Breakdown&&  0\% & 50\% & 29\% & 50\%  &&   0\% & 25\% & 50\% & 29\% & 50\%  \\
+%% ARE      &&100\% & 64\% & 96\% & 95\%  && 100\% & 38\% & 37\% & 86\% & 82\%  \\
+%% \hline
+%% \end{tabular}
+%% %% \end{color}
+%% \end{center}
+%% \end{table}
+%% %--------------------------------------------------
+
+
+%--------------------------------------------------
+\begin{table}[t!]
+\begin{center}
+\caption{Breakdown Points and AREs of the estimators under consideration.}
+\label{TABLE:ARL}
+\medskip
+\begin{tabular}{clcccl@{\quad}cccc} %% \\[-0.5ex]
+\hline
+         && \multicolumn{3}{c}{Location} && \multicolumn{4}{c}{Scale}  \\
+        \cline{3-5} \cline{8-10}   \\[-1.5ex]
+         && Mean & Median & HL   && SD & IQR & MAD & Shamos  \\
+        \cline{3-5} \cline{8-10}      \\[-1.5ex]
+Breakdown&&  0\% & 50\% & 29\%   &&   0\% & 25\% & 50\% & 29\%   \\
+ARE      &&100\% & 64\% & 96\%   && 100\% & 38\% & 37\% & 86\%   \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+%--------------------------------------------------
+
+
+
+
+
+
+
+
+
+%===================================================================
+\section{Empirical distributions}
+%-------------------------------------------------------------------
+%% \begin{color}{red}
+As mentioned above, the robustified statistics, $T_A$ in (\ref{EQ:TA})
+and $T_B$ in (\ref{EQ:TB}), converge to the standard normal distribution.
+However, when the sample size is small,
+it is not appropriate to use the standard normal distribution.
+
+It may be impossible to obtain the theoretical distributions of $T_A$
+and $T_B$. 
+Thus, we obtain the empirical distributions of $T_A$ and $T_B$ 
+using extensive Monte Carlo simulations
+and calculate their empirical quantiles, which are useful for estimating critical values, 
+confidence intervals, $p$-values,
+etc. We used the R language to conduct the simulations, which are summarized as follows.
+We generated one hundred million ($N=10^8$) samples of size $n$
+from the standard normal distribution to obtain the empirical distributions of
+$T_A$ and $T_B$, where $n=4,5,\ldots,50$.
+Using these samples, we can obtain the empirical distribution of $T_A$ or $T_B$
+for each sample size $n$.
+Then, by inverting the empirical distribution, we obtained the empirical quantiles
+of $p$.
+
+It is worthwhile to discuss the accuracy of the empirical quantiles obtained above.
+Let $F^{-1}_N(p)$ be the
+empirical quantile of $p$ obtained from the $N$ replications and
+$F^{-1}(p)$ be the true quantile of $p$. Then it is easily seen from
+Corollary~21.5 of \cite{Vaart:1998} that the sequence $\sqrt{N}\big(
+F_N^{-1} - F^{-1}(p) \big)$ is asymptotically normal with mean zero and
+variance $p/(1-p)/f^2\big(F^{-1}(p) \big)$. Thus, the standard deviation
+of the empirical quantile of $p$ is approximately proportional to
+$\sqrt{p(1-p)/N}$, which has its maximum value at $p=0.5$. Consequently,
+the empirical quantile values are computed with an approximate accuracy of
+$0.5/\sqrt{N}$. With $N=10^8$, we have $0.5/\sqrt{N}=0.00005$, which
+roughly indicates that the empirical quantile values are accurate
+up to the fourth decimal point.
+
+Given that the probability density functions of $T_A$ and $T_B$ are symmetric about zero,
+we have $F(-x) = 1 - F(x)$ and $F^{-1}(1/2)=0$.
+Letting $q_p$ be the $p$th lower quantile so that $F(q_p)=p$,
+we have $q_{1-p} = -q_{p}$.
+Thus, it is enough to find the $p$th quantile only when $p>1/2$.
+Let $G(\cdot)$ be the cumulative distribution function of $|X|$. Then we have
+\[
+G(x) = P[ |X| \le x ] = P[ -x \le X \le x ] = F(x) - F(-x)
+= 2F(x) -1.
+\]
+Substituting $x=q_p$ into the above, we have $G(q_p) = 2p-1$.
+Thus, we have
+\[
+q_p = G^{-1}(2p-1),
+\]
+which is more efficient than using $q_p = F^{-1}(p)$ when obtaining empirical quantile values.
+%% \end{color}
+
+%%===============================================
+\bigskip
+\bibliographystyle{unsrt}
+\bibliography{robust}
+
+%%===============================================
+\end{document}
+%%===============================================
